@@ -5,7 +5,7 @@ import React,{useState,useEffect} from 'react';
 function App() {
 
   const sendRequest = async() => {
-    const response = await axios.get('http://localhost:5000');
+    const response = await axios.get("/visitormanager?site_id=01f0ea04-6040-47d8-a756-f1b08d855096", {headers:{"login_token": "98A047DF-0C2D-402D-8397-86AC011D09A8"}});
     console.log(response);
     console.log(response.data);
   };
@@ -21,6 +21,30 @@ function App() {
 }
 
 export default App;
+
+/* import './App.css';
+import axios from 'axios';
+import React,{useState,useEffect} from 'react';
+
+function App() {
+
+  const sendRequest = async() => {
+    const response = await axios.get('http://localhost:5000');
+    console.log(response);
+    console.log(response.data);
+  };
+
+  useEffect(()=>{
+    sendRequest();    
+  });
+
+  return (
+    <div className="App">      
+    </div>
+  );
+}
+
+export default App; */
 
 /* import axios from "axios";
 import { useEffect } from 'react';

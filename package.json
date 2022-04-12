@@ -38,5 +38,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://20.194.27.202:48090/v1"
 }
