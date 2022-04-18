@@ -1,4 +1,4 @@
-import './App.css';
+/* import './App.css';
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 
@@ -20,9 +20,9 @@ function App() {
   );
 }
 
-export default App;
+export default App; */
 
-/* import './App.css';
+import './App.css';
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 
@@ -44,7 +44,7 @@ function App() {
   );
 }
 
-export default App; */
+export default App;
 
 /* import axios from "axios";
 import { useEffect } from 'react';
