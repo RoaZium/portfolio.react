@@ -1,99 +1,25 @@
-/* import './App.css';
-import axios from 'axios';
-import React,{useState,useEffect} from 'react';
-
-function App() {
-
-  const sendRequest = async() => {
-    const response = await axios.get("/visitormanager?site_id=01f0ea04-6040-47d8-a756-f1b08d855096", {headers:{"login_token": "98A047DF-0C2D-402D-8397-86AC011D09A8"}});
-    console.log(response);
-    console.log(response.data);
-  };
-
-  useEffect(()=>{
-    sendRequest();    
-  });
-
-  return (
-    <div className="App">      
-    </div>
-  );
-}
-
-export default App; */
-
-import './App.css';
-import axios from 'axios';
-import React,{useState,useEffect} from 'react';
-
-function App() {
-
-  const sendRequest = async() => {
-    const response = await axios.get('http://localhost:5000');
-    console.log(response);
-    console.log(response.data);
-  };
-
-  useEffect(()=>{
-    sendRequest();    
-  });
-
-  return (
-    <div className="App">      
-    </div>
-  );
-}
-
-export default App;
-
-/* import axios from "axios";
-import { useEffect } from 'react';
-
-function App() {
-  const callApi = async()=>{
-    axios.get("/api").then((res)=>{console.log(res.data.test)});
-  };
-
-  useEffect(()=>{
-    callApi();
-  }, []);
-  
-  return (
-    <div className="App">
-	...
-    </div>
-  );
-}
-
-export default App; */
-
-/* import axios from "axios";
-import { useEffect } from 'react';
-
-function App() {
-  const callApi = async()=>{
-    axios.get("/api").then((res)=>{console.log(res.data.test)});
-  };
-
-  useEffect(()=>{
-    callApi();
-  }, []);
-  
-  return (
-    <div className="App">
-	...
-    </div>
-  );
-}
-
-export default App; */
-
-/* export default App;
-
 import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { Info, Login, Main, Nav } from "./pages";
+// import axios from 'axios';
 
-function App() {
+export default function App() {
+  const [userInfo, setUserInfo] = React.useState("devstone");
+  return (
+    <Router>
+      <p>fwef</p>
+{/*       <Routes>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/info" render={() => <Info userInfo={userInfo} />} />
+      </Routes> */}
+    </Router>
+  );
+}
+
+/* function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -110,6 +36,27 @@ function App() {
           Learn React
         </a>
       </header>
+    </div>
+  );
+}
+
+export default App; */
+
+/* function App() {
+
+  const sendRequest = async() => {
+    const response = await axios.get('http://localhost:5000');
+    console.log(response);
+    console.log(response.data);
+  };
+
+  useEffect(()=>{
+    sendRequest();    
+  });
+
+  return (
+    <div className="App">
+      <p>hjw2</p>      
     </div>
   );
 }
