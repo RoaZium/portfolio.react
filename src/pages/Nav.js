@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Nav() {
+function Nav() {
   return (
     <>
       <Link to="/">
@@ -17,3 +17,5 @@ export default function Nav() {
     </>
   );
 }
+
+export default Nav;

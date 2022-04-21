@@ -1,64 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import { Info, Login, Main, Nav } from "./pages";
-// import axios from 'axios';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './Layout';
+import About from './pages/About';
+import Article from './pages/Article';
+import Articles from './pages/Articles';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import MyPage from './pages/MyPage';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
-export default function App() {
-  const [userInfo, setUserInfo] = React.useState("devstone");
+const App = () => {
   return (
-    <Router>
-      <p>fwef</p>
-{/*       <Routes>
-        <Route exact path="/" component={Main} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/info" render={() => <Info userInfo={userInfo} />} />
-      </Routes> */}
-    </Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profiles/:username" element={<Profile />} />
+      </Route>
+      <Route path="/articles" element={<Articles />}>
+        <Route path=":id" element={<Article />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
-}
+};
 
-/* function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App; */
-
-/* function App() {
-
-  const sendRequest = async() => {
-    const response = await axios.get('http://localhost:5000');
-    console.log(response);
-    console.log(response.data);
-  };
-
-  useEffect(()=>{
-    sendRequest();    
-  });
-
-  return (
-    <div className="App">
-      <p>hjw2</p>      
-    </div>
-  );
-}
-
-export default App; */
+export default App;

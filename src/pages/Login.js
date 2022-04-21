@@ -1,14 +1,5 @@
-import React from "react";
-
-function Login({ match, location }) {
-  const params = match.params.id ? match.params.id : "익명";
-  console.log("match", match);
-  console.log("location", location);
-  return (
-    <>
-      <div>{params} login page</div>
-    </>
-  );
-}
+const Login = () => {
+  return <div>로그인 페이지</div>;
+};
 
 export default Login;
