@@ -11,16 +11,9 @@ import Main from "./layouts/Main";
 
 ReactDOM.render(
   <BrowserRouter>
-    <div className="App">
-      <CssBaseline />
+    {/* <div className="App"> */}
       <Main />
-    </div>
-    {/* <Appbar /> */}
-    {/* <header>
-      <Appbar />
-    </header> */}
-    {/* <App /> */}
-    {/* <StateHook text={'hjw hjw hjw hjw'} maxLength={2} /> */}
+    {/* </div> */}
   </BrowserRouter>,
   document.getElementById("root")
 );

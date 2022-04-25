@@ -240,7 +240,6 @@ class MiniDrawer extends React.Component {
             accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
             ultrices sagittis orci a.
           </Typography>
-          <Typography paragraph>foo</Typography>
         </main>
       </div>
     );
