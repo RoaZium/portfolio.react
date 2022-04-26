@@ -8,12 +8,31 @@ import Appbar from "./components/Appbar";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Main from "./layouts/Main";
+import PropsExample from "./examples/props";
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+
+/* ReactDOM.render(
   <BrowserRouter>
-    {/* <div className="App"> */}
+    <div className="App">
       <Main />
-    {/* </div> */}
+    </div>
   </BrowserRouter>,
   document.getElementById("root")
+); */
+
+//props example.01
+/* ReactDOM.render(
+  <>
+    <PropsExample title="222" body="health" />
+  </>,
+  rootElement
+); */
+
+// props example.02
+ReactDOM.render(
+  <>
+    <PropsExample name="HJW" color="blue" brand="Rapido" />
+  </>,
+  rootElement
 );
