@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -22,10 +22,7 @@ import Menu from "@material-ui/core/Menu";
 
 // import { Visitor01, Visitor02, Visitor03, Visitor04, Visitor05 } from "../layouts/visitors";
 
-import Visitor01 from "./visitors/Visitor01";
-import { Link } from "react-router-dom";
 import { Admin01 } from "./admin";
-import { Outlet, useNavigate } from "react-router-dom";
 import routes from "../routes";
 
 const drawerWidth = 220;
@@ -106,7 +103,7 @@ const styles = (theme) => ({
   },
 });
 
-class MiniDrawer extends React.Component {
+class MiniDrawer extends Component {
   state = {
     open: false,
     anchorEl: null,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 // import React, { Component } from "react"; > React.Component > Component
 
 // Example.01
@@ -44,4 +44,17 @@ function Garage() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Garage />);
  */
-export default Props02;
+
+// Example.04-this.props.children
+class Childrentest extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello {this.props.name}</h1>
+        <div>{this.props.children}</div>
+      </div>
+    );
+  }
+}
+
+export default Childrentest;
