@@ -9,16 +9,33 @@ import Profile from "./pages/Profile";
 import { Admin01, Admin02, Admin03, Admin04 } from "./layouts/admin";
 import { Visitor01, Visitor02, Visitor03, Visitor04, Visitor05 } from "./layouts/visitors";
 
+import Main from "./layouts/Main";
+
+import Appbar from "./components/Appbar";
+
 const App = () => {
   return (
-    <Routes>
+/*     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/Admin01" element={<Admin01 />} />
         <Route path="/Admin02" element={<Admin02 />} />
         <Route path="/Admin03" element={<Admin03 />} />
         <Route path="/Admin04" element={<Admin04 />} />
       </Route>
-    </Routes>
+    </Routes> */
+
+    <div className="App">
+      <Main />
+    </div>
+    
+/*     <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/Admin01" element={<Admin01 />} />
+        <Route path="/Admin02" element={<Admin02 />} />
+        <Route path="/Admin03" element={<Admin03 />} />
+        <Route path="/Admin04" element={<Admin04 />} />
+      </Route>
+    </Routes> */
     
     /*          <Routes>
       <Route path="/" element={<Layout />}>

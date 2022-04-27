@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -19,6 +19,14 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+
+// import { Visitor01, Visitor02, Visitor03, Visitor04, Visitor05 } from "../layouts/visitors";
+
+import Visitor01 from "./visitors/Visitor01";
+import { Link } from "react-router-dom";
+import { Admin01 } from "./admin";
+import { Outlet, useNavigate } from "react-router-dom";
+import routes from "../routes";
 
 const drawerWidth = 220;
 
@@ -119,20 +127,19 @@ class MiniDrawer extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleClicked = () => {
+    console.log("click test1");
+  };
+
   render() {
     const { classes, theme } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={classes.appBar}
-          fooJon={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.open,
-          })}
-        >
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar disableGutters={true}>
             <IconButton
               color="inherit"
@@ -221,26 +228,22 @@ class MiniDrawer extends React.Component {
               </ListItem>
             ))}
           </List>
+          <Divider />
+          <List>
+            {routes.map((item, index) => {
+              const { name, icon, onClick } = item;
+              return (
+                <ListItem button key={name} onClick={this.handleClicked()}>
+                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                  <ListItemText primary={name} />
+                </ListItem>
+              );
+            })}
+          </List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
-        </main>
+        <div>
+          <Admin01 />
+        </div>
       </div>
     );
   }

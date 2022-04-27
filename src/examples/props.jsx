@@ -1,4 +1,5 @@
 import React from "react";
+// import React, { Component } from "react"; > React.Component > Component
 
 // Example.01
 class Props01 extends React.Component {

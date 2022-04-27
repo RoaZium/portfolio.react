@@ -50,6 +50,9 @@
   },
   "proxy": "http://20.194.27.202:48090/v1",
   "devDependencies": {
-    "babel-plugin-root-import": "^6.6.0"
+    "babel-plugin-root-import": "^6.6.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0"
   }
 }

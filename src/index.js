@@ -12,14 +12,14 @@ import PropsExample from "./examples/props";
 
 const rootElement = document.getElementById("root");
 
-/* ReactDOM.render(
+ReactDOM.render(
   <BrowserRouter>
     <div className="App">
-      <Main />
+      <App />
     </div>
   </BrowserRouter>,
   document.getElementById("root")
-); */
+);
 
 //props example.01
 /* ReactDOM.render(
@@ -30,9 +30,9 @@ const rootElement = document.getElementById("root");
 ); */
 
 // props example.02
-ReactDOM.render(
+/* ReactDOM.render(
   <>
     <PropsExample name="HJW" color="blue" brand="Rapido" />
   </>,
   rootElement
-);
+); */
