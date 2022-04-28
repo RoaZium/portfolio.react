@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -28,9 +22,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
 import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
-import Layout from "../Layout";
+import Layout from "./Layout";
 import routes from "../routes";
 import Button from "@mui/material/Button";
+import history from "./history";
 
 const drawerWidth = 220;
 
@@ -237,7 +232,7 @@ class MiniDrawer extends Component {
             {routes.map((item, index) => {
               const { name, icon, onClick } = item;
               return (
-                <ListItem button key={name}>
+                <ListItem button key={name} >
                   {icon && <ListItemIcon>{icon}</ListItemIcon>}
                   <ListItemText primary={name} />
                 </ListItem>
@@ -245,19 +240,21 @@ class MiniDrawer extends Component {
             })}
           </List>
           <Divider />
-          <Button variant="outlined" onClick={this.handleClicked}>
+          <Button variant="outlined" onClick={() => history.push('Admin03')}>
             방문자01
           </Button>
         </Drawer>
         <div>
-          <Routes>
-            <Route path="/" element={<Admin01 />}>
-              <Route path="/Admin01" element={<Admin01 />} />
-              <Route path="/Admin02" element={<Admin02 />} />
-              <Route path="/Admin03" element={<Admin03 />} />
-              <Route path="/Admin04" element={<Admin04 />} />
-            </Route>
-          </Routes>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="/Admin01" element={<Admin01 />} />
+                <Route path="/Admin02" element={<Admin02 />} />
+                <Route path="/Admin03" element={<Admin03 />} />
+                <Route path="/Admin04" element={<Admin04 />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </div>
       </div>
     );
