@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -20,10 +27,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
-// import { Visitor01, Visitor02, Visitor03, Visitor04, Visitor05 } from "../layouts/visitors";
-
-import { Admin01 } from "./admin";
+import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
+import Layout from "../Layout";
 import routes from "../routes";
+import Button from "@mui/material/Button";
 
 const drawerWidth = 220;
 
@@ -125,7 +132,7 @@ class MiniDrawer extends Component {
   };
 
   handleClicked = () => {
-    console.log("click test1");
+    console.log("click test2");
   };
 
   render() {
@@ -230,16 +237,27 @@ class MiniDrawer extends Component {
             {routes.map((item, index) => {
               const { name, icon, onClick } = item;
               return (
-                <ListItem button key={name} onClick={this.handleClicked()}>
+                <ListItem button key={name}>
                   {icon && <ListItemIcon>{icon}</ListItemIcon>}
                   <ListItemText primary={name} />
                 </ListItem>
               );
             })}
           </List>
+          <Divider />
+          <Button variant="outlined" onClick={this.handleClicked}>
+            방문자01
+          </Button>
         </Drawer>
         <div>
-          <Admin01 />
+          <Routes>
+            <Route path="/" element={<Admin01 />}>
+              <Route path="/Admin01" element={<Admin01 />} />
+              <Route path="/Admin02" element={<Admin02 />} />
+              <Route path="/Admin03" element={<Admin03 />} />
+              <Route path="/Admin04" element={<Admin04 />} />
+            </Route>
+          </Routes>
         </div>
       </div>
     );
