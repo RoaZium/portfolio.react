@@ -19,7 +19,7 @@ const Layout = () => {
 
   return (
     <div>
-      <header style={{ background: "lightgray", padding: 66, fontSize: 24 }}>
+      <header style={{ background: "lightgray", padding: 16, fontSize: 24 }}>
         <button onClick={Admin01}>Admin01</button>
         <button onClick={goBack}>뒤로가기</button>
         <button onClick={goArticles}>게시글 목록</button>

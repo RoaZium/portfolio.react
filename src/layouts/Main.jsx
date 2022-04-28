@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -20,14 +26,25 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { styled } from "@mui/material/styles";
 
 import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
 import Layout from "./Layout";
 import routes from "../routes";
 import Button from "@mui/material/Button";
 import history from "./history";
+import Box from "@mui/material/Box";
 
 const drawerWidth = 220;
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
 const styles = (theme) => ({
   root: {
@@ -232,7 +249,7 @@ class MiniDrawer extends Component {
             {routes.map((item, index) => {
               const { name, icon, onClick } = item;
               return (
-                <ListItem button key={name} >
+                <ListItem button key={name}>
                   {icon && <ListItemIcon>{icon}</ListItemIcon>}
                   <ListItemText primary={name} />
                 </ListItem>
@@ -240,11 +257,12 @@ class MiniDrawer extends Component {
             })}
           </List>
           <Divider />
-          <Button variant="outlined" onClick={() => history.push('Admin03')}>
+          <Button variant="outlined" onClick={() => history.push("Admin03")}>
             방문자01
           </Button>
         </Drawer>
-        <div>
+        <Box>
+          <DrawerHeader />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
@@ -255,7 +273,7 @@ class MiniDrawer extends Component {
               </Route>
             </Routes>
           </BrowserRouter>
-        </div>
+        </Box>
       </div>
     );
   }
