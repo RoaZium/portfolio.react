@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import {
   BrowserRouter,
-  Link,
   Route,
   Routes,
-  useNavigate,
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -148,7 +146,7 @@ class MiniDrawer extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -247,7 +245,7 @@ class MiniDrawer extends Component {
           <Divider />
           <List>
             {routes.map((item, index) => {
-              const { name, icon, onClick } = item;
+              const { name, icon } = item;
               return (
                 <ListItem button key={name}>
                   {icon && <ListItemIcon>{icon}</ListItemIcon>}

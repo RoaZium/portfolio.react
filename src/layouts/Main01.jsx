@@ -17,8 +17,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
+import routes from "../routes";
+import Visitor01 from "./visitors/Visitor01";
+import Visitor02 from "./visitors/Visitor02";
+import Visitor03 from "./visitors/Visitor03";
+import Visitor04 from "./visitors/Visitor04";
+import Visitor05 from "./visitors/Visitor05";
 
 const drawerWidth = 240;
 
@@ -101,6 +107,21 @@ export default function MiniDrawer() {
 
   const changeLayout = () => {
     console.log("test1");
+    Navigate(Admin01);
+  };
+
+  const getRoutes = (allRoutes) => {
+    allRoutes.map((route) => {
+      console.log("test01");
+      return (
+        <Route
+          exact
+          path={route.route}
+          element={route.component}
+          key={route.key}
+        />
+      );
+    });
   };
 
   return (
@@ -189,12 +210,8 @@ export default function MiniDrawer() {
         <DrawerHeader />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Admin01 />}>
-              <Route path="/Admin01" element={<Admin01 />} />
-              <Route path="/Admin02" element={<Admin02 />} />
-              <Route path="/Admin03" element={<Admin03 />} />
-              <Route path="/Admin04" element={<Admin04 />} />
-            </Route>
+            <Route path="*" element={<Visitor01 />} />
+            {getRoutes(routes)}
           </Routes>
         </BrowserRouter>
       </Box>
