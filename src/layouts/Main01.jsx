@@ -156,7 +156,6 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
             <ListItemButton
@@ -210,8 +209,14 @@ export default function MiniDrawer() {
         <DrawerHeader />
         <BrowserRouter>
           <Routes>
-            <Route path="*" element={<Visitor01 />} />
-            {getRoutes(routes)}
+            <Route path="/" element={<Admin01 />}>
+              <Route path="/Admin01" element={<Visitor01 />} />
+              <Route path="/Admin02" element={<Visitor02 />} />
+              <Route path="/Admin03" element={<Visitor03 />} />
+              <Route path="/Admin04" element={<Visitor04 />} />
+            </Route>
+            {/*             <Route path="*" element={<Visitor01 />} />
+            {getRoutes(routes)} */}
           </Routes>
         </BrowserRouter>
       </Box>
