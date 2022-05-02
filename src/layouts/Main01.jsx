@@ -101,6 +101,7 @@ const testEvent = (e, hjw) => {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [comp, setComp] = React.useState(Visitor01);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -210,24 +211,15 @@ export default function MiniDrawer() {
           ))}
         </List>
         <Divider />
-        <Button onClick={(e) => {
-          this.testEvent(e, "hjw");
-        }}>Test</Button>
+        <Button onClick={() => setComp(Visitor01)}>방문자01</Button>
+        <Button onClick={() => setComp(Visitor02)}>방문자02</Button>
+        <Button onClick={() => setComp(Visitor03)}>방문자03</Button>
+        <Button onClick={() => setComp(Visitor04)}>방문자04</Button>
+        <Button onClick={() => setComp(Visitor05)}>방문자05</Button>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
         <DrawerHeader />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Admin01 />}>
-              <Route path="/Admin01" element={<Visitor01 />} />
-              <Route path="/Admin02" element={<Visitor02 />} />
-              <Route path="/Admin03" element={<Visitor03 />} />
-              <Route path="/Admin04" element={<Visitor04 />} />
-            </Route>
-            {/*             <Route path="*" element={<Visitor01 />} />
-            {getRoutes(routes)} */}
-          </Routes>
-        </BrowserRouter>
+        <main children={comp} />
       </Box>
     </Box>
   );

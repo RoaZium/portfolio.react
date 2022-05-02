@@ -1,3 +1,3 @@
 export default function Visitor04() {
-    return <label>Visitor04</label>;
+  return <label>Visitor04</label>;
 }

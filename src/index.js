@@ -9,8 +9,7 @@ const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <StyledEngineProvider injectFirst>
-    {/* <Main01 /> */}
-    <EventHandler01 />
+    <Main01 />
   </StyledEngineProvider>,
   rootElement
 );
