@@ -25,6 +25,7 @@ import Visitor02 from "./visitors/Visitor02";
 import Visitor03 from "./visitors/Visitor03";
 import Visitor04 from "./visitors/Visitor04";
 import Visitor05 from "./visitors/Visitor05";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -92,6 +93,10 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+
+const testEvent = (e, hjw) => {
+  console.log(hjw);
+};
 
 export default function MiniDrawer() {
   const theme = useTheme();
@@ -204,6 +209,10 @@ export default function MiniDrawer() {
             </ListItemButton>
           ))}
         </List>
+        <Divider />
+        <Button onClick={(e) => {
+          this.testEvent(e, "hjw");
+        }}>Test</Button>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
         <DrawerHeader />
