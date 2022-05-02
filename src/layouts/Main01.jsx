@@ -5,6 +5,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -17,7 +18,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
 import routes from "../routes";
 import Visitor01 from "./visitors/Visitor01";
@@ -131,96 +132,110 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 2,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            방문자
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItemButton
-              key={text}
+    <BrowserRouter>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
               sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
+                marginRight: 2,
+                ...(open && { display: "none" }),
               }}
             >
-              <ListItemIcon
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              방문자
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <List>
+            <Link to="/Visitor01">
+              <ListItem button>
+                <ListItemIcon>
+                  <MenuIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+            </Link>
+            <Link to="/Visitor02">
+              <ListItem button>
+                <ListItemIcon>
+                  <MenuIcon />
+                </ListItemIcon>
+                <ListItemText primary={"About"} />
+              </ListItem>
+            </Link>
+          </List>
+          <Divider />
+          <List>
+            {["All mail", "Trash", "Spam"].map((text, index) => (
+              <ListItemButton
+                onClick={changeLayout}
+                key={text}
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItemButton
-              onClick={changeLayout}
-              key={text}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          ))}
-        </List>
-        <Divider />
-        <Button onClick={() => setComp(Visitor01)}>방문자01</Button>
-        <Button onClick={() => setComp(Visitor02)}>방문자02</Button>
-        <Button onClick={() => setComp(Visitor03)}>방문자03</Button>
-        <Button onClick={() => setComp(Visitor04)}>방문자04</Button>
-        <Button onClick={() => setComp(Visitor05)}>방문자05</Button>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
-        <DrawerHeader />
-        <main children={comp} />
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            ))}
+          </List>
+          <Divider />
+          <Link to="/" style={{ textDecoration: `none` }}>
+            <Button>방문01</Button>
+          </Link>
+          <Link to="/Visitor02" style={{ textDecoration: `none` }}>
+            <Button>방문02</Button>
+          </Link>
+          <Link to="/Visitor03" style={{ textDecoration: `none` }}>
+            <Button>방문03</Button>
+          </Link>
+          <Link to="/Visitor04" style={{ textDecoration: `none` }}>
+            <Button>방문04</Button>
+          </Link>
+          <Link to="/Visitor05" style={{ textDecoration: `none` }}>
+            <Button>방문05</Button>
+          </Link>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
+          <DrawerHeader />
+          <Routes>
+            <Route path="/" element={<Visitor01 />} />
+            <Route path="/Visitor01" element={<Visitor01 />} />
+            <Route path="/Visitor02" element={<Visitor02 />} />
+            <Route path="/Visitor03" element={<Visitor03 />} />
+            <Route path="/Visitor04" element={<Visitor04 />} />
+            <Route path="/Visitor05" element={<Visitor05 />} />
+          </Routes>
+        </Box>
       </Box>
-    </Box>
+    </BrowserRouter>
   );
 }
