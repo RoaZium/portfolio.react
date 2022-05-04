@@ -128,7 +128,7 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -138,50 +138,10 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
-        <List>
-          <Link to="/Visitor01">
-            <ListItem button>
-              <ListItemIcon>
-                <MenuIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Home"} />
-            </ListItem>
-          </Link>
-          <Link to="/Visitor02">
-            <ListItem button>
-              <ListItemIcon>
-                <MenuIcon />
-              </ListItemIcon>
-              <ListItemText primary={"About"} />
-            </ListItem>
-          </Link>
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItemButton
-              key={text}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          ))}
-        </List>
-        <Divider />
         <Link to="/" style={{ textDecoration: `none` }}>
+          <Button >홈</Button>
+        </Link>
+        <Link to="/Visitor01" style={{ textDecoration: `none` }}>
           <Button>방문01</Button>
         </Link>
         <Link to="/Visitor02" style={{ textDecoration: `none` }}>
