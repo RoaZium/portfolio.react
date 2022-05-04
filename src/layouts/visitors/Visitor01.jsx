@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -32,18 +34,20 @@ export default function Visitor01() {
               p={10}
               textAlign="center"
             >
-              <Button
-                style={{
-                  maxWidth: "30px",
-                  maxHeight: "30px",
-                  minWidth: "200px",
-                  minHeight: "200px",
-                }}
-                variant="contained"
-                startIcon={<InboxIcon />}
-              >
-                방문자 예약 신청
-              </Button>
+              <Link to="/Visitor02" style={{ textDecoration: "none" }}>
+                <Button
+                  style={{
+                    maxWidth: "30px",
+                    maxHeight: "30px",
+                    minWidth: "200px",
+                    minHeight: "200px",
+                  }}
+                  variant="contained"
+                  startIcon={<InboxIcon />}
+                >
+                  방문자 예약 신청
+                </Button>
+              </Link>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -72,7 +76,10 @@ export default function Visitor01() {
               <Box bgcolor="warning.main" color="info.contrastText" p={5}>
                 <Card>
                   <Typography>① 방문절차 안내</Typography>
-                  <Typography>방문신청 &gt; 피방문자 통보 &gt; 내부승인 &gt; 방문수속 &gt; 방문</Typography>
+                  <Typography>
+                    방문신청 &gt; 피방문자 통보 &gt; 내부승인 &gt; 방문수속 &gt;
+                    방문
+                  </Typography>
                 </Card>
               </Box>
             </Grid>
