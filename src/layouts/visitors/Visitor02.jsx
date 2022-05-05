@@ -5,9 +5,18 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
+import { styled } from "@material-ui/core/styles";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+const MyButton = styled(Button)({
+  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+  border: 0,
+  borderRadius: 3,
+  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  color: "white",
+  height: 48,
+  padding: "0 30px",
+});
+
 export default function Visitor02() {
   return (
     <Container
@@ -35,9 +44,9 @@ export default function Visitor02() {
               textAlign="center"
             >
               <Link to="/Visitor01" style={{ textDecoration: "none" }}>
-                <Button variant="contained" fullWidth>
+                <MyButton variant="contained" fullWidth>
                   이전 페이지
-                </Button>
+                </MyButton>
               </Link>
             </Box>
           </Grid>
@@ -49,9 +58,9 @@ export default function Visitor02() {
               textAlign="center"
             >
               <Link to="/Visitor01" style={{ textDecoration: "none" }}>
-                <Button variant="contained" fullWidth>
+                <MyButton variant="contained" fullWidth>
                   홈으로
-                </Button>
+                </MyButton>
               </Link>
             </Box>
           </Grid>
