@@ -14,21 +14,29 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useState } from "react";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
-const sendRequest = async () => {
-  const response = await axios.get(
-    "/visitormanager?visitor_id=VT7157&visitor_name=김민구&site_id=01f0ea04-6040-47d8-a756-f1b08d855096",
-    { headers: { login_token: "98A047DF-0C2D-402D-8397-86AC011D09A8" } }
-  );
-  console.log(response);
-  console.log(response.data);
-};
-
-axios.defaults.withCredentials = true;
-
 export default function Visitor04() {
+  const [visitors, setVisitors] = useState("");
+
+  const sendRequest = async () => {
+    await axios
+      .get(
+        "/visitormanager?visitor_id=VT7157&visitor_name=김민구&site_id=01f0ea04-6040-47d8-a756-f1b08d855096",
+        { headers: { login_token: "98A047DF-0C2D-402D-8397-86AC011D09A8" } }
+      )
+      .then(function (response) {
+        if (response.data["visitors"][0] != null) {
+          setVisitors(response.data["visitors"][0]);
+          console.log("ghj");
+        } else {
+          console.log("fef");
+        }
+      });
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -79,7 +87,7 @@ export default function Visitor04() {
                     />
                     <TextField
                       id="outlined-basic"
-                      label="연락처"
+                      label={visitors.telephone}
                       variant="outlined"
                     />
                     <TextField
@@ -103,7 +111,7 @@ export default function Visitor04() {
                   <Stack>
                     <TextField
                       id="outlined-basic"
-                      label="홍길동"
+                      label={visitors.visitor_name}
                       variant="outlined"
                     />
                     <TextField
