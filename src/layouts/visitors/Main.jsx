@@ -16,7 +16,7 @@ import Visitor02 from "./Visitor02";
 import Visitor03 from "./Visitor03";
 import Visitor04 from "./Visitor04";
 import Visitor05 from "./Visitor05";
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import CI from "../../assets/images/CI.png";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -89,50 +89,57 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
+export default function Main() {
   return (
-    <Box sx={{ display: "flex" }}>
+    <React.Fragment>
       <CssBaseline />
-      <AppBar position="fixed" open={open} color="transparent">
-        <Toolbar>
-          <Box component="img" src={CI} width="auto" height="40px" />
-          <Typography
-            align="center"
-            variant="h6"
-            fontWeight="bold"
-            sx={{
-              bgcolor: "transparent",
-              height: "30px",
-              marginLeft: 1,
-              textAlign: "center",
-            }}
-          >
-            방문 예약 시스템
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
-        <DrawerHeader />
-        <Routes>
-          <Route path="/" element={<Visitor01 />} />
-          <Route path="/Visitor01" element={<Visitor01 />} />
-          <Route path="/Visitor02" element={<Visitor02 />} />
-          <Route path="/Visitor03" element={<Visitor03 />} />
-          <Route path="/Visitor04" element={<Visitor04 />} />
-          <Route path="/Visitor05" element={<Visitor05 />} />
-        </Routes>
+      <Box maxWidth sx={{ bgcolor: "transparent", height: "10vh" }}>
+        <Grid container spacing={0}>
+          <Grid item xs={1.2}>
+            <Box
+              component="img"
+              src={CI}
+              sx={{
+                bgcolor: "transparent",
+                height: 55,
+                marginLeft: 2,
+                my: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            />
+          </Grid>
+          <Grid item xs={1}>
+            <Typography
+              variant="h6"
+              fontWeight="bold"
+              sx={{
+                bgcolor: "transparent",
+                height: 55,
+                my: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              방문 예약 시스템
+            </Typography>
+          </Grid>
+        </Grid>
       </Box>
-    </Box>
+      <Box maxWidth sx={{ bgcolor: "#dd09f4", height: "90vh" }}>
+        <Container maxWidth="lg">
+          <Routes>
+            <Route path="/" element={<Visitor01 />} />
+            <Route path="/Visitor01" element={<Visitor01 />} />
+            <Route path="/Visitor02" element={<Visitor02 />} />
+            <Route path="/Visitor03" element={<Visitor03 />} />
+            <Route path="/Visitor04" element={<Visitor04 />} />
+            <Route path="/Visitor05" element={<Visitor05 />} />
+          </Routes>
+        </Container>
+      </Box>
+    </React.Fragment>
   );
 }

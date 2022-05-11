@@ -94,7 +94,7 @@ export default function Visitor02() {
         justifyContent="center"
         sx={{
           bgcolor: "red",
-          height: "94vh",
+          height: "90vh",
         }}
       >
         <Grid container spacing={1}>
