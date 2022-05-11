@@ -1,9 +1,9 @@
-import Main from "./layouts/Main";
+import Visitor from "./layouts/visitors/Main";
 
 const App = () => {
   return (
     <div>
-      <Main />
+      <Visitor />
     </div>
   );
 };

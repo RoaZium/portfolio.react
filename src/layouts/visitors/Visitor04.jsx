@@ -87,7 +87,7 @@ export default function Visitor04() {
                     />
                     <TextField
                       id="outlined-basic"
-                      label={visitors.telephone}
+                      label="연락처"
                       variant="outlined"
                     />
                     <TextField
@@ -116,7 +116,7 @@ export default function Visitor04() {
                     />
                     <TextField
                       id="outlined-basic"
-                      label="010-1111-2222"
+                      label={visitors.telephone}
                       variant="outlined"
                     />
                     <TextField
