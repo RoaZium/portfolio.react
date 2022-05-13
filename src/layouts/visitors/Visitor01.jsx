@@ -26,6 +26,7 @@ export default function Visitor01() {
       alignItems="center"
       sx={{
         height: "80vh",
+        bgcolor: "red",
       }}
     >
       <Grid container>

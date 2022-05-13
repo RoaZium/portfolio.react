@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { styled } from "@material-ui/core/styles";
 import Stepper from "@mui/material/Stepper";
@@ -27,107 +26,115 @@ const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입�
 
 export default function Visitor02() {
   return (
-    <Container
-      maxWidth="lg"
+    <Box
+      display="flex"
+      alignItems="center"
       sx={{
-        bgcolor: "yellow",
+        height: "80vh",
+        bgcolor: "red",
       }}
     >
-      <Card>방문자 02</Card>
-      <Box sx={{ width: "100%" }}>
-        <Stepper activeStep={0} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box>
-      <Box bgcolor="orange">
-        <Grid container spacing={2} bgcolor="warning.main">
-          <Grid item xs={12}>
-            <Typography
-              bgcolor="green"
-              color="red"
-              textAlign="center"
-              fontWeight="bold"
-              fontSize={20}
-            >
-              개인정보 수집, 이용, 제공 동의
-            </Typography>
-            <Typography bgcolor="green" color="red">
-              (주) 종근당(이하. 회사라고 합니다.) 이용자들의 개인정보를 소중히
-              다루고 개인정보와 관련된 정보 통신망 이용 촉진 및 정보 보호등에
-              관한 법률(이하' 개인정보보호법) 등을 준수합니다. 귀하의 개인정보를
-              수집함에 있어 아래 내용을 안내하고 있으니 자세히 읽어보시고 모든
-              내용을 이해하신 후에 동의 여부를 결정 해주시기 바랍니다.
-            </Typography>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="상기 내용을 확인 하였으며, 개인정보 수집 및 이용에 동의 합니다."
-            />
-            <Typography
-              bgcolor="green"
-              color="red"
-              textAlign="center"
-              fontWeight="bold"
-              fontSize={20}
-            >
-              (주) 종근당 보안 정책 준수 동의
-            </Typography>
-            <Typography bgcolor="green" color="red">
-              · 지정된 장소 외 출입 및 개별 행동 금지(안내자와 상시 동행) <br />
-              · 사진 촬영 및 음성 녹음 금지 <br />
-              · 사전 허가된 인원과 장비만 출입 및 반입 <br />
-            </Typography>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="당사의 보안 정책의 내용을 확인 하였으며, 동의 합니다."
-            />
-          </Grid>
-          <Grid></Grid>
+      <Grid>
+        <Grid item xs={2} sx={{
+          bgcolor: "blue",
+          height: "20%",
+        }}>
+          <Box sx={{ width: "100%" }}>
+            <Stepper activeStep={0} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
         </Grid>
-      </Box>
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        sx={{
-          bgcolor: "red",
-          height: "90vh",
-        }}
-      >
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={6}>
-            <Box
-              bgcolor="warning.main"
-              color="info.contrastText"
-              p={2}
-              textAlign="center"
-            >
-              <Link to="/Visitor01" style={{ textDecoration: "none" }}>
-                <MyButton variant="contained" fullWidth>
-                  이전 페이지
-                </MyButton>
-              </Link>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Box
-              bgcolor="warning.main"
-              color="info.contrastText"
-              p={2}
-              textAlign="center"
-            >
-              <Link to="/Visitor03" style={{ textDecoration: "none" }}>
-                <MyButton variant="contained" fullWidth>
-                  다음 페이지
-                </MyButton>
-              </Link>
-            </Box>
+        <Grid item xs={8}>
+          <Grid>
+            <Grid item xs={12}>
+              <Typography
+                bgcolor="green"
+                color="red"
+                textAlign="center"
+                fontWeight="bold"
+                fontSize={20}
+              >
+                개인정보 수집, 이용, 제공 동의
+              </Typography>
+              <Typography bgcolor="green" color="red">
+                (주) 종근당(이하. 회사라고 합니다.) 이용자들의 개인정보를 소중히
+                다루고 개인정보와 관련된 정보 통신망 이용 촉진 및 정보 보호등에
+                관한 법률(이하' 개인정보보호법) 등을 준수합니다. 귀하의
+                개인정보를 수집함에 있어 아래 내용을 안내하고 있으니 자세히
+                읽어보시고 모든 내용을 이해하신 후에 동의 여부를 결정 해주시기
+                바랍니다.
+              </Typography>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="상기 내용을 확인 하였으며, 개인정보 수집 및 이용에 동의 합니다."
+              />
+              <Typography
+                bgcolor="green"
+                color="red"
+                textAlign="center"
+                fontWeight="bold"
+                fontSize={20}
+              >
+                (주) 종근당 보안 정책 준수 동의
+              </Typography>
+              <Typography bgcolor="green" color="red">
+                · 지정된 장소 외 출입 및 개별 행동 금지(안내자와 상시 동행){" "}
+                <br />
+                · 사진 촬영 및 음성 녹음 금지 <br />
+                · 사전 허가된 인원과 장비만 출입 및 반입 <br />
+              </Typography>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="당사의 보안 정책의 내용을 확인 하였으며, 동의 합니다."
+              />
+            </Grid>
+            <Grid></Grid>
           </Grid>
         </Grid>
-      </Box>
-    </Container>
+        <Grid item xs={2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={6}>
+                <Box
+                  bgcolor="warning.main"
+                  color="info.contrastText"
+                  p={2}
+                  textAlign="center"
+                >
+                  <Link to="/Visitor01" style={{ textDecoration: "none" }}>
+                    <MyButton variant="contained" fullWidth>
+                      이전 페이지
+                    </MyButton>
+                  </Link>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box
+                  bgcolor="warning.main"
+                  color="info.contrastText"
+                  p={2}
+                  textAlign="center"
+                >
+                  <Link to="/Visitor03" style={{ textDecoration: "none" }}>
+                    <MyButton variant="contained" fullWidth>
+                      다음 페이지
+                    </MyButton>
+                  </Link>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
