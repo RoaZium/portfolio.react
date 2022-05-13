@@ -16,7 +16,7 @@ import Visitor02 from "./Visitor02";
 import Visitor03 from "./Visitor03";
 import Visitor04 from "./Visitor04";
 import Visitor05 from "./Visitor05";
-import { Button, Container } from "@mui/material";
+import { Button, Card, Container } from "@mui/material";
 import CI from "../../assets/images/CI.png";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -95,15 +95,15 @@ export default function Main() {
       <CssBaseline />
       <Box maxWidth sx={{ bgcolor: "transparent", height: "10vh" }}>
         <Grid container spacing={0}>
-          <Grid item xs={1.2}>
+          <Grid item xs={1}>
             <Box
               component="img"
               src={CI}
               sx={{
                 bgcolor: "transparent",
-                height: 55,
-                marginLeft: 2,
-                my: 2,
+                height: 40,
+                marginLeft: 3,
+                my: 3,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -128,8 +128,8 @@ export default function Main() {
           </Grid>
         </Grid>
       </Box>
-      <Box maxWidth sx={{ bgcolor: "#dd09f4", height: "90vh" }}>
-        <Container maxWidth="lg">
+      <Box maxWidth sx={{ bgcolor: "transparent" }}>
+        <Container maxWidth="md">
           <Routes>
             <Route path="/" element={<Visitor01 />} />
             <Route path="/Visitor01" element={<Visitor01 />} />
@@ -140,6 +140,7 @@ export default function Main() {
           </Routes>
         </Container>
       </Box>
+      <Box maxWidth sx={{ bgcolor: "transparent", height: "10vh" }} />
     </React.Fragment>
   );
 }

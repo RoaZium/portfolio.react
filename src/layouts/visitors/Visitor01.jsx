@@ -6,9 +6,16 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+
+const buttonStyle = {
+  minWidth: "300px",
+  minHeight: "300px",
+  border: "3px solid",
+  borderColor: "yellow",
+  borderRadius: 5,
+};
 
 export default function Visitor01() {
   return (
@@ -18,65 +25,88 @@ export default function Visitor01() {
       justifyContent="center"
       sx={{
         bgcolor: "red",
-        height: "90vh",
+        height: "80vh",
       }}
     >
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
+      <Grid container>
+        <Grid
+          item
+          xs={5}
+          container
+          justifyContent="center"
+          alignContent="center"
+          bgcolor="purple"
+        >
           <Box
-            bgcolor="warning.main"
+            bgcolor="transparent"
             color="info.contrastText"
-            p={10}
-            textAlign="center"
+            sx={{
+              boxShadow: 13,
+              borderRadius: 5,
+            }}
           >
             <Link to="/Visitor02" style={{ textDecoration: "none" }}>
-              <Button
-                style={{
-                  minWidth: "300px",
-                  minHeight: "300px",
-                  borderColor: "black",
-                  borderRadius: 20,
-                }}
-                variant="outlined"
-              >
+              <Button bgcolor="red" sx={buttonStyle} variant="outlined">
                 방문자 예약 신청
                 <AssignmentIndIcon
-                  style={{ position: "absolute", top: "30px" }}
                   sx={{
                     height: "100px",
                     width: "100px",
+                    position: "absolute",
+                    top: "30px",
                   }}
                 />
               </Button>
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={6} container spacing={2}>
-          <Grid item xs={12}>
-            <Box
-              bgcolor="warning.main"
-              color="info.contrastText"
-              p={6}
-              textAlign="center"
+        <Grid item xs={7} container>
+          <Grid
+            item
+            xs={12}
+            height="45%"
+            bgcolor="orange"
+            container
+            justifyContent="center"
+          >
+            <Button
+              sx={[
+                {
+                  boxShadow: 13,
+                  minWidth: "470px",
+                  border: "3px solid",
+                  color: "blue",
+                  bgcolor: "black",
+                  borderColor: "yellow",
+                  borderRadius: 5,
+                },
+              ]}
+              variant="outlined"
+              startIcon={<PersonSearchIcon />}
             >
-              <Button
-                style={{
-                  minWidth: "300px",
-                  minHeight: "300px",
-                  borderColor: "black",
-                  borderRadius: 20,
-                }}
-                variant="outlined"
-                startIcon={<PersonSearchIcon />}
-              >
-                방문자 예약 조회
-              </Button>
-            </Box>
+              방문자 예약 조회
+            </Button>
           </Grid>
-          <Grid item xs={12}>
-            <Card sx={{
-              height: "50px",
-            }}>
+          <Grid item xs={12} height="10%" bgcolor="yellowgreen"></Grid>
+          <Grid
+            item
+            height="45%"
+            xs={12}
+            container
+            justifyContent="center"
+            bgcolor="blue"
+          >
+            <Card
+              sx={{
+                width: "470px",
+                border: "3px solid",
+                color: "blue",
+                borderColor: "yellow",
+                boxShadow: 13,
+                borderRadius: 5,
+                bgcolor: "red",
+              }}
+            >
               <Typography>① 방문절차 안내</Typography>
               <Typography>
                 방문신청 &gt; 피방문자 통보 &gt; 내부승인 &gt; 방문수속 &gt;
