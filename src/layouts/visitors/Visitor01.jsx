@@ -13,8 +13,6 @@ const buttonStyle = {
   minWidth: "300px",
   minHeight: "300px",
   backgroundColor: "#62b4f4",
-  border: "3px solid",
-  borderColor: "yellow",
   borderRadius: 5,
   boxShadow: 13,
 };
@@ -38,7 +36,7 @@ export default function Visitor01() {
           alignContent="center"
         >
           <Link to="/Visitor02" style={{ textDecoration: "none" }}>
-            <Button bgcolor="red" sx={buttonStyle} variant="outlined">
+            <Button bgcolor="red" sx={buttonStyle} variant="contained">
               방문자 예약 신청
               <AssignmentIndIcon
                 sx={{
@@ -59,13 +57,11 @@ export default function Visitor01() {
                 {
                   boxShadow: 13,
                   minWidth: "470px",
-                  border: "3px solid",
                   bgcolor: "#62b4f4",
-                  borderColor: "yellow",
                   borderRadius: 5,
                 },
               ]}
-              variant="outlined"
+              variant="contained"
               startIcon={<PersonSearchIcon sx={{ color: "yellow" }} />}
             >
               방문자 예약 조회

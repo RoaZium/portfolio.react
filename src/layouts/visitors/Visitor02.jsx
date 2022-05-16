@@ -36,14 +36,13 @@ export default function Visitor02() {
           item
           xs={2}
           sx={{
-            height: "10vh",
+            height: "60px",
           }}
         >
           <Box>
             <Stepper
               sx={{
                 alignItems: "center",
-                height: "10vh",
               }}
               activeStep={0}
               alternativeLabel

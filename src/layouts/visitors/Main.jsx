@@ -16,9 +16,9 @@ export default function Main() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Box maxWidth sx={{ bgcolor: "transparent", height: "10vh" }}>
-        <Grid container spacing={0}>
-          <Grid item xs={1}>
+      <Box sx={{ bgcolor: "yellow", height: "100px" }}>
+        <Grid container>
+          <Grid>
             <Box
               component="img"
               src={CI}
@@ -27,23 +27,19 @@ export default function Main() {
                 height: 40,
                 marginLeft: 3,
                 my: 3,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
               }}
             />
           </Grid>
-          <Grid item xs={1}>
+          <Grid>
             <Typography
               variant="h6"
               fontWeight="bold"
+              align="center"
               sx={{
                 bgcolor: "transparent",
-                height: 55,
-                my: 2,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
+                height: 40,
+                marginLeft: 2,
+                my: 3,
               }}
             >
               방문 예약 시스템
@@ -63,7 +59,7 @@ export default function Main() {
           </Routes>
         </Container>
       </Box>
-      <Box maxWidth sx={{ bgcolor: "transparent", height: "10vh" }} />
+      <Box maxWidth sx={{ bgcolor: "transparent", height: "100px" }} />
     </React.Fragment>
   );
 }
