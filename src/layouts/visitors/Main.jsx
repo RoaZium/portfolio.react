@@ -16,7 +16,7 @@ export default function Main() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Box sx={{ bgcolor: "yellow", height: "100px" }}>
+      <Box sx={{ bgcolor: "yellow", height: "93px" }}>
         <Grid container>
           <Grid>
             <Box
@@ -34,7 +34,6 @@ export default function Main() {
             <Typography
               variant="h6"
               fontWeight="bold"
-              align="center"
               sx={{
                 bgcolor: "transparent",
                 height: 40,
@@ -47,7 +46,7 @@ export default function Main() {
           </Grid>
         </Grid>
       </Box>
-      <Box maxWidth sx={{ bgcolor: "transparent" }}>
+      <Box sx={{ bgcolor: "transparent" }}>
         <Container maxWidth="lg">
           <Routes>
             <Route path="/" element={<Visitor01 />} />
@@ -59,7 +58,7 @@ export default function Main() {
           </Routes>
         </Container>
       </Box>
-      <Box maxWidth sx={{ bgcolor: "transparent", height: "100px" }} />
+      <Box sx={{ bgcolor: "transparent", height: "93px" }} />
     </React.Fragment>
   );
 }
