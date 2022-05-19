@@ -8,13 +8,10 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Divider from "@mui/material/Divider";
-import Card from "@mui/material/Card";
 import axios from "axios";
 import { useState } from "react";
 import { styled } from "@mui/system";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Checkbox from "@mui/material/Checkbox";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
@@ -55,125 +52,227 @@ export default function Visitor04() {
     <Box
       sx={{
         alignContent: "stretch",
-        height: "80vh",
-        flexDirection: "column",
-        bgcolor: "red",
+        height: "750px",
+        bgcolor: "transparent",
+        display: "grid",
+        gridAutoRows: "80px auto 70px",
+        gridTemplateColumns: "1",
+        gridTemplateRows: "3",
+        gap: 1,
       }}
     >
-      <Grid
-        item
+      <Box
         sx={{
-          height: "60px",
+          gridRow: "1",
+          bgcolor: "yellow",
+          borderRadius: 3,
+          boxShadow: 3,
+          p: 2,
         }}
       >
-        <Stepper activeStep={2} alternativeLabel>
+        <Stepper
+          sx={{
+            bgcolor: "transparent",
+          }}
+          activeStep={2}
+          alternativeLabel
+        >
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
-      </Grid>
-      <Grid
-        item
-        xs={12}
+      </Box>
+      <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "614px",
+          gridRow: "2",
+          bgcolor: "whitesmoke",
+          borderRadius: 3,
+          boxShadow: 3,
+          p: 2,
         }}
       >
-        <Typography bgcolor="green" color="red" fontWeight="bold" fontSize={20}>
-          ▶ 방문자 예약 정보
+        <Typography bgcolor="transparent" fontWeight="bold" fontSize={20}>
+          방문자 예약 정보
         </Typography>
-        <Button variant="contained" onClick={sendRequest}>
-          테스트
-        </Button>
-        <Divider />
-        <Grid item bgcolor="yellow" xs={12} container>
-          <Grid xs={6} bgcolor="blue">
-            <Box color="white">
-              <Typography>방문자</Typography>
-              <Divider></Divider>
-              <Typography></Typography>
-              <TextField></TextField>
-            </Box>
-          </Grid>
-          <Grid xs={6} bgcolor="yellow">
-            <Card bgcolor="yellow"></Card>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} container spacing={0}>
-          <Grid item xs={2} bgcolor="red">
-            <Stack>
-              <Typography
-                component="h2"
-                variant="h6"
-                sx={{ ...commonStyles, borderBottom: 0 }}
-              >
-                성명
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h6"
-                sx={{ ...commonStyles, borderBottom: 0 }}
-              >
-                연락처
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h6"
-                sx={{ ...commonStyles, borderBottom: 0 }}
-              >
-                방문기간
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h6"
-                sx={{ ...commonStyles, borderBottom: 0 }}
-              >
-                차량번호
-              </Typography>
-              <Typography component="h2" variant="h6" sx={{ ...commonStyles }}>
-                모바일 출입방식
-              </Typography>
-            </Stack>
-          </Grid>
-          <Grid item xs={10} bgcolor="red">
-            <Stack>
-              <TextField
-                id="outlined-basic"
-                label={visitors.visitor_name}
-                variant="outlined"
-              />
-              <TextField
-                id="outlined-basic"
-                label={visitors.telephone}
-                variant="outlined"
-              />
-              <TextField
-                id="outlined-basic"
-                label="방문기간"
-                variant="outlined"
-              />
-              <TextField
-                id="outlined-basic"
-                label="12가 4455"
-                variant="outlined"
-              />
-              <Checkbox />
-            </Stack>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs="auto"
+        <Divider sx={{ marginTop: 3, marginBottom: 3 }} />
+        <Box
+          sx={{
+            alignContent: "stretch",
+            bgcolor: "transparent",
+            display: "grid",
+            gridAutoColumns: "140px auto",
+            gridTemplateColumns: "2",
+            gridTemplateRows: "9",
+            gap: 1,
+          }}
+        >
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "1",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            방문자 성명
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "2",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            예약번호
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "3",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            연락처
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "4",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            회사명
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "5",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            피방문자
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "6",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            방문기간
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "7",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            차량번호
+          </Typography>
+          <Typography
+            sx={{
+              gridColumn: "1",
+              gridRow: "8",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            승인상태
+          </Typography>
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "1",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "2",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "3",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "4",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "4",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "5",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "6",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "7",
+            }}
+            variant="filled"
+          />
+          <TextField
+            sx={{
+              gridColumn: "2",
+              gridRow: "8",
+            }}
+            variant="filled"
+          />
+        </Box>
+      </Box>
+      <Box
         sx={{
-          bgcolor: "green",
+          gridRow: "3",
+          bgcolor: "orange",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          borderRadius: 3,
+          boxShadow: 3,
         }}
       >
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={6}>
           <Box p={2} textAlign="center">
             <Link to="/Visitor03" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
@@ -182,7 +281,7 @@ export default function Visitor04() {
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={6}>
           <Box p={2} textAlign="center">
             <Link to="/" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
@@ -191,7 +290,14 @@ export default function Visitor04() {
             </Link>
           </Box>
         </Grid>
-      </Grid>
+        {/*         <Button
+          onClick={sendRequest}
+          sx={{ display: "flex" }}
+          variant="contained"
+        >
+          테스트
+        </Button> */}
+      </Box>
     </Box>
   );
 }

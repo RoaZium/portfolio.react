@@ -49,8 +49,8 @@ export default function Main() {
             </Grid>
           </Grid>
         </Box>
-        <Container>
-          <Box maxWidth="lg" sx={{ bgcolor: "transparent", borderRadius: 3 }}>
+        <Container maxWidth="lg">
+          <Box sx={{ bgcolor: "transparent" }}>
             <Routes>
               <Route path="/" element={<Visitor01 />} />
               <Route path="/Visitor01" element={<Visitor01 />} />
