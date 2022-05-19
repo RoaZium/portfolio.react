@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
 
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 
 const buttonStyle = {
-  minWidth: "300px",
-  minHeight: "300px",
+  minWidth: "350px",
+  minHeight: "400px",
   borderRadius: 10,
   boxShadow: 13,
+  fontSize: 30,
+  textAlign: "top",
 };
 
 export default function Visitor01() {
@@ -23,17 +22,17 @@ export default function Visitor01() {
       alignItems="center"
       sx={{
         height: "80vh",
-        bgcolor: "red",
-        justifyContent: "flex-end",
+        bgcolor: "transparent",
+        borderRadius: 3,
       }}
     >
       <Grid container>
         <Grid
-          bgcolor="blue"
+          bgcolor="transparent"
           item
-          xs={6}
+          xs={5.5}
           container
-          justifyContent="center"
+          justifyContent="right"
         >
           <Link to="/Visitor02" style={{ textDecoration: "none" }}>
             <Button sx={buttonStyle} variant="contained">
@@ -44,18 +43,19 @@ export default function Visitor01() {
                   width: "100px",
                   position: "absolute",
                   top: "40px",
-                  color: "yellow",
+                  color: "white",
                 }}
               />
             </Button>
           </Link>
         </Grid>
+        <Grid xs={1}></Grid>
         <Grid
           item
-          bgcolor="yellow"
-          xs={6}
+          bgcolor="transparent"
+          xs={5.5}
           container
-          justifyContent="center"
+          justifyContent="left"
         >
           <Link to="/Visitor02" style={{ textDecoration: "none" }}>
             <Button sx={buttonStyle} variant="contained">
@@ -66,7 +66,7 @@ export default function Visitor01() {
                   width: "100px",
                   position: "absolute",
                   top: "40px",
-                  color: "yellow",
+                  color: "white",
                 }}
               />
             </Button>

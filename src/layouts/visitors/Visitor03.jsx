@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import Stepper from "@mui/material/Stepper";
@@ -18,34 +16,43 @@ const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입�
 
 export default function Visitor03() {
   return (
-    <Container
-      maxWidth="lg"
+    <Box
       sx={{
-        bgcolor: "yellow",
-        height: "93vh",
+        alignContent: "stretch",
+        height: "80vh",
+        flexDirection: "column",
+        bgcolor: "red",
       }}
     >
-      <Box>
-        <Box py={2} height={60}>
-          <Card>방문자 03</Card>
-        </Box>
-        <Box
-          className="Stepper"
-          bgcolor="gold"
-          border={1}
-          py={2}
-          sx={{ width: "100%" }}
+      <Grid
+        item
+        sx={{
+          height: "60px",
+        }}
+      >
+        <Stepper
+          sx={{
+            alignItems: "center",
+          }}
+          activeStep={1}
+          alternativeLabel
         >
-          <Stepper activeStep={1} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </Box>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Grid>
+      <Grid
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "614px",
+        }}
+      >
         <Box className="VisitorInfo" bgcolor="orange" border={1}>
-          <Grid bgcolor="warning.main">
+          <Grid>
             <Grid item xs={12}>
               <Typography
                 bgcolor="green"
@@ -180,54 +187,33 @@ export default function Visitor03() {
             <Grid></Grid>
           </Grid>
         </Box>
-        <Box
-          className="ReservResult"
-          bgcolor="purple"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <Typography
-                bgcolor="green"
-                color="red"
-                fontWeight="bold"
-                fontSize={20}
-              >
-                ▶ 방문자 정보
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Box
-                bgcolor="warning.main"
-                color="info.contrastText"
-                p={2}
-                textAlign="center"
-              >
-                <Link to="/Visitor02" style={{ textDecoration: "none" }}>
-                  <Button variant="contained" fullWidth>
-                    이전 페이지
-                  </Button>
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Box
-                bgcolor="warning.main"
-                color="info.contrastText"
-                p={2}
-                textAlign="center"
-              >
-                <Link to="/Visitor03" style={{ textDecoration: "none" }}>
-                  <Button variant="contained" fullWidth>
-                    다음 페이지
-                  </Button>
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+      </Grid>
+      <Grid
+        container
+        xs="auto"
+        sx={{
+          bgcolor: "green",
+        }}
+      >
+        <Grid item xs={12} sm={6}>
+          <Box p={2} textAlign="center">
+            <Link to="/Visitor02" style={{ textDecoration: "none" }}>
+              <Button variant="contained" fullWidth>
+                이전 페이지
+              </Button>
+            </Link>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Box p={2} textAlign="center">
+            <Link to="/Visitor04" style={{ textDecoration: "none" }}>
+              <Button variant="contained" fullWidth>
+                다음 페이지
+              </Button>
+            </Link>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
