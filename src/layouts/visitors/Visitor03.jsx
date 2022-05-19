@@ -19,20 +19,27 @@ export default function Visitor03() {
     <Box
       sx={{
         alignContent: "stretch",
-        height: "80vh",
-        flexDirection: "column",
-        bgcolor: "red",
+        height: "750px",
+        bgcolor: "transparent",
+        display: "grid",
+        gridAutoRows: "80px auto 70px",
+        gridTemplateColumns: "1",
+        gridTemplateRows: "3",
+        gap: 1,
       }}
     >
-      <Grid
-        item
+      <Box
         sx={{
-          height: "60px",
+          gridRow: "1",
+          bgcolor: "yellow",
+          borderRadius: 3,
+          boxShadow: 3,
+          p: 2,
         }}
       >
         <Stepper
           sx={{
-            alignItems: "center",
+            bgcolor: "transparent",
           }}
           activeStep={1}
           alternativeLabel
@@ -43,159 +50,129 @@ export default function Visitor03() {
             </Step>
           ))}
         </Stepper>
-      </Grid>
-      <Grid
+      </Box>
+      <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "614px",
+          gridRow: "2",
+          bgcolor: "whitesmoke",
+          borderRadius: 3,
+          boxShadow: 3,
+          p: 2,
         }}
       >
-        <Box className="VisitorInfo" bgcolor="orange" border={1}>
-          <Grid>
-            <Grid item xs={12}>
-              <Typography
-                bgcolor="green"
-                color="red"
-                fontWeight="bold"
-                fontSize={20}
+        <Grid item xs={12}>
+          <Typography bgcolor="transparent" fontWeight="bold" fontSize={20}>
+            방문자 정보
+          </Typography>
+          <Divider sx={{ marginTop: 3, marginBottom: 3 }} />
+          <Box
+            sx={{
+              alignContent: "stretch",
+              bgcolor: "transparent",
+              display: "grid",
+              gridTemplateColumns: "2",
+              gridTemplateRows: "5",
+              gap: 3,
+            }}
+          >
+            <TextField
+              sx={{
+                gridColumn: "1",
+                gridRow: "1",
+              }}
+              label="방문자 성명"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "1",
+                gridRow: "2",
+              }}
+              label="연락처"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "1",
+                gridRow: "3",
+              }}
+              label="방문기간"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "1",
+                gridRow: "4",
+              }}
+              label="차량번호"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "1",
+                gridRow: "5",
+              }}
+              label="모바일 출입방식"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "2",
+                gridRow: "1",
+              }}
+              label="이메일"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "2",
+                gridRow: "2",
+              }}
+              label="회사명"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "2",
+                gridRow: "3",
+              }}
+              label="방문목적"
+              variant="filled"
+            />
+            <TextField
+              sx={{
+                gridColumn: "2",
+                gridRow: "4",
+              }}
+              label="피방문자 성명"
+              variant="filled"
+            />
+            <Link to="/Visitor04" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  gridColumn: "2",
+                  gridRow: "5",
+                }}
+                variant="contained"
               >
-                ▶ 방문자 정보
-              </Typography>
-              <Divider />
-              <Grid item xs={12} container spacing={0}>
-                <Grid bgcolor="red">
-                  <Stack>
-                    <TextField
-                      id="outlined-basic"
-                      label="성명"
-                      variant="outlined"
-                      autoFocus="true"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="연락처"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="방문기간"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="차량번호"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="모바일 출입방식"
-                      variant="outlined"
-                    />
-                  </Stack>
-                </Grid>
-                <Grid bgcolor="red">
-                  <Stack>
-                    <TextField
-                      id="outlined-basic"
-                      label="홍길동"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="010-1111-2222"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="방문기간"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="12가 4455"
-                      variant="outlined"
-                    />
-                    <Checkbox />
-                  </Stack>
-                </Grid>
-                <Grid bgcolor="red">
-                  <Stack>
-                    <TextField
-                      id="outlined-basic"
-                      label="이메일"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="회사명"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="방문목적"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="피방문자성명"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label=""
-                      variant="outlined"
-                    />
-                  </Stack>
-                </Grid>
-                <Grid bgcolor="red">
-                  <Stack>
-                    <TextField
-                      id="outlined-basic"
-                      label="visitor@xx.com"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="xx테크"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="업무회의"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="고길동"
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label=""
-                      variant="outlined"
-                    />
-                  </Stack>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <Link to="/Visitor04" style={{ textDecoration: "none" }}>
-                  <Button variant="contained">예약하기</Button>
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid></Grid>
-          </Grid>
-        </Box>
-      </Grid>
-      <Grid
-        container
-        xs="auto"
+                예약하기
+              </Button>
+            </Link>
+          </Box>
+        </Grid>
+      </Box>
+      <Box
         sx={{
-          bgcolor: "green",
+          gridRow: "3",
+          bgcolor: "orange",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          borderRadius: 3,
+          boxShadow: 3,
         }}
       >
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={6}>
           <Box p={2} textAlign="center">
             <Link to="/Visitor02" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
@@ -204,7 +181,7 @@ export default function Visitor03() {
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={6}>
           <Box p={2} textAlign="center">
             <Link to="/Visitor04" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
@@ -213,7 +190,7 @@ export default function Visitor03() {
             </Link>
           </Box>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }

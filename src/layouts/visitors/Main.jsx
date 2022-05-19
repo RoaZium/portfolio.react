@@ -19,7 +19,7 @@ export default function Main() {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <CssBaseline />
-        <Box sx={{ bgcolor: "transparent", height: "93px" }}>
+        <Box sx={{ bgcolor: "transparent", height: "100px" }}>
           <Grid container>
             <Grid>
               <Box
@@ -61,7 +61,7 @@ export default function Main() {
             </Routes>
           </Box>
         </Container>
-        <Box sx={{ bgcolor: "transparent", height: "93px" }} />
+        <Box sx={{ bgcolor: "transparent", height: "100px" }} />
       </React.Fragment>
     </ThemeProvider>
   );
