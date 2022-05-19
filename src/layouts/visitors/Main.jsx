@@ -61,7 +61,7 @@ export default function Main() {
             </Routes>
           </Box>
         </Container>
-        <Box sx={{ bgcolor: "transparent", height: "100px" }} />
+        <Box sx={{ bgcolor: "transparent", height: "auto" }} />
       </React.Fragment>
     </ThemeProvider>
   );

@@ -52,7 +52,7 @@ export default function Visitor04() {
     <Box
       sx={{
         alignContent: "stretch",
-        height: "750px",
+        height: "760px",
         bgcolor: "transparent",
         display: "grid",
         gridAutoRows: "80px auto 70px",
@@ -87,7 +87,7 @@ export default function Visitor04() {
       <Box
         sx={{
           gridRow: "2",
-          bgcolor: "whitesmoke",
+          bgcolor: "transparent",
           borderRadius: 3,
           boxShadow: 3,
           p: 2,
@@ -96,13 +96,20 @@ export default function Visitor04() {
         <Typography bgcolor="transparent" fontWeight="bold" fontSize={20}>
           방문자 예약 정보
         </Typography>
-        <Divider sx={{ marginTop: 3, marginBottom: 3 }} />
+        <Divider
+          sx={{
+            marginTop: 1,
+            marginBottom: 1,
+            marginLeft: -2,
+            marginRight: -2,
+          }}
+        />
         <Box
           sx={{
             alignContent: "stretch",
             bgcolor: "transparent",
             display: "grid",
-            gridAutoColumns: "140px auto",
+            gridAutoColumns: "200px auto",
             gridTemplateColumns: "2",
             gridTemplateRows: "9",
             gap: 1,
@@ -214,13 +221,6 @@ export default function Visitor04() {
             sx={{
               gridColumn: "2",
               gridRow: "3",
-            }}
-            variant="filled"
-          />
-          <TextField
-            sx={{
-              gridColumn: "2",
-              gridRow: "4",
             }}
             variant="filled"
           />
