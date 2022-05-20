@@ -84,7 +84,15 @@ export default function Visitor02() {
         >
           개인정보 수집, 이용, 제공 동의
         </Typography>
-        <Divider gridRow="2" sx={{ marginLeft: -2, marginRight: -2 }} />
+        <Divider
+          gridRow="2"
+          sx={{
+            marginLeft: -2,
+            marginRight: -2,
+            bgcolor: "secondary.main",
+            height: "1px",
+          }}
+        />
         <Typography
           sx={{
             alignItems: "center",
@@ -136,7 +144,14 @@ export default function Visitor02() {
         >
           (주) 종근당 보안 정책 준수 동의
         </Typography>
-        <Divider sx={{ marginLeft: -2, marginRight: -2 }} />
+        <Divider
+          sx={{
+            marginLeft: -2,
+            marginRight: -2,
+            bgcolor: "secondary.main",
+            height: "1px",
+          }}
+        />
         <Typography
           sx={{
             alignItems: "center",

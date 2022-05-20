@@ -49,7 +49,7 @@ export default function Visitor01() {
             </Button>
           </Link>
         </Grid>
-        <Grid xs={1}></Grid>
+        <Grid xs={1} visibility="hidden"></Grid>
         <Grid
           item
           bgcolor="transparent"
