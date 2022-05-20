@@ -15,7 +15,6 @@ import Visitor01 from "./visitors/Visitor01";
 import Visitor02 from "./visitors/Visitor02";
 import Visitor03 from "./visitors/Visitor03";
 import Visitor04 from "./visitors/Visitor04";
-import Visitor05 from "./visitors/Visitor05";
 import { Button } from "@mui/material";
 
 const drawerWidth = 240;
@@ -120,7 +119,7 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} >
+      <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -131,7 +130,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Link to="/" style={{ textDecoration: `none` }}>
-          <Button >홈</Button>
+          <Button>홈</Button>
         </Link>
         <Link to="/Visitor01" style={{ textDecoration: `none` }}>
           <Button>방문01</Button>
@@ -145,9 +144,6 @@ export default function MiniDrawer() {
         <Link to="/Visitor04" style={{ textDecoration: `none` }}>
           <Button>방문04</Button>
         </Link>
-        <Link to="/Visitor05" style={{ textDecoration: `none` }}>
-          <Button>방문05</Button>
-        </Link>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
         <DrawerHeader />
@@ -157,7 +153,6 @@ export default function MiniDrawer() {
           <Route path="/Visitor02" element={<Visitor02 />} />
           <Route path="/Visitor03" element={<Visitor03 />} />
           <Route path="/Visitor04" element={<Visitor04 />} />
-          <Route path="/Visitor05" element={<Visitor05 />} />
         </Routes>
       </Box>
     </Box>
