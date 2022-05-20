@@ -3,11 +3,11 @@ import AccessibleIcon from "@mui/icons-material/Accessible";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import ElderlyIcon from "@mui/icons-material/Elderly";
-import Visitor01 from "./layouts/visitors/Visitor01";
-import Visitor02 from "./layouts/visitors/Visitor02";
-import Visitor03 from "./layouts/visitors/Visitor03";
-import Visitor04 from "./layouts/visitors/Visitor04";
-import Visitor05 from "./layouts/visitors/Visitor05";
+import Visitor01 from "../src/layouts/visitors/Visitor01";
+import Visitor02 from "../src/layouts/visitors/Visitor02";
+import Visitor03 from "../src/layouts/visitors/Visitor03";
+import Visitor04 from "../src/layouts/visitors/Visitor04";
+import Visitor05 from "../src/layouts/visitors/Visitor05";
 
 const routes = [
   {

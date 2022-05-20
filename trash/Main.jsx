@@ -26,9 +26,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { styled } from "@mui/material/styles";
 
-import { Admin01, Admin02, Admin03, Admin04 } from "./admin";
+import { Admin01, Admin02, Admin03, Admin04 } from "../src/layouts/admin";
 import Layout from "./Layout";
-import routes from "../routes";
+import routes from "./routes";
 import Button from "@mui/material/Button";
 import history from "./history";
 import Box from "@mui/material/Box";

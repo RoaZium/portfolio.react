@@ -11,11 +11,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link, Route, Routes } from "react-router-dom";
-import Visitor01 from "./visitors/Visitor01";
-import Visitor02 from "./visitors/Visitor02";
-import Visitor03 from "./visitors/Visitor03";
-import Visitor04 from "./visitors/Visitor04";
-import Visitor05 from "./visitors/Visitor05";
+import Visitor01 from "../src/layouts/visitors/Visitor01";
+import Visitor02 from "../src/layouts/visitors/Visitor02";
+import Visitor03 from "../src/layouts/visitors/Visitor03";
+import Visitor04 from "../src/layouts/visitors/Visitor04";
+import Visitor05 from "../src/layouts/visitors/Visitor05";
 import { Button } from "@mui/material";
 
 const drawerWidth = 240;

@@ -22,25 +22,24 @@ function App() {
 
 export default App; */
 
-import './App.css';
-import axios from 'axios';
-import React,{useState,useEffect} from 'react';
+import "./App.css";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function App() {
-
-  const sendRequest = async() => {
-    const response = await axios.get('http://localhost:5000');
+  const sendRequest = async () => {
+    const response = await axios.get("http://localhost:5000");
     console.log(response);
     console.log(response.data);
   };
 
-  useEffect(()=>{
-    sendRequest();    
+  useEffect(() => {
+    sendRequest();
   });
 
   return (
     <div className="App">
-      <p>hjw</p>      
+      <p>hjw</p>
     </div>
   );
 }
