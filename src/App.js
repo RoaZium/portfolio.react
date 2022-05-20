@@ -1,4 +1,4 @@
-import Visitor from "./layouts/visitors/Main";
+import Visitor from "./layouts/visitors";
 
 const App = () => {
   return <Visitor />;
