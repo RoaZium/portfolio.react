@@ -53,14 +53,16 @@ export default function Main() {
             </Grid>
           </Grid>
         </Box>
-        <Container maxWidth="lg" sx={{ bgcolor: "whitesmoke", height: "80vh" }}>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/Admin01" element={<Admin01 />} />
-            <Route path="/Admin02" element={<Admin02 />} />
-            <Route path="/Admin03" element={<Admin03 />} />
-            <Route path="/Admin04" element={<Admin04 />} />
-          </Routes>
+        <Container maxWidth="lg">
+          <Box sx={{ bgcolor: "transparent" }}>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/Admin01" element={<Admin01 />} />
+              <Route path="/Admin02" element={<Admin02 />} />
+              <Route path="/Admin03" element={<Admin03 />} />
+              <Route path="/Admin04" element={<Admin04 />} />
+            </Routes>
+          </Box>
         </Container>
         <Box sx={{ bgcolor: "transparent", height: "auto" }} />
       </React.Fragment>
