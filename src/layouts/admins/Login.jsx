@@ -20,7 +20,6 @@ export default function Login() {
       sx={{
         height: "80vh",
         bgcolor: "transparent",
-        borderRadius: 3,
       }}
     >
       <Grid
@@ -33,6 +32,7 @@ export default function Login() {
           marginRight: "150px",
           gridTemplateColumns: "repeat(2, 1fr)",
           gridTemplateRows: "1",
+          boxShadow: 13,
         }}
       >
         <Grid
@@ -46,7 +46,6 @@ export default function Login() {
             gridAutoRows: "30px 60px 90px 70px 70px 50px 60px",
             gridTemplateColumns: "1",
             gridTemplateRows: "7",
-            boxShadow: 13,
           }}
         >
           <Typography
@@ -145,7 +144,6 @@ export default function Login() {
           sx={{
             display: "flex",
             bgcolor: "transparent",
-            boxShadow: 13,
             borderTopRightRadius: 13,
             borderBottomRightRadius: 13,
             gridColumn: 2,
@@ -159,8 +157,6 @@ export default function Login() {
               bgcolor: "transparent",
               height: "100%",
               width: "100%",
-              borderTopRightRadius: 13,
-              borderBottomRightRadius: 13,
             }}
           />
         </Grid>
