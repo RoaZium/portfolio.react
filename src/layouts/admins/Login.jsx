@@ -10,6 +10,7 @@ import {
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
+import Company from "../../assets/images/Login_company.jpg";
 
 export default function Login() {
   return (
@@ -18,7 +19,7 @@ export default function Login() {
       alignItems="center"
       sx={{
         height: "80vh",
-        bgcolor: "red",
+        bgcolor: "transparent",
         borderRadius: 3,
       }}
     >
@@ -45,6 +46,7 @@ export default function Login() {
             gridAutoRows: "30px 60px 90px 70px 70px 50px 60px",
             gridTemplateColumns: "1",
             gridTemplateRows: "7",
+            boxShadow: 13,
           }}
         >
           <Typography
@@ -74,6 +76,8 @@ export default function Login() {
             variant="standard"
             sx={{
               gridRow: 4,
+              alignSelf: "center",
+              justifySelf: "stretch",
             }}
           >
             <OutlinedInput
@@ -87,7 +91,6 @@ export default function Login() {
                 gridRow: 4,
                 borderRadius: 10,
                 height: "50px",
-                justifySelf: "center",
                 marginLeft: 3,
                 marginRight: 3,
               }}
@@ -97,6 +100,8 @@ export default function Login() {
             variant="standard"
             sx={{
               gridRow: 5,
+              alignSelf: "center",
+              justifySelf: "stretch",
             }}
           >
             <OutlinedInput
@@ -118,6 +123,8 @@ export default function Login() {
           <Box
             sx={{
               gridRow: 6,
+              alignSelf: "center",
+              justifySelf: "center",
             }}
           >
             <Link to="/Admin01" style={{ textDecoration: "none" }}>
@@ -126,7 +133,6 @@ export default function Login() {
                 sx={{
                   borderRadius: 10,
                   fontSize: 16,
-                  marginLeft: 3,
                   width: "380px",
                 }}
               >
@@ -137,13 +143,27 @@ export default function Login() {
         </Grid>
         <Grid
           sx={{
-            bgcolor: "orange",
+            display: "flex",
+            bgcolor: "transparent",
+            boxShadow: 13,
             borderTopRightRadius: 13,
             borderBottomRightRadius: 13,
             gridColumn: 2,
             gridRow: 1,
           }}
-        ></Grid>
+        >
+          <Box
+            component="img"
+            src={Company}
+            sx={{
+              bgcolor: "transparent",
+              height: "100%",
+              width: "100%",
+              borderTopRightRadius: 13,
+              borderBottomRightRadius: 13,
+            }}
+          />
+        </Grid>
       </Grid>
     </Box>
   );
