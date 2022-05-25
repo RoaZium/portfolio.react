@@ -10,12 +10,16 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Link, Route, Routes } from "react-router-dom";
-import Admin02 from "../admins/Admin02";
-import Admin03 from "../admins/Admin03";
-import Admin04 from "../admins/Admin04";
-import { Button, Menu, MenuItem } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import {
+  Button,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { AccountCircle, AccountBox } from "@mui/icons-material";
 
 const drawerWidth = 200;
 
@@ -34,9 +38,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(14)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(14)} + 1px)`,
   },
 });
 
@@ -175,6 +179,13 @@ export default function Admin01() {
             )}
           </IconButton>
         </DrawerHeader>
+        <List>
+          <ListItemButton>
+            <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+          </ListItemButton>
+        </List>
         <Link to="/" style={{ textDecoration: `none` }}>
           <Button
             sx={{
@@ -185,13 +196,21 @@ export default function Admin01() {
             방문 신청
           </Button>
         </Link>
-        <Link to="/Visitor01" style={{ textDecoration: `none` }}>
-          <Button>방문 조회</Button>
+        <Link to="/Admin02" style={{ textDecoration: `none` }}>
+          <Button
+            sx={{
+              alignItems: "center",
+              justifySelf: "stretch",
+            }}
+          >
+            방문 조회
+          </Button>
         </Link>
-        <Link to="/Visitor02" style={{ textDecoration: `none` }}>
+        <Link to="/Admin03" style={{ textDecoration: `none` }}>
           <Button>관리자 기능</Button>
         </Link>
       </Drawer>
+      <div>방문 신청</div>
     </Box>
   );
 }
