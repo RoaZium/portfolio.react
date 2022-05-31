@@ -101,228 +101,265 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const columns = [
-  { id: "name", label: "번호", minWidth: 70 },
-  { id: "code", label: "방문자", minWidth: 100 },
+  { id: "number", label: "번호", minWidth: 70, align: "center" },
+  { id: "visitorname", label: "방문자", minWidth: 100, align: "center" },
+  { id: "phonenumber", label: "전화번호", minWidth: 170, align: "center" },
+  { id: "company", label: "회사명", minWidth: 170, align: "center" },
+  { id: "carnumber", label: "차량번호", minWidth: 120, align: "center" },
+  { id: "assign", label: "승인", minWidth: 100, align: "center" },
+  { id: "interviewer", label: "피방문자", minWidth: 100, align: "center" },
+  { id: "department", label: "부서", minWidth: 170, align: "center" },
+  { id: "reservationnumber", label: "예약번호", minWidth: 170, align: "center" },
+  { id: "people", label: "동행자", minWidth: 70, align: "center" },
+  { id: "visitorpurpose", label: "방문목적", minWidth: 170, align: "center" },
   {
-    id: "population",
-    label: "전화번호",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "size",
-    label: "회사명",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "density",
-    label: "차량번호",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "assign",
-    label: "승인",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "admin1",
-    label: "피방문자",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "room",
-    label: "부서",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "reserve",
-    label: "예약번호",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
+    id: "privacyconsent",
+    label: "개인정보동의",
+    minWidth: 100,
+    align: "center",
   },
 ];
 
 function createData(
-  name,
-  code,
-  population,
-  size,
+  number,
+  visitorname,
+  phonenumber,
+  company,
+  carnumber,
   assign,
-  admin1,
-  room,
-  reserve
+  interviewer,
+  department,
+  reservationnumber,
+  people,
+  visitorpurpose,
+  privacyconsent
 ) {
-  const density = population / size;
   return {
-    name,
-    code,
-    population,
-    size,
-    density,
+    number,
+    visitorname,
+    phonenumber,
+    company,
+    carnumber,
     assign,
-    admin1,
-    room,
-    reserve,
+    interviewer,
+    department,
+    reservationnumber,
+    people,
+    visitorpurpose,
+    privacyconsent,
   };
 }
 
-const rows = [
-  createData("1", "IN", 1324171354, 3287263, "data", "data", "data", "data"),
+const visitorData = [
+  createData(
+    "1",
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
+  ),
   createData(
     "2",
-    "CN",
-    1403500365,
-    9596961,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "3",
-    "IT",
-    60483973,
-    301340,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "4",
-    "US",
-    327167434,
-    9833520,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "5",
-    "CA",
-    37602103,
-    9984670,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "6",
-    "AU",
-    25475400,
-    7692024,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "7",
-    "DE",
-    83019200,
-    357578,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
-  createData("8", "IE", 4857000, 70273, "data", "data", "data", "data", "data"),
+  createData(
+    "8",
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
+  ),
   createData(
     "9",
-    "MX",
-    126577691,
-    1972550,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "10",
-    "JP",
-    126317000,
-    377973,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "11",
-    "FR",
-    67022000,
-    640679,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "12",
-    "GB",
-    67545757,
-    242495,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "13",
-    "RU",
-    146793744,
-    17098246,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "14",
-    "NG",
-    200962417,
-    923768,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
   createData(
     "15",
-    "BR",
-    210147125,
-    8515767,
-    "data",
-    "data",
-    "data",
-    "data",
-    "data"
+    "홍길동",
+    "010-1234-5678",
+    "xx테크",
+    "56가 2323",
+    "승인",
+    "고길동",
+    "영업1팀",
+    "123456789",
+    "3",
+    "회의",
+    "동의"
   ),
 ];
 
@@ -468,10 +505,22 @@ export default function Admin02() {
           </ListItemButton>
         </List>
       </Drawer>
-      <Box sx={{ width: "100%", overflow: "hidden", boxShadow: 13, borderRadius: 2, height: "85vh" }}>
+      <Box
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+          boxShadow: 13,
+          borderRadius: 2,
+          height: "85vh",
+        }}
+      >
         <TableContainer>
           <Table>
-            <TableHead>
+            <TableHead
+              sx={{
+                bgcolor: "skyblue",
+              }}
+            >
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
@@ -485,7 +534,7 @@ export default function Admin02() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {visitorData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -514,7 +563,7 @@ export default function Admin02() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={visitorData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
