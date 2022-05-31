@@ -96,9 +96,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
-
-export default function Admin03() {
+export default function AdminManagement() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -190,7 +188,7 @@ export default function Admin03() {
           </IconButton>
         </DrawerHeader>
         <List>
-          <ListItemButton component={Link} to="/Admin01">
+          <ListItemButton component={Link} to="/Visitor">
             <ListItemIcon>
               <PersonAddAlt1 />
             </ListItemIcon>
@@ -199,22 +197,10 @@ export default function Admin03() {
                 marginLeft: -2,
               }}
             >
-              방문신청
+              방문자 관리
             </ListItemText>
           </ListItemButton>
-          <ListItemButton component={Link} to="/Admin02">
-            <ListItemIcon>
-              <PersonSearch />
-            </ListItemIcon>
-            <ListItemText
-              sx={{
-                marginLeft: -2,
-              }}
-            >
-              방문조회
-            </ListItemText>
-          </ListItemButton>
-          <ListItemButton component={Link} to="/Admin03">
+          <ListItemButton component={Link} to="/Admin">
             <ListItemIcon>
               <AccountBox />
             </ListItemIcon>
@@ -223,12 +209,12 @@ export default function Admin03() {
                 marginLeft: -2,
               }}
             >
-              관라자 기능
+              관라자 관리
             </ListItemText>
           </ListItemButton>
         </List>
       </Drawer>
-      <div bgcolor="yellow">관라자 기능</div>
+      <div bgcolor="yellow">관라자 관리</div>
     </Box>
   );
 }

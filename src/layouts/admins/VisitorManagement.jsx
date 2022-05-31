@@ -109,7 +109,12 @@ const columns = [
   { id: "assign", label: "승인", minWidth: 100, align: "center" },
   { id: "interviewer", label: "피방문자", minWidth: 100, align: "center" },
   { id: "department", label: "부서", minWidth: 170, align: "center" },
-  { id: "reservationnumber", label: "예약번호", minWidth: 170, align: "center" },
+  {
+    id: "reservationnumber",
+    label: "예약번호",
+    minWidth: 170,
+    align: "center",
+  },
   { id: "people", label: "동행자", minWidth: 70, align: "center" },
   { id: "visitorpurpose", label: "방문목적", minWidth: 170, align: "center" },
   {
@@ -363,7 +368,7 @@ const visitorData = [
   ),
 ];
 
-export default function Admin02() {
+export default function VisitorManagement() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -373,10 +378,12 @@ export default function Admin02() {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    console.log("true");
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
+    console.log("false");
   };
 
   const handleMenu = (event) => {
@@ -467,7 +474,7 @@ export default function Admin02() {
           </IconButton>
         </DrawerHeader>
         <List>
-          <ListItemButton component={Link} to="/Admin01">
+          <ListItemButton component={Link} to="/Visitor">
             <ListItemIcon>
               <PersonAddAlt1 />
             </ListItemIcon>
@@ -476,22 +483,10 @@ export default function Admin02() {
                 marginLeft: -2,
               }}
             >
-              방문신청
+              방문자 관리
             </ListItemText>
           </ListItemButton>
-          <ListItemButton component={Link} to="/Admin02">
-            <ListItemIcon>
-              <PersonSearch />
-            </ListItemIcon>
-            <ListItemText
-              sx={{
-                marginLeft: -2,
-              }}
-            >
-              방문조회
-            </ListItemText>
-          </ListItemButton>
-          <ListItemButton component={Link} to="/Admin03">
+          <ListItemButton component={Link} to="/Admin">
             <ListItemIcon>
               <AccountBox />
             </ListItemIcon>
@@ -500,7 +495,7 @@ export default function Admin02() {
                 marginLeft: -2,
               }}
             >
-              관라자 기능
+              관라자 관리
             </ListItemText>
           </ListItemButton>
         </List>
