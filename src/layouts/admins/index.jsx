@@ -53,7 +53,7 @@ export default function Main() {
             </Grid>
           </Grid>
         </Box>
-        <Container maxWidth="lg">
+        <Container maxWidth="">
           <Box sx={{ bgcolor: "transparent" }}>
             <Routes>
               <Route path="/" element={<Login />} />

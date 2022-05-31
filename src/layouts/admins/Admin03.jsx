@@ -11,10 +11,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
-import { Button, Menu, MenuItem } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import {
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  TableCell,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
+import {
+  AccountCircle,
+  AccountBox,
+  PersonAddAlt1,
+  PersonSearch,
+} from "@mui/icons-material";
 
-const drawerWidth = 200;
+const drawerWidth = 160;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -33,7 +48,7 @@ const closedMixin = (theme) => ({
   overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(7)} + 1px)`,
   },
 });
 
@@ -80,6 +95,8 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+
+
 
 export default function Admin03() {
   const theme = useTheme();
@@ -172,23 +189,46 @@ export default function Admin03() {
             )}
           </IconButton>
         </DrawerHeader>
-        <Link to="/" style={{ textDecoration: `none` }}>
-          <Button
-            sx={{
-              bgcolor: "red",
-              justifyContent: "stretch",
-            }}
-          >
-            방문 신청
-          </Button>
-        </Link>
-        <Link to="/Admin02" style={{ textDecoration: `none` }}>
-          <Button>방문 조회</Button>
-        </Link>
-        <Link to="/Admin03" style={{ textDecoration: `none` }}>
-          <Button>관리자 기능</Button>
-        </Link>
+        <List>
+          <ListItemButton component={Link} to="/Admin01">
+            <ListItemIcon>
+              <PersonAddAlt1 />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                marginLeft: -2,
+              }}
+            >
+              방문신청
+            </ListItemText>
+          </ListItemButton>
+          <ListItemButton component={Link} to="/Admin02">
+            <ListItemIcon>
+              <PersonSearch />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                marginLeft: -2,
+              }}
+            >
+              방문조회
+            </ListItemText>
+          </ListItemButton>
+          <ListItemButton component={Link} to="/Admin03">
+            <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                marginLeft: -2,
+              }}
+            >
+              관라자 기능
+            </ListItemText>
+          </ListItemButton>
+        </List>
       </Drawer>
+      <div bgcolor="yellow">관라자 기능</div>
     </Box>
   );
 }
