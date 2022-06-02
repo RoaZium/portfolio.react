@@ -372,23 +372,12 @@ const visitorData = [
 
 export default function VisitorManagement() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-    console.log("true");
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-    console.log("false");
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -405,6 +394,11 @@ export default function VisitorManagement() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const tableRowDoubleClick = () => {
+    <Link to="/" style={{ textDecoration: "none" }} />;
+    console.log("doubleClick");
   };
 
   return (
@@ -532,7 +526,12 @@ export default function VisitorManagement() {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody
+              component={Link}
+              to="/VisitorDetail"
+              style={{ textDecoration: "none" }}
+              onDoubleClick={tableRowDoubleClick}
+            >
               {visitorData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {

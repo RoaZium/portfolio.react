@@ -15,6 +15,7 @@ import theme from "../../assets/theme";
 import Login from "../admins/Login";
 import AdminManagement from "./AdminManagement";
 import VisitorManagement from "./VisitorManagement";
+import VisitorDetailManagement from "./VisitorDetailManagement";
 
 export default function Main() {
   return (
@@ -57,6 +58,10 @@ export default function Main() {
               <Route path="/" element={<Login />} />
               <Route path="/Admin" element={<AdminManagement />} />
               <Route path="/Visitor" element={<VisitorManagement />} />
+              <Route
+                path="/VisitorDetail"
+                element={<VisitorDetailManagement />}
+              />
             </Routes>
           </Box>
         </Container>
