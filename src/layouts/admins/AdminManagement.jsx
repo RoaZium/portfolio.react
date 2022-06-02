@@ -29,6 +29,8 @@ import {
   PersonSearch,
 } from "@mui/icons-material";
 
+import { AppOpenContext } from "../../App";
+
 const drawerWidth = 160;
 
 const openedMixin = (theme) => ({
@@ -101,6 +103,8 @@ export default function AdminManagement() {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -120,16 +124,16 @@ export default function AdminManagement() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={appOpen}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={() => setAppOpen(true)}
             edge="start"
             sx={{
               marginRight: 2,
-              ...(open && { display: "none" }),
+              ...(appOpen && { display: "none" }),
             }}
           >
             <MenuIcon />
@@ -177,9 +181,9 @@ export default function AdminManagement() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} bgcolor="red">
+      <Drawer variant="permanent" open={appOpen} bgcolor="red">
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => setAppOpen(false)}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (

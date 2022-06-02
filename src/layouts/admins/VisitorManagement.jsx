@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -32,6 +32,8 @@ import {
   PersonAddAlt1,
   PersonSearch,
 } from "@mui/icons-material";
+
+import { AppOpenContext } from "../../App";
 
 const drawerWidth = 160;
 
@@ -376,6 +378,8 @@ export default function VisitorManagement() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
+
   const handleDrawerOpen = () => {
     setOpen(true);
     console.log("true");
@@ -406,16 +410,16 @@ export default function VisitorManagement() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={appOpen}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={() => setAppOpen(true)}
             edge="start"
             sx={{
               marginRight: 2,
-              ...(open && { display: "none" }),
+              ...(appOpen && { display: "none" }),
             }}
           >
             <MenuIcon />
@@ -463,9 +467,9 @@ export default function VisitorManagement() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} bgcolor="red">
+      <Drawer variant="permanent" open={appOpen} bgcolor="red">
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => setAppOpen(false)}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
