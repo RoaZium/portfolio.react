@@ -12,12 +12,14 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
+  Breadcrumbs,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -30,7 +32,7 @@ import {
   AccountCircle,
   AccountBox,
   PersonAddAlt1,
-  PersonSearch,
+  NavigateNext,
 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
@@ -401,6 +403,12 @@ export default function VisitorManagement() {
     console.log("doubleClick");
   };
 
+  const breadcrumbs = [
+    <Typography key="3" color="text.primary">
+      방문자 관리
+    </Typography>,
+  ];
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -500,73 +508,105 @@ export default function VisitorManagement() {
       </Drawer>
       <Box
         sx={{
+          display: "grid",
           width: "100%",
-          overflow: "hidden",
           boxShadow: 13,
           borderRadius: 2,
           height: "85vh",
+          gridAutoRows: "5vh 10px auto",
+          gridTemplateRows: "3",
         }}
       >
-        <TableContainer>
-          <Table>
-            <TableHead
-              sx={{
-                bgcolor: "skyblue",
-              }}
+        <Box
+          sx={{
+            bgcolor: "transparent",
+            borderRadius: 2,
+            display: "flex",
+            gridRow: 1,
+            alignItems: "center",
+            justifySelf: "stretch",
+            marginLeft: 2,
+          }}
+        >
+          <Stack spacing={2}>
+            <Breadcrumbs
+              separator={<NavigateNext fontSize="small" />}
+              aria-label="breadcrumb"
             >
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody
-              component={Link}
-              to="/VisitorDetail"
-              style={{ textDecoration: "none" }}
-              onDoubleClick={tableRowDoubleClick}
-            >
-              {visitorData
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
+              {breadcrumbs}
+            </Breadcrumbs>
+          </Stack>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+            boxShadow: 13,
+            borderRadius: 2,
+            gridRow: 3,
+          }}
+        >
+          <TableContainer>
+            <Table>
+              <TableHead
+                sx={{
+                  bgcolor: "skyblue",
+                }}
+              >
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
                     >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={visitorData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody
+                component={Link}
+                to="/VisitorDetail"
+                style={{ textDecoration: "none" }}
+                onDoubleClick={tableRowDoubleClick}
+              >
+                {visitorData
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === "number"
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={visitorData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Box>
       </Box>
     </Box>
   );
