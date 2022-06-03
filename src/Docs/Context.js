@@ -27,11 +27,6 @@ context를 사용하면 컴포넌트를 재사용하기가 어려워지므로 �
 : 이 컴포넌트를 사용하면 함수 컴포넌트 안에서 context를 구독할 수 있습니다.
 : Context.Consumer의 자식은 함수여야합니다.
 
-4. 핵심 개념
-- createContext: Context 객체를 만든다
-- Provider: 생성된 Context의 props를 하위 컴포넌트에 전달하는 역할을 한다.
-- Consumer: Context의 변화를 감시하는 역할을 한다.
-
  */
 
 import { Button } from "@mui/material";
@@ -42,14 +37,6 @@ import React, { useState } from "react";
 
 const ExampleContext01 = React.createContext();
 
-function User() {
-  return (
-    <ExampleContext01.Consumer>
-      {(value) => <h1>{value}</h1>}
-    </ExampleContext01.Consumer>
-  );
-}
-
 export function ContextExample() {
   return (
     <ExampleContext01.Provider value="HJW">
@@ -58,12 +45,63 @@ export function ContextExample() {
   );
 }
 
+function User() {
+  return (
+    <ExampleContext01.Consumer>
+      {(value) => <h1>{value}</h1>}
+    </ExampleContext01.Consumer>
+  );
+}
+
 /* ===================================================== */
 
 /* ==================== 02. Example ==================== */
+// 정의: const 변수 선언 값 전달 - 하위 컴포넌트 값 전달
+
+const ExampleContext03 = React.createContext();
+
+export default function Example03() {
+  const user = {
+    name: "홍길동",
+    age: 25,
+  };
+
+  return (
+    <ExampleContext03.Provider value={user}>
+      <Example033 />
+    </ExampleContext03.Provider>
+  );
+}
+
+function Example033() {
+  return (
+    <ExampleContext03.Consumer>
+      {(value) => (
+        <>
+          <h3>user의 이름은 {value.name}입니다.</h3>
+          <h3>user의 나이는 {value.age}입니다.</h3>
+        </>
+      )}
+    </ExampleContext03.Consumer>
+  );
+}
+
+/* ===================================================== */
+
+/* ==================== 03. Example ==================== */
 // 정의: 하위 컴포넌트에서 conetxt 업데이트 하기
 
 const Example02Context = React.createContext(false);
+
+export function Example02() {
+  const [appOpen, setAppOpen] = useState(false);
+
+  return (
+    <Example02Context.Provider value={{ appOpen, setAppOpen }}>
+      <Example021 />
+    </Example02Context.Provider>
+  );
+}
 
 function Example021() {
   const { appOpen, setAppOpen } = React.useContext(Example02Context);
@@ -75,16 +113,6 @@ function Example021() {
         Text
       </Button>
     </div>
-  );
-}
-
-export default function Example02() {
-  const [appOpen, setAppOpen] = useState(false);
-
-  return (
-    <Example02Context.Provider value={{ appOpen, setAppOpen }}>
-      <Example021 />
-    </Example02Context.Provider>
   );
 }
 
