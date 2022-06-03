@@ -434,7 +434,7 @@ export default function VisitorManagement() {
               flexGrow: 1,
             }}
           >
-            관리자
+            관리자{appOpen}
           </Typography>
           <div>
             <IconButton

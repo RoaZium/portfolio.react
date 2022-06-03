@@ -1,5 +1,5 @@
 /* 
-정의
+▣ 정의
 데이터는 위에서 아래로(즉, 부모로부터 자식에게) props를 통해 전달되지만, context는 일일이 props를 넘겨주지 않고도
 컴포넌트 트리전체에 데이터를 제공할 수 있습니다.
 
@@ -26,22 +26,66 @@ context를 사용하면 컴포넌트를 재사용하기가 어려워지므로 �
 : context 변화를 구독하는 React 컴포넌트입니다.
 : 이 컴포넌트를 사용하면 함수 컴포넌트 안에서 context를 구독할 수 있습니다.
 : Context.Consumer의 자식은 함수여야합니다.
+
+4. 핵심 개념
+- createContext: Context 객체를 만든다
+- Provider: 생성된 Context의 props를 하위 컴포넌트에 전달하는 역할을 한다.
+- Consumer: Context의 변화를 감시하는 역할을 한다.
+
  */
 
-import React from "react";
+import { Button } from "@mui/material";
+import React, { useState } from "react";
 
-export const themes = {
-    light: {
-      foreground: '#000000',
-      background: '#eeeeee',
-    },
-    dark: {
-      foreground: '#ffffff',
-      background: '#222222',
-    },
-  };
-  
-export const ThemeContext = React.createContext({
-  theme: themes.dark,
-  toggleTheme: () => {},
-});
+/* ==================== 01. Example ==================== */
+// 정의: 하위 컴포넌트 값 전달
+
+const ExampleContext01 = React.createContext();
+
+function User() {
+  return (
+    <ExampleContext01.Consumer>
+      {(value) => <h1>{value}</h1>}
+    </ExampleContext01.Consumer>
+  );
+}
+
+export function ContextExample() {
+  return (
+    <ExampleContext01.Provider value="HJW">
+      <User />
+    </ExampleContext01.Provider>
+  );
+}
+
+/* ===================================================== */
+
+/* ==================== 02. Example ==================== */
+// 정의: 하위 컴포넌트에서 conetxt 업데이트 하기
+
+const Example02Context = React.createContext(false);
+
+function Example021() {
+  const { appOpen, setAppOpen } = React.useContext(Example02Context);
+
+  return (
+    <div>
+      <h1>Flag: {String(appOpen)}</h1>
+      <Button variant="contained" onClick={() => setAppOpen(!appOpen)}>
+        Text
+      </Button>
+    </div>
+  );
+}
+
+export default function Example02() {
+  const [appOpen, setAppOpen] = useState(false);
+
+  return (
+    <Example02Context.Provider value={{ appOpen, setAppOpen }}>
+      <Example021 />
+    </Example02Context.Provider>
+  );
+}
+
+/* ===================================================== */
