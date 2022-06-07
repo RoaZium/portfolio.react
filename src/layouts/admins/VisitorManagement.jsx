@@ -36,6 +36,8 @@ import {
 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
+import { VisitorColumns } from "../../Datas/Columns";
+import { VisitorDatas } from "../../Datas/DemoDatas";
 
 const drawerWidth = 160;
 
@@ -103,274 +105,6 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
-const columns = [
-  { id: "number", label: "번호", minWidth: 70, align: "center" },
-  { id: "visitorname", label: "방문자", minWidth: 100, align: "center" },
-  { id: "phonenumber", label: "전화번호", minWidth: 170, align: "center" },
-  { id: "company", label: "회사명", minWidth: 170, align: "center" },
-  { id: "carnumber", label: "차량번호", minWidth: 120, align: "center" },
-  { id: "assign", label: "승인", minWidth: 100, align: "center" },
-  { id: "interviewer", label: "피방문자", minWidth: 100, align: "center" },
-  { id: "department", label: "부서", minWidth: 170, align: "center" },
-  {
-    id: "reservationnumber",
-    label: "예약번호",
-    minWidth: 170,
-    align: "center",
-  },
-  { id: "people", label: "동행자", minWidth: 70, align: "center" },
-  { id: "visitorpurpose", label: "방문목적", minWidth: 170, align: "center" },
-  {
-    id: "privacyconsent",
-    label: "개인정보동의",
-    minWidth: 100,
-    align: "center",
-  },
-];
-
-function createData(
-  number,
-  visitorname,
-  phonenumber,
-  company,
-  carnumber,
-  assign,
-  interviewer,
-  department,
-  reservationnumber,
-  people,
-  visitorpurpose,
-  privacyconsent
-) {
-  return {
-    number,
-    visitorname,
-    phonenumber,
-    company,
-    carnumber,
-    assign,
-    interviewer,
-    department,
-    reservationnumber,
-    people,
-    visitorpurpose,
-    privacyconsent,
-  };
-}
-
-const visitorData = [
-  createData(
-    "1",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "2",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "3",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "4",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "5",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "6",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "7",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "8",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "9",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "10",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "11",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "12",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "13",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "14",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-  createData(
-    "15",
-    "홍길동",
-    "010-1234-5678",
-    "xx테크",
-    "56가 2323",
-    "승인",
-    "고길동",
-    "영업1팀",
-    "123456789",
-    "3",
-    "회의",
-    "동의"
-  ),
-];
 
 export default function VisitorManagement() {
   const theme = useTheme();
@@ -554,7 +288,7 @@ export default function VisitorManagement() {
                 }}
               >
                 <TableRow>
-                  {columns.map((column) => (
+                  {VisitorColumns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -571,7 +305,7 @@ export default function VisitorManagement() {
                 style={{ textDecoration: "none" }}
                 onDoubleClick={tableRowDoubleClick}
               >
-                {visitorData
+                {VisitorDatas
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -581,7 +315,7 @@ export default function VisitorManagement() {
                         tabIndex={-1}
                         key={row.code}
                       >
-                        {columns.map((column) => {
+                        {VisitorColumns.map((column) => {
                           const value = row[column.id];
                           return (
                             <TableCell key={column.id} align={column.align}>
@@ -600,7 +334,7 @@ export default function VisitorManagement() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={visitorData.length}
+            count={VisitorDatas.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
