@@ -12,6 +12,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
+  Autocomplete,
   Breadcrumbs,
   Button,
   Divider,
@@ -100,6 +101,19 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+
+const AccessAuthority = [
+  { label: "LV1 출입", code: "0001" },
+  { label: "LV2 출입", code: "0002" },
+  { label: "LV3 출입", code: "0003" },
+  { label: "LV4 출입", code: "0004" },
+  { label: "LV5 출입", code: "0005" },
+];
+
+const ApprovalState = [
+  { label: "승인", code: "0001" },
+  { label: "불가", code: "0002" },
+];
 
 export default function VisitorDetailManagement() {
   const theme = useTheme();
@@ -301,7 +315,7 @@ export default function VisitorDetailManagement() {
                 bgcolor: "transparent",
                 display: "grid",
                 gridTemplateColumns: "2",
-                gridTemplateRows: "5",
+                gridTemplateRows: "6",
                 gap: 3,
               }}
             >
@@ -345,6 +359,50 @@ export default function VisitorDetailManagement() {
                 label="모바일 출입방식"
                 variant="filled"
               />
+              <Box
+                sx={{
+                  gridColumn: "1",
+                  gridRow: "6",
+                  bgcolor: "#e8e8e8",
+                  display: "grid",
+                  gridAutoColumns: "auto auto 70px 70px",
+                  gridTemplateColumns: "4",
+                  gridTemplateRows: "1",
+                }}
+              >
+                <Typography
+                  sx={{
+                    alignSelf: "center",
+                    gridColumn: "1",
+                    gridRow: "1",
+                    marginLeft: "10px",
+                  }}
+                >
+                  모바일
+                </Typography>
+                <Button
+                  variant="contained"
+                  sx={{
+                    display: "flex",
+                    alignSelf: "center",
+                    gridColumn: "3",
+                    gridRow: "1",
+                  }}
+                >
+                  신청
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    display: "flex",
+                    alignSelf: "center",
+                    gridColumn: "4",
+                    gridRow: "1",
+                  }}
+                >
+                  삭제
+                </Button>
+              </Box>
               <TextField
                 sx={{
                   gridColumn: "2",
@@ -388,6 +446,24 @@ export default function VisitorDetailManagement() {
                   예약하기
                 </Button>
               </Link>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={AccessAuthority}
+                sx={{ gridColumn: "2", gridRow: "5" }}
+                renderInput={(params) => (
+                  <TextField {...params} label="출입권한" />
+                )}
+              />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={ApprovalState}
+                sx={{ gridColumn: "2", gridRow: "6" }}
+                renderInput={(params) => (
+                  <TextField {...params} label="승인상태" />
+                )}
+              />
             </Box>
           </Box>
           <Box
