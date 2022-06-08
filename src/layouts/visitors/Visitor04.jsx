@@ -41,9 +41,9 @@ export default function Visitor04() {
       .then(function (response) {
         if (response.data["visitors"][0] != null) {
           setVisitors(response.data["visitors"][0]);
-          console.log("ghj");
+          return response.data["visitors"][0];
         } else {
-          console.log("fef");
+          return null;
         }
       });
   };

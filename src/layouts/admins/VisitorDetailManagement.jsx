@@ -34,6 +34,7 @@ import {
 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
+import { AccessAuthority, ApprovalState } from "../../Datas/ComboBox";
 
 const drawerWidth = 160;
 
@@ -101,19 +102,6 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
-const AccessAuthority = [
-  { label: "LV1 출입", code: "0001" },
-  { label: "LV2 출입", code: "0002" },
-  { label: "LV3 출입", code: "0003" },
-  { label: "LV4 출입", code: "0004" },
-  { label: "LV5 출입", code: "0005" },
-];
-
-const ApprovalState = [
-  { label: "승인", code: "0001" },
-  { label: "불가", code: "0002" },
-];
 
 export default function VisitorDetailManagement() {
   const theme = useTheme();

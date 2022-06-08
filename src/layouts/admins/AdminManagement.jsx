@@ -12,6 +12,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
+  Button,
+  Card,
+  Divider,
+  Grid,
   List,
   ListItemButton,
   ListItemIcon,
@@ -21,6 +25,7 @@ import {
   TableCell,
   TablePagination,
   TableRow,
+  TextField,
 } from "@mui/material";
 import {
   AccountCircle,
@@ -30,6 +35,7 @@ import {
 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
+import DashboardLayout from "../LayoutContainers/DashboardLayout";
 
 const drawerWidth = 160;
 
@@ -181,7 +187,7 @@ export default function AdminManagement() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={appOpen} bgcolor="red">
+      <Drawer variant="permanent" open={appOpen}>
         <DrawerHeader>
           <IconButton onClick={() => setAppOpen(false)}>
             {theme.direction === "rtl" ? (
@@ -218,7 +224,29 @@ export default function AdminManagement() {
           </ListItemButton>
         </List>
       </Drawer>
-      <div bgcolor="yellow">관라자 관리</div>
+      <DashboardLayout>
+        <Box bgcolor="red">
+          <Box mb={3}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Box>
+                  <Card>
+                    <Typography bgcolor="transparent" variant="h6">
+                      비밀번호 변경
+                    </Typography>
+                    <Divider />
+                    <TextField label="현재 비밀번호" variant="outlined" />
+                    <TextField label="비밀번호 변경" variant="outlined" />
+                    <TextField label="비밀번호 확인" variant="outlined" />
+                    <Button variant="outlined">변경</Button>
+                  </Card>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={6} lg={3}></Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </DashboardLayout>
     </Box>
   );
 }
