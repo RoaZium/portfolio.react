@@ -6,7 +6,6 @@ export default function DashboardLayout({ children }) {
       sx={{
         display: "grid",
         width: "100%",
-        boxShadow: 13,
         borderRadius: 2,
         height: "85vh",
       }}

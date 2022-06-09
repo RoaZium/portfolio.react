@@ -36,6 +36,8 @@ import {
 
 import { AppOpenContext } from "../../App";
 import DashboardLayout from "../LayoutContainers/DashboardLayout";
+import PasswordChange from "../../components/PasswordChange";
+import Policy from "../../components/Policy";
 
 const drawerWidth = 160;
 
@@ -225,24 +227,24 @@ export default function AdminManagement() {
         </List>
       </Drawer>
       <DashboardLayout>
-        <Box bgcolor="red">
+        <Box>
           <Box mb={3}>
-            <Grid container spacing={3}>
+            <Grid container spacing={0}>
               <Grid item xs={12}>
-                <Box>
-                  <Card>
-                    <Typography bgcolor="transparent" variant="h6">
-                      비밀번호 변경
+                <Box p={2}>
+                  <Box p={1} borderRadius={2} boxShadow="12">
+                    <Typography variant="h6" fontWeight="bold">
+                      관리자 정보
                     </Typography>
-                    <Divider />
-                    <TextField label="현재 비밀번호" variant="outlined" />
-                    <TextField label="비밀번호 변경" variant="outlined" />
-                    <TextField label="비밀번호 확인" variant="outlined" />
-                    <Button variant="outlined">변경</Button>
-                  </Card>
+                  </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} lg={3}></Grid>
+              <Grid item xs={12}>
+                <Policy />
+              </Grid>
+              <Grid item xs={12}>
+                <PasswordChange />
+              </Grid>
             </Grid>
           </Box>
         </Box>
