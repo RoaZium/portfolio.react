@@ -181,7 +181,7 @@ export default function VisitorDetailManagement() {
               onClose={handleClose}
             >
               <MenuItem component={Link} to="/" onClick={handleClose}>
-                Logout
+                로그아웃
               </MenuItem>
             </Menu>
           </div>
