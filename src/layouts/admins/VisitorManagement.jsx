@@ -211,7 +211,7 @@ export default function VisitorManagement() {
                 marginLeft: -2,
               }}
             >
-              관라자 관리
+              관리자 설정
             </ListItemText>
           </ListItemButton>
         </List>

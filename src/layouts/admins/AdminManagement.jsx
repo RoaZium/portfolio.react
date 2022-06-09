@@ -221,7 +221,7 @@ export default function AdminManagement() {
                 marginLeft: -2,
               }}
             >
-              관라자 관리
+              관라자 설정
             </ListItemText>
           </ListItemButton>
         </List>
@@ -234,7 +234,7 @@ export default function AdminManagement() {
                 <Box p={2}>
                   <Box p={1} borderRadius={2} boxShadow="3">
                     <Typography variant="h6" fontWeight="bold">
-                      관리자 정보
+                      관리자 설정
                     </Typography>
                   </Box>
                 </Box>
