@@ -12,9 +12,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
-  Button,
-  Card,
-  Divider,
   Grid,
   List,
   ListItemButton,
@@ -22,17 +19,8 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  TableCell,
-  TablePagination,
-  TableRow,
-  TextField,
 } from "@mui/material";
-import {
-  AccountCircle,
-  AccountBox,
-  PersonAddAlt1,
-  PersonSearch,
-} from "@mui/icons-material";
+import { AccountCircle, AccountBox, PersonAddAlt1 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
 import DashboardLayout from "../LayoutContainers/DashboardLayout";
@@ -108,18 +96,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function AdminManagement() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
