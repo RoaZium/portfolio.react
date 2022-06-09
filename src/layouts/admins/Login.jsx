@@ -38,112 +38,110 @@ export default function Login() {
         <Grid
           container
           display="flex"
+          justifyContent="center"
           sx={{
             bgcolor: "white",
-            borderTopLeftRadius: 13,
-            borderBottomLeftRadius: 13,
-            display: "grid",
             gridColumn: 1,
             gridRow: 1,
-            gridAutoRows: "30px 60px 90px 70px 70px 50px 60px",
-            gridTemplateColumns: "1",
-            gridTemplateRows: "7",
           }}
         >
-          <Grid>
-
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            alignItems="end"
+            justifyContent="center"
+          >
+            <Typography
+              fontWeight="bold"
+              variant="h6"
+              textAlign="center"
+            >
+              WELCOME TO
+            </Typography>
           </Grid>
-          <Typography
-            fontWeight="bold"
-            fontSize={18}
-            sx={{
-              gridRow: 2,
-              alignItems: "center",
-              bgcolor: "transparent",
-              display: "center",
-              justifyContent: "center",
-            }}
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
           >
-            WELCOME TO
-          </Typography>
-          <Box
-            component="img"
-            src={Logo}
-            sx={{
-              gridRow: 3,
-              bgcolor: "transparent",
-              height: "30px",
-              justifySelf: "center",
-            }}
-          />
-          <FormControl
-            variant="standard"
-            sx={{
-              gridRow: 4,
-              alignSelf: "center",
-              justifySelf: "stretch",
-            }}
+            <Box component="img" src={Logo} />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            alignItems="end"
+            justifyContent="center"
           >
-            <OutlinedInput
-              id="input-with-icon-adornment"
-              startAdornment={
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              }
-              sx={{
-                gridRow: 4,
-                borderRadius: 10,
-                height: "50px",
-                marginLeft: 3,
-                marginRight: 3,
-              }}
-            />
-          </FormControl>
-          <FormControl
-            variant="standard"
-            sx={{
-              gridRow: 5,
-              alignSelf: "center",
-              justifySelf: "stretch",
-            }}
-          >
-            <OutlinedInput
-              id="input-with-icon-adornment"
-              startAdornment={
-                <InputAdornment position="start">
-                  <Lock />
-                </InputAdornment>
-              }
-              sx={{
-                borderRadius: 10,
-                height: "50px",
-                justifySelf: "center",
-                marginLeft: 3,
-                marginRight: 3,
-              }}
-            />
-          </FormControl>
-          <Box
-            sx={{
-              gridRow: 6,
-              alignSelf: "center",
-              justifySelf: "center",
-            }}
-          >
-            <Link to="/Visitor" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
+            <FormControl variant="standard">
+              <OutlinedInput
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                }
                 sx={{
                   borderRadius: 10,
-                  fontSize: 16,
-                  width: "380px",
+                  height: "50px",
+                  width: "350px",
+                  marginLeft: 3,
+                  marginRight: 3,
                 }}
-              >
-                SIGN IN
-              </Button>
-            </Link>
-          </Box>
+              />
+            </FormControl>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <FormControl variant="standard">
+              <OutlinedInput
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <Lock />
+                  </InputAdornment>
+                }
+                sx={{
+                  borderRadius: 10,
+                  height: "50px",
+                  width: "350px",
+                  marginLeft: 3,
+                  marginRight: 3,
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box>
+              <Link to="/Visitor" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    borderRadius: 10,
+                    alignSelf: "center",
+                    justifySelf: "center",
+                    width: "350px",
+                  }}
+                >
+                  SIGN IN
+                </Button>
+              </Link>
+            </Box>
+          </Grid>
         </Grid>
         <Grid
           item
