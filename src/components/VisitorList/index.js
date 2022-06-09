@@ -1,34 +1,108 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-} from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
-import { Link } from "react-router-dom";
-import { VisitorColumns } from "../../Datas/Columns";
-import { VisitorDatas } from "../../Datas/DemoDatas";
+import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+import { VisitorRows } from "../../Datas/VisitorList";
+import { Button, Grid } from "@mui/material";
+
+const columns = [
+  // { field: "VisitorID", headerName: "ID", width: 90, editable: false },
+  {
+    field: "VisitorName",
+    headerName: "이름",
+    editable: false,
+    align: "center",
+    flex: 0.7,
+    headerAlign: "center",
+  },
+  {
+    field: "CompanyName",
+    headerName: "회사명",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "TelePhone",
+    headerName: "연락처",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "CarNo",
+    headerName: "차량번호",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "Email",
+    headerName: "이메일",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "BirthDay",
+    headerName: "생년월일",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "Vip",
+    headerName: "VIP",
+    editable: false,
+    align: "center",
+    flex: 0.5,
+    headerAlign: "center",
+  },
+  {
+    field: "Purpose",
+    headerName: "방문 목적",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "VisitFrom",
+    headerName: "방문 시작일",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "VisitTo",
+    headerName: "방문 종료일",
+    editable: false,
+    align: "center",
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "AgreePrivacy",
+    headerName: "개인정보동의",
+    editable: false,
+    align: "center",
+    flex: 0.8,
+    headerAlign: "center",
+  },
+];
 
 export default function VisitorList() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const navigate = useNavigate();
+  const [pageSize, setPageSize] = React.useState(5);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  const tableRowDoubleClick = () => {
-    <Link to="/" style={{ textDecoration: "none" }} />;
-    console.log("doubleClick");
+  const RowDoubleClick = () => {
+    navigate("/VisitorDetail");
   };
 
   return (
@@ -47,61 +121,36 @@ export default function VisitorList() {
         boxShadow="3"
         height="70vh"
       >
-        <TableContainer>
-          <Table>
-            <TableHead
-              sx={{
-                bgcolor: "skyblue",
-              }}
-            >
-              <TableRow>
-                {VisitorColumns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody
-              component={Link}
-              to="/VisitorDetail"
-              style={{ textDecoration: "none" }}
-              onDoubleClick={tableRowDoubleClick}
-            >
-              {VisitorDatas.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              ).map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {VisitorColumns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={VisitorDatas.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+        <Box display="flex" justifyContent="flex-end">
+          <Button variant="contained" sx={{ marginRight: 2 }}>
+            수정
+          </Button>
+          <Button variant="contained">삭제</Button>
+        </Box>
+        <DataGrid
+          GridLinesVisibility="None"
+          rows={VisitorRows}
+          columns={columns}
+          pageSize={pageSize}
+          isCellEditable={(params) => 0}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          onRowDoubleClick={RowDoubleClick}
+          rowsPerPageOptions={[5, 10, 20]}
+          checkboxSelection
+          disableSelectionOnClick
+          sx={{
+            border: 0,
+            borderColor: "primary.light",
+            "& .MuiDataGrid-row:hover": {
+              color: "primary.main",
+            },
+            ".MuiDataGrid-cell:focus": {
+              outline: 0,
+            },
+            "&.MuiDataGrid-root": {
+              border: "none",
+            },
+          }}
         />
       </Box>
     </Box>

@@ -30,12 +30,14 @@ export default function Login() {
           height: "460px",
           marginLeft: "150px",
           marginRight: "150px",
-          gridTemplateColumns: "repeat(2, 1fr)",
+          gridAutoColumns: "450px auto",
           gridTemplateRows: "1",
-          boxShadow: 13,
+          boxShadow: 5,
         }}
       >
         <Grid
+          container
+          display="flex"
           sx={{
             bgcolor: "white",
             borderTopLeftRadius: 13,
@@ -48,6 +50,9 @@ export default function Login() {
             gridTemplateRows: "7",
           }}
         >
+          <Grid>
+
+          </Grid>
           <Typography
             fontWeight="bold"
             fontSize={18}
@@ -141,6 +146,7 @@ export default function Login() {
           </Box>
         </Grid>
         <Grid
+          item
           sx={{
             display: "flex",
             bgcolor: "transparent",

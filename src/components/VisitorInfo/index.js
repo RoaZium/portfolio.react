@@ -102,7 +102,7 @@ export default function VisitorInfo() {
               gridRow: "6",
               bgcolor: "#e8e8e8",
               display: "grid",
-              gridAutoColumns: "auto auto 70px 10px 70px 10px",
+              gridAutoColumns: "auto auto 70px 10px 70px",
               gridTemplateColumns: "6",
               gridTemplateRows: "1",
             }}
@@ -186,7 +186,25 @@ export default function VisitorInfo() {
             sx={{ gridColumn: "2", gridRow: "6" }}
             renderInput={(params) => <TextField {...params} label="승인상태" />}
           />
-          <Link to="/Visitor" style={{ textDecoration: "none" }}>
+          <Link
+            to="/Visitor"
+            style={{ textDecoration: "none", justifySelf: "flex-end" }}
+          >
+            <Button
+              sx={{
+                gridColumn: "2",
+                gridRow: "7",
+                visibility: "hidden",
+              }}
+              variant="contained"
+            >
+              예약하기
+            </Button>
+          </Link>
+          <Link
+            to="/Visitor"
+            style={{ textDecoration: "none", justifySelf: "flex-end" }}
+          >
             <Button
               sx={{
                 gridColumn: "2",
@@ -199,7 +217,7 @@ export default function VisitorInfo() {
           </Link>
         </Box>
         <Box
-          mb={1}
+          mt={3}
           display="flex"
           flexDirection="row"
           sx={{
@@ -212,7 +230,7 @@ export default function VisitorInfo() {
         >
           <Grid container>
             <Grid item sm={6}>
-              <Box p={2} textAlign="center">
+              <Box pr={1.5} textAlign="center">
                 <Link to="/Visitor" style={{ textDecoration: "none" }}>
                   <Button variant="contained" fullWidth>
                     취소
@@ -221,7 +239,7 @@ export default function VisitorInfo() {
               </Box>
             </Grid>
             <Grid item sm={6}>
-              <Box p={2} textAlign="center">
+              <Box pl={1.5} textAlign="center">
                 <Link to="/Visitor" style={{ textDecoration: "none" }}>
                   <Button variant="contained" fullWidth>
                     완료
