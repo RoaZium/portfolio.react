@@ -15,7 +15,7 @@ export default function Policy() {
         flexDirection="column"
         borderRadius={2}
         p={2}
-        boxShadow="12"
+        boxShadow="3"
       >
         <Box
           display="flex"

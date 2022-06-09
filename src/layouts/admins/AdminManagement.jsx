@@ -232,7 +232,7 @@ export default function AdminManagement() {
             <Grid container spacing={0}>
               <Grid item xs={12}>
                 <Box p={2}>
-                  <Box p={1} borderRadius={2} boxShadow="12">
+                  <Box p={1} borderRadius={2} boxShadow="3">
                     <Typography variant="h6" fontWeight="bold">
                       관리자 정보
                     </Typography>

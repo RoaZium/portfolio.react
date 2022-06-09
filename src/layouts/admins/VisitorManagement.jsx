@@ -13,20 +13,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
   Breadcrumbs,
+  Grid,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
 } from "@mui/material";
 import {
   AccountCircle,
@@ -36,8 +29,8 @@ import {
 } from "@mui/icons-material";
 
 import { AppOpenContext } from "../../App";
-import { VisitorColumns } from "../../Datas/Columns";
-import { VisitorDatas } from "../../Datas/DemoDatas";
+import DashboardLayout from "../LayoutContainers/DashboardLayout";
+import VisitorList from "../../components/VisitorList";
 
 const drawerWidth = 160;
 
@@ -110,9 +103,6 @@ export default function VisitorManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
 
   const handleMenu = (event) => {
@@ -123,22 +113,8 @@ export default function VisitorManagement() {
     setAnchorEl(null);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  const tableRowDoubleClick = () => {
-    <Link to="/" style={{ textDecoration: "none" }} />;
-    console.log("doubleClick");
-  };
-
   const breadcrumbs = [
-    <Typography key="3" color="text.primary">
+    <Typography variant="h6" fontWeight="bold" key="3" color="text.primary">
       방문자 관리
     </Typography>,
   ];
@@ -240,109 +216,27 @@ export default function VisitorManagement() {
           </ListItemButton>
         </List>
       </Drawer>
-      <Box
-        sx={{
-          display: "grid",
-          width: "100%",
-          boxShadow: 13,
-          borderRadius: 2,
-          height: "85vh",
-          gridAutoRows: "5vh 10px auto",
-          gridTemplateRows: "3",
-        }}
-      >
-        <Box
-          sx={{
-            bgcolor: "transparent",
-            borderRadius: 2,
-            display: "flex",
-            gridRow: 1,
-            alignItems: "center",
-            justifySelf: "stretch",
-            marginLeft: 2,
-          }}
-        >
-          <Stack spacing={2}>
-            <Breadcrumbs
-              separator={<NavigateNext fontSize="small" />}
-              aria-label="breadcrumb"
-            >
-              {breadcrumbs}
-            </Breadcrumbs>
-          </Stack>
+      <DashboardLayout>
+        <Box>
+          <Grid container spacing={0}>
+            <Grid item xs={12}>
+              <Box p={2}>
+                <Box p={1} borderRadius={2} boxShadow="3">
+                  <Breadcrumbs
+                    separator={<NavigateNext fontSize="small" />}
+                    aria-label="breadcrumb"
+                  >
+                    {breadcrumbs}
+                  </Breadcrumbs>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <VisitorList />
+            </Grid>
+          </Grid>
         </Box>
-        <Box
-          sx={{
-            width: "100%",
-            overflow: "hidden",
-            boxShadow: 13,
-            borderRadius: 2,
-            gridRow: 3,
-          }}
-        >
-          <TableContainer>
-            <Table>
-              <TableHead
-                sx={{
-                  bgcolor: "skyblue",
-                }}
-              >
-                <TableRow>
-                  {VisitorColumns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody
-                component={Link}
-                to="/VisitorDetail"
-                style={{ textDecoration: "none" }}
-                onDoubleClick={tableRowDoubleClick}
-              >
-                {VisitorDatas.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                ).map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {VisitorColumns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={VisitorDatas.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Box>
-      </Box>
+      </DashboardLayout>
     </Box>
   );
 }
