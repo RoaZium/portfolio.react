@@ -52,11 +52,7 @@ export default function Login() {
             alignItems="end"
             justifyContent="center"
           >
-            <Typography
-              fontWeight="bold"
-              variant="h6"
-              textAlign="center"
-            >
+            <Typography fontWeight="bold" variant="h6" textAlign="center">
               WELCOME TO
             </Typography>
           </Grid>

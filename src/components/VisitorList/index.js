@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { VisitorRows } from "../../Datas/VisitorList";
 import { Button, Grid } from "@mui/material";
+import { VisitorInfoContext } from "../../App";
 
 const columns = [
   // { field: "VisitorID", headerName: "ID", width: 90, editable: false },
@@ -100,9 +101,12 @@ const columns = [
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
+  const [visitorInfo, setVisitorInfo] = React.useContext(VisitorInfoContext);
+  const [selectionModel, setSelectionModel] = React.useState([]);
 
   const RowDoubleClick = () => {
     navigate("/VisitorDetail");
+    console.log(selectionModel.VisitorName);
   };
 
   return (
@@ -138,6 +142,10 @@ export default function VisitorList() {
           rowsPerPageOptions={[5, 10, 20]}
           checkboxSelection
           disableSelectionOnClick
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
           sx={{
             border: 0,
             borderColor: "primary.light",

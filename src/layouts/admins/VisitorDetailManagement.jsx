@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -32,7 +32,7 @@ import {
   NavigateNext,
 } from "@mui/icons-material";
 
-import { AppOpenContext } from "../../App";
+import { AppOpenContext, VisitorInfoContext } from "../../App";
 import { AccessAuthority, ApprovalState } from "../../Datas/ComboBox";
 import VisitorInfo from "../../components/VisitorInfo";
 import DashboardLayout from "../LayoutContainers/DashboardLayout";
@@ -107,8 +107,13 @@ const Drawer = styled(MuiDrawer, {
 export default function VisitorDetailManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
+  const [visitorInfo, setVisitorInfo] = React.useContext(VisitorInfoContext);
+
+  useEffect(() => {
+    console.log("마운트 될 때만 실행된다");
+    console.log(visitorInfo);
+  });
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
