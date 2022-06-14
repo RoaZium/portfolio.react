@@ -101,12 +101,12 @@ const columns = [
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
-  const [visitorInfo, setVisitorInfo] = React.useContext(VisitorInfoContext);
+  const { visitorInfo, setVisitorInfo } = React.useContext(VisitorInfoContext);
   const [selectionModel, setSelectionModel] = React.useState([]);
 
   const RowDoubleClick = () => {
-    navigate("/VisitorDetail");
-    console.log(selectionModel.VisitorName);
+    //navigate("/VisitorDetail");
+    console.log("ㄹㄷㄹ");
   };
 
   return (

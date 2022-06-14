@@ -108,7 +108,7 @@ export default function VisitorDetailManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
-  const [visitorInfo, setVisitorInfo] = React.useContext(VisitorInfoContext);
+  const { visitorInfo, setVisitorInfo } = React.useContext(VisitorInfoContext);
 
   useEffect(() => {
     console.log("마운트 될 때만 실행된다");
