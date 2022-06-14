@@ -162,7 +162,7 @@ export default function AdminManagement() {
               onClose={handleClose}
             >
               <MenuItem component={Link} to="/" onClick={handleClose}>
-                Logout
+                로그아웃
               </MenuItem>
             </Menu>
           </div>
