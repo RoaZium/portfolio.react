@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -12,10 +12,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import {
-  Autocomplete,
   Breadcrumbs,
-  Button,
-  Divider,
   Grid,
   List,
   ListItemButton,
@@ -23,7 +20,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  TextField,
 } from "@mui/material";
 import {
   AccountCircle,
@@ -31,9 +27,7 @@ import {
   PersonAddAlt1,
   NavigateNext,
 } from "@mui/icons-material";
-
-import { AppOpenContext, VisitorInfoContext } from "../../App";
-import { AccessAuthority, ApprovalState } from "../../Datas/ComboBox";
+import { AppOpenContext } from "../../App";
 import VisitorInfo from "../../components/VisitorInfo";
 import DashboardLayout from "../LayoutContainers/DashboardLayout";
 
@@ -108,12 +102,6 @@ export default function VisitorDetailManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
-  const { visitorInfo, setVisitorInfo } = React.useContext(VisitorInfoContext);
-
-  useEffect(() => {
-    console.log("마운트 될 때만 실행된다");
-    console.log(visitorInfo);
-  });
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

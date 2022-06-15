@@ -1,10 +1,11 @@
-import React from "react";
+import * as React from "react";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { VisitorRows } from "../../Datas/VisitorList";
 import { Button, Grid } from "@mui/material";
-import { VisitorInfoContext } from "../../App";
+import { SelectedVisitorInfoContext } from "../../App";
+import { Navigation } from "@mui/icons-material";
 
 const columns = [
   // { field: "VisitorID", headerName: "ID", width: 90, editable: false },
@@ -101,12 +102,14 @@ const columns = [
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
-  const { visitorInfo, setVisitorInfo } = React.useContext(VisitorInfoContext);
-  const [selectionModel, setSelectionModel] = React.useState([]);
+  const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
+    SelectedVisitorInfoContext
+  );
+
+  const [selectedRows, setSelectedRows] = React.useState([]);
 
   const RowDoubleClick = () => {
-    //navigate("/VisitorDetail");
-    console.log("ㄹㄷㄹ");
+    navigate("/VisitorDetail");
   };
 
   return (
@@ -140,12 +143,14 @@ export default function VisitorList() {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onRowDoubleClick={RowDoubleClick}
           rowsPerPageOptions={[5, 10, 20]}
-          checkboxSelection
-          disableSelectionOnClick
-          onSelectionModelChange={(newSelectionModel) => {
-            setSelectionModel(newSelectionModel);
+          checkboxSelection={false}
+          onSelectionModelChange={(ids) => {
+            const selectedIDs = new Set(ids);
+            const selectedVisitorInfo = VisitorRows.filter((row) =>
+              selectedIDs.has(row.id)
+            );
+            setSelectedVisitorInfo(selectedVisitorInfo);
           }}
-          selectionModel={selectionModel}
           sx={{
             border: 0,
             borderColor: "primary.light",
@@ -160,6 +165,7 @@ export default function VisitorList() {
             },
           }}
         />
+        <div></div>
       </Box>
     </Box>
   );

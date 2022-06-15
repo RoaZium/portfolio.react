@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Autocomplete,
   Button,
@@ -13,9 +13,17 @@ import { AccessAuthority, ApprovalState } from "../../Datas/ComboBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import { SelectedVisitorInfoContext } from "../../App";
 
 export default function VisitorInfo() {
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
+    SelectedVisitorInfoContext
+  );
+
+  useEffect(() => {
+    console.log("상세: ", selectedVisitorInfo);
+  });
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -77,6 +85,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="방문자 성명"
+              value={selectedVisitorInfo[0].VisitorName}
               variant="filled"
             />
             <TextField
@@ -85,6 +94,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="연락처"
+              value={selectedVisitorInfo[0].TelePhone}
               variant="filled"
             />
             <Grid
@@ -140,6 +150,7 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="차량번호"
+              value={selectedVisitorInfo[0].CarNo}
               variant="filled"
             />
             <Box
@@ -192,6 +203,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="이메일"
+              value={selectedVisitorInfo[0].Email}
               variant="filled"
             />
             <TextField
@@ -200,6 +212,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="회사명"
+              value={selectedVisitorInfo[0].CompanyName}
               variant="filled"
             />
             <TextField
@@ -208,6 +221,7 @@ export default function VisitorInfo() {
                 gridRow: "3",
               }}
               label="방문목적"
+              value={selectedVisitorInfo[0].Purpose}
               variant="filled"
             />
             <TextField
@@ -216,6 +230,7 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="피방문자 성명"
+              value={selectedVisitorInfo[0].VisitorName}
               variant="filled"
             />
             <Autocomplete
