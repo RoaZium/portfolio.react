@@ -3,9 +3,8 @@ import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { VisitorRows } from "../../Datas/VisitorList";
-import { Button, Grid } from "@mui/material";
+import { Button } from "@mui/material";
 import { SelectedVisitorInfoContext } from "../../App";
-import { Navigation } from "@mui/icons-material";
 
 const columns = [
   // { field: "VisitorID", headerName: "ID", width: 90, editable: false },
@@ -102,14 +101,20 @@ const columns = [
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
+  const [VisitorRow, setVisitorRows] = React.useState(VisitorRows);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
 
-  const [selectedRows, setSelectedRows] = React.useState([]);
-
   const RowDoubleClick = () => {
     navigate("/VisitorDetail");
+  };
+
+  const DeleteSelectedVisitor = () => {
+    const select = new Set(selectedVisitorInfo);
+    console.log(select);
+    setVisitorRows((row) => row.filter((x) => !select.has(x.id)));
+    console.log(VisitorRow);
   };
 
   return (
@@ -132,11 +137,13 @@ export default function VisitorList() {
           <Button variant="contained" sx={{ marginRight: 2 }}>
             수정
           </Button>
-          <Button variant="contained">삭제</Button>
+          <Button variant="contained" onClick={DeleteSelectedVisitor}>
+            삭제
+          </Button>
         </Box>
         <DataGrid
           GridLinesVisibility="None"
-          rows={VisitorRows}
+          rows={VisitorRow}
           columns={columns}
           pageSize={pageSize}
           isCellEditable={(params) => 0}
@@ -146,7 +153,7 @@ export default function VisitorList() {
           checkboxSelection={false}
           onSelectionModelChange={(ids) => {
             const selectedIDs = new Set(ids);
-            const selectedVisitorInfo = VisitorRows.filter((row) =>
+            const selectedVisitorInfo = VisitorRow.filter((row) =>
               selectedIDs.has(row.id)
             );
             setSelectedVisitorInfo(selectedVisitorInfo);
