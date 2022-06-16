@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Divider } from "@mui/material";
+import React from "react";
 
 const MyButton = styled(Button)({
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -23,6 +24,26 @@ const MyButton = styled(Button)({
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
 export default function Visitor02() {
+  const navigate = useNavigate();
+  const [privateAssignFlag, setPrivateAssignFlag] = React.useState(false);
+  const [policyAssignFlag, setPolicyAssignFlag] = React.useState(false);
+
+  const ValidAssign = () => {
+    if (privateAssignFlag === false) {
+      alert("개인정보 수집, 이용, 제공 동의가 필요합니다.");
+      return;
+    }
+
+    if (policyAssignFlag === false) {
+      alert("당사의 보안 정책 동의가 필요합니다.");
+      return;
+    }
+
+    navigate("/Visitor03");
+  };
+
+  // const Valid
+
   return (
     <Box
       sx={{
@@ -117,7 +138,14 @@ export default function Visitor02() {
             margin: 0,
             gridRow: "4",
           }}
-          control={<Checkbox />}
+          control={
+            <Checkbox
+              checked={privateAssignFlag}
+              onClick={() => {
+                setPrivateAssignFlag(!privateAssignFlag);
+              }}
+            />
+          }
           label="상기 내용을 확인 하였으며, 개인정보 수집 및 이용에 동의 합니다."
         />
       </Box>
@@ -174,7 +202,14 @@ export default function Visitor02() {
             height: "30px",
             margin: 0,
           }}
-          control={<Checkbox />}
+          control={
+            <Checkbox
+              checked={policyAssignFlag}
+              onClick={() => {
+                setPolicyAssignFlag(!policyAssignFlag);
+              }}
+            />
+          }
           label="당사의 보안 정책의 내용을 확인 하였으며, 동의 합니다."
         />
       </Box>
@@ -200,11 +235,9 @@ export default function Visitor02() {
         </Grid>
         <Grid item xs={6}>
           <Box p={2}>
-            <Link to="/Visitor03" style={{ textDecoration: "none" }}>
-              <Button variant="contained" fullWidth>
-                다음 페이지
-              </Button>
-            </Link>
+            <Button variant="contained" fullWidth onClick={() => ValidAssign()}>
+              다음 페이지
+            </Button>
           </Box>
         </Grid>
       </Box>
