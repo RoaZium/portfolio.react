@@ -14,7 +14,8 @@ const App = () => {
       <SelectedVisitorInfoContext.Provider
         value={{ selectedVisitorInfo, setSelectedVisitorInfo }}
       >
-        <Admin />
+        <Visitor />
+        {/* <Admin /> */}
       </SelectedVisitorInfoContext.Provider>
     </AppOpenContext.Provider>
   );

@@ -9,9 +9,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Divider from "@mui/material/Divider";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
+import { GetVisitor } from "../../APIs/VisitorAPI";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
@@ -30,7 +31,12 @@ const commonStyles = {
 };
 
 export default function Visitor04() {
-  const [visitors, setVisitors] = useState("");
+  const [visitors, setVisitors] = useState(null);
+
+  useEffect(() => {
+    console.log("fff");
+    GetVisitor();
+  }, []);
 
   const sendRequest = async () => {
     await axios
@@ -43,6 +49,24 @@ export default function Visitor04() {
           setVisitors(response.data["visitors"][0]);
           return response.data["visitors"][0];
         } else {
+          return null;
+        }
+      });
+  };
+
+  const GetVisitor = async () => {
+    await axios
+      .get(
+        "/visitor?visitor_id=VT7148&site_id=01f0ea04-6040-47d8-a756-f1b08d855096",
+        { headers: { login_token: "319A1998-3BE8-47DD-A118-E2B387817FA2" } }
+      )
+      .then(function (response) {
+        if (response.data["visitors"][0] != null) {
+          setVisitors(response.data["visitors"][0]);
+          console.log(visitors);
+          return;
+        } else {
+          console.log("ttt");
           return null;
         }
       });
@@ -209,6 +233,7 @@ export default function Visitor04() {
               gridRow: "1",
             }}
             variant="filled"
+            value={visitors.visitor_name}
           />
           <TextField
             sx={{
@@ -216,6 +241,7 @@ export default function Visitor04() {
               gridRow: "2",
             }}
             variant="filled"
+            value={visitors.visitor_name}
           />
           <TextField
             sx={{
