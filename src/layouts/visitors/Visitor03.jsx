@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Box from "@mui/material/Box";
@@ -18,41 +18,55 @@ const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입�
 
 export default function Visitor03() {
   const [value, setValue] = React.useState(new Date());
-  const visitorInfo = JSON.stringify({
-    site_id: "1",
-    visitor_name: "테스트01",
-    telephone: "010-0000-0000",
-    manager_id: "WT0000000000",
-    visit_from: "2022-01-01 00:00:00",
-    visit_to: "2022-01-01 23:59:59",
-  });
+  const navigate = useNavigate();
+
+  const [visitorName, setVisitorName] = React.useState();
+  const [comapnyName, setComapnyName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [carNo, setCarNo] = React.useState();
+  const [telephone, setTelephone] = React.useState();
+  const [purpose, setPurpose] = React.useState();
+  const [managerID, setManagerID] = React.useState();
+  const [visitFrom, setVisitFrom] = React.useState();
+  const [visitTo, setVisitTo] = React.useState();
+  const [agreePrivacy, setAgreePrivacy] = React.useState();
+  const [visitApproval, setVisitApproval] = React.useState();
+
+  useEffect(() => {
+    PostVisitor();
+  }, []);
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-  const PostVisitor = async () => {
-    await axios
-      .post("/visitor", {
-        site_id: "1",
-        visitor_name: "테스트05",
-        telephone: "010-0000-0000",
-        manager_id: "WT0000000000",
-        visit_from: "2022-01-01 00:00:00",
-        visit_to: "2022-01-01 23:59:59",
-      })
-      .then(function (response) {
-        console.log(response);
-      });
+  const reservation = () => {
+    PostVisitor();
+    // navigate("/Visitor04");
   };
 
   var data = JSON.stringify({
     site_id: "1",
-    visitor_name: "테스트04",
-    telephone: "010-0000-0000",
+    visitor_name: { visitorName },
+    gender: "",
+    address: "",
+    company_name: { comapnyName },
+    job_position: "",
+    job_title: "",
+    email: { email },
+    car_no: { carNo },
+    telephone: { telephone },
+    picture: "",
+    birthday: "",
+    vip: "",
+    purpose: { purpose },
     manager_id: "WT0000000000",
     visit_from: "2022-01-01 00:00:00",
     visit_to: "2022-01-01 23:59:59",
+    agree_privacy: "",
+    sign_image: "",
+    access_permission: "",
+    visit_approval: "",
   });
 
   var config = {
@@ -64,17 +78,15 @@ export default function Visitor03() {
     data: data,
   };
 
-  useEffect(() => {
-    /*     axios(config)
+  const PostVisitor = async () => {
+    axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
-      }); */
-    PostVisitor();
-  }, []);
+      });
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -161,7 +173,9 @@ export default function Visitor03() {
                 gridRow: "1",
               }}
               label="방문자 성명"
+              value={visitorName}
               variant="filled"
+              onChange={(event) => setVisitorName(event.target.value)}
             />
             <TextField
               sx={{
@@ -169,7 +183,9 @@ export default function Visitor03() {
                 gridRow: "2",
               }}
               label="연락처"
+              value={telephone}
               variant="filled"
+              onChange={(event) => setTelephone(event.target.value)}
             />
             <Grid
               container
@@ -224,15 +240,9 @@ export default function Visitor03() {
                 gridRow: "4",
               }}
               label="차량번호"
+              value={carNo}
               variant="filled"
-            />
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "5",
-              }}
-              label="모바일 출입방식"
-              variant="filled"
+              onChange={(event) => setCarNo(event.target.value)}
             />
             <TextField
               sx={{
@@ -240,7 +250,9 @@ export default function Visitor03() {
                 gridRow: "1",
               }}
               label="이메일"
+              value={email}
               variant="filled"
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               sx={{
@@ -248,7 +260,9 @@ export default function Visitor03() {
                 gridRow: "2",
               }}
               label="회사명"
+              value={comapnyName}
               variant="filled"
+              onChange={(event) => setComapnyName(event.target.value)}
             />
             <TextField
               sx={{
@@ -256,7 +270,9 @@ export default function Visitor03() {
                 gridRow: "3",
               }}
               label="방문목적"
+              value={purpose}
               variant="filled"
+              onChange={(event) => setPurpose(event.target.value)}
             />
             <TextField
               sx={{
@@ -264,19 +280,20 @@ export default function Visitor03() {
                 gridRow: "4",
               }}
               label="피방문자 성명"
+              value={visitorName}
               variant="filled"
+              onChange={(event) => setVisitorName(event.target.value)}
             />
-            <Link to="/Visitor04" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  gridColumn: "2",
-                  gridRow: "5",
-                }}
-                variant="contained"
-              >
-                예약하기
-              </Button>
-            </Link>
+            <Button
+              sx={{
+                gridColumn: "2",
+                gridRow: "5",
+              }}
+              variant="contained"
+              onClick={reservation}
+            >
+              예약하기
+            </Button>
           </Box>
         </Box>
         <Box

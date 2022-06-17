@@ -12,7 +12,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import { GetVisitor } from "../../APIs/VisitorAPI";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
