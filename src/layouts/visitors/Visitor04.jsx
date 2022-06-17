@@ -31,46 +31,26 @@ const commonStyles = {
 };
 
 export default function Visitor04() {
-  const [visitors, setVisitors] = useState(null);
+  const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {
-    console.log("fff");
     GetVisitor();
   }, []);
 
-  const sendRequest = async () => {
-    await axios
-      .get(
-        "/visitormanager?visitor_id=VT7157&visitor_name=김민구&site_id=01f0ea04-6040-47d8-a756-f1b08d855096",
-        { headers: { login_token: "98A047DF-0C2D-402D-8397-86AC011D09A8" } }
-      )
-      .then(function (response) {
-        if (response.data["visitors"][0] != null) {
-          setVisitors(response.data["visitors"][0]);
-          return response.data["visitors"][0];
-        } else {
-          return null;
-        }
-      });
+  var config = {
+    method: "get",
+    url: "/visitor?site_id=1&manager_id=WT0000000000&visitor_id=WT0000000061",
+    headers: {},
   };
 
-  const GetVisitor = async () => {
-    await axios
-      .get(
-        "/visitor?visitor_id=VT7148&site_id=01f0ea04-6040-47d8-a756-f1b08d855096",
-        { headers: { login_token: "319A1998-3BE8-47DD-A118-E2B387817FA2" } }
-      )
+  const GetVisitor = async () =>
+    await axios(config)
       .then(function (response) {
-        if (response.data["visitors"][0] != null) {
-          setVisitors(response.data["visitors"][0]);
-          console.log(visitors);
-          return;
-        } else {
-          console.log("ttt");
-          return null;
-        }
+        setVisitors(response.data["visitors"][0]);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-  };
 
   return (
     <Box
@@ -249,6 +229,7 @@ export default function Visitor04() {
               gridRow: "3",
             }}
             variant="filled"
+            value={visitors.telephone}
           />
           <TextField
             sx={{
@@ -256,6 +237,7 @@ export default function Visitor04() {
               gridRow: "4",
             }}
             variant="filled"
+            value={visitors.comapny_name}
           />
           <TextField
             sx={{
@@ -263,6 +245,7 @@ export default function Visitor04() {
               gridRow: "5",
             }}
             variant="filled"
+            value={visitors.visitor_name}
           />
           <TextField
             sx={{
@@ -270,6 +253,7 @@ export default function Visitor04() {
               gridRow: "6",
             }}
             variant="filled"
+            value={visitors.visitor_name}
           />
           <TextField
             sx={{
@@ -277,6 +261,7 @@ export default function Visitor04() {
               gridRow: "7",
             }}
             variant="filled"
+            value={visitors.car_no}
           />
           <TextField
             sx={{
@@ -284,6 +269,7 @@ export default function Visitor04() {
               gridRow: "8",
             }}
             variant="filled"
+            value={visitors.visitor_name}
           />
         </Box>
       </Box>
