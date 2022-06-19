@@ -60,7 +60,6 @@ export default function Visitor02() {
       <Box
         sx={{
           gridRow: "1",
-          bgcolor: "yellow",
           borderRadius: 3,
           boxShadow: 3,
           p: 2,
@@ -216,7 +215,6 @@ export default function Visitor02() {
       <Box
         sx={{
           gridRow: "4",
-          bgcolor: "orange",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",

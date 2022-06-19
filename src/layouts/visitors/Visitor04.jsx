@@ -67,7 +67,6 @@ export default function Visitor04() {
       <Box
         sx={{
           gridRow: "1",
-          bgcolor: "yellow",
           borderRadius: 3,
           boxShadow: 3,
           p: 2,
@@ -127,7 +126,7 @@ export default function Visitor04() {
               justifyContent: "center",
             }}
           >
-            방문자 성명
+            성명
           </Typography>
           <Typography
             sx={{
@@ -275,7 +274,6 @@ export default function Visitor04() {
       <Box
         sx={{
           gridRow: "3",
-          bgcolor: "orange",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",

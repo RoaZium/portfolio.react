@@ -42,7 +42,7 @@ export default function Visitor03() {
 
   const reservation = () => {
     PostVisitor();
-    // navigate("/Visitor04");
+    navigate("/Visitor04");
   };
 
   var data = JSON.stringify({
@@ -105,7 +105,6 @@ export default function Visitor03() {
         <Box
           sx={{
             gridRow: "1",
-            bgcolor: "yellow",
             borderRadius: 3,
             boxShadow: 3,
             p: 2,
@@ -128,13 +127,11 @@ export default function Visitor03() {
         <Box
           sx={{
             gridRow: "2",
-            bgcolor: "transparent",
             borderRadius: 3,
             boxShadow: 3,
             p: 2,
             display: "grid",
-            gridAutoRows: "30px 5px 40px",
-            gridTemplateColumns: "1",
+            gridAutoRows: "30px 5px auto",
             gridTemplateRows: "3",
           }}
         >
@@ -156,150 +153,120 @@ export default function Visitor03() {
               marginRight: -2,
             }}
           />
-          <Box
+          <Grid
+            container
+            spacing={3}
             sx={{
               gridRow: "3",
-              alignContent: "stretch",
-              bgcolor: "transparent",
-              display: "grid",
-              gridTemplateColumns: "2",
-              gridTemplateRows: "5",
-              gap: 3,
+              display: "flex",
             }}
           >
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "1",
-              }}
-              label="방문자 성명"
-              value={visitorName}
-              variant="filled"
-              onChange={(event) => setVisitorName(event.target.value)}
-            />
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "2",
-              }}
-              label="연락처"
-              value={telephone}
-              variant="filled"
-              onChange={(event) => setTelephone(event.target.value)}
-            />
             <Grid
+              item
               container
-              spacing={1}
+              xs={6}
               sx={{
-                gridColumn: "1",
-                gridrow: "3",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              <Grid item display="flex">
-                <Typography
-                  sx={{
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  방문기간
-                </Typography>
-              </Grid>
-              <Grid item>
-                <DateTimePicker
-                  label="시작일"
-                  value={value}
-                  onChange={handleChange}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </Grid>
-              <Grid item display="flex">
-                <Typography
-                  sx={{
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  ~
-                </Typography>
-              </Grid>
-              <Grid item>
-                <DateTimePicker
-                  label="종료일"
-                  value={value}
-                  onChange={handleChange}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </Grid>
+              <TextField
+                label="성명"
+                value={visitorName}
+                variant="filled"
+                onChange={(event) => setVisitorName(event.target.value)}
+                sx={{
+                  marginBottom: 2,
+                }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="연락처"
+                value={telephone}
+                variant="filled"
+                onChange={(event) => setTelephone(event.target.value)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="회사명"
+                value={comapnyName}
+                variant="filled"
+                onChange={(event) => setComapnyName(event.target.value)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="차량번호"
+                value={carNo}
+                variant="filled"
+                onChange={(event) => setCarNo(event.target.value)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="이메일"
+                value={email}
+                variant="filled"
+                onChange={(event) => setEmail(event.target.value)}
+              />
             </Grid>
-            <TextField
+            <Grid
+              item
+              container
+              xs={6}
               sx={{
-                gridColumn: "1",
-                gridRow: "4",
+                flexDirection: "column",
               }}
-              label="차량번호"
-              value={carNo}
-              variant="filled"
-              onChange={(event) => setCarNo(event.target.value)}
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "1",
-              }}
-              label="이메일"
-              value={email}
-              variant="filled"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "2",
-              }}
-              label="회사명"
-              value={comapnyName}
-              variant="filled"
-              onChange={(event) => setComapnyName(event.target.value)}
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "3",
-              }}
-              label="방문목적"
-              value={purpose}
-              variant="filled"
-              onChange={(event) => setPurpose(event.target.value)}
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "4",
-              }}
-              label="피방문자 성명"
-              value={visitorName}
-              variant="filled"
-              onChange={(event) => setVisitorName(event.target.value)}
-            />
-            <Button
-              sx={{
-                gridColumn: "2",
-                gridRow: "5",
-              }}
-              variant="contained"
-              onClick={reservation}
             >
-              예약하기
-            </Button>
-          </Box>
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="방문목적"
+                value={purpose}
+                variant="filled"
+                onChange={(event) => setPurpose(event.target.value)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 성명"
+                value={visitorName}
+                variant="filled"
+                onChange={(event) => setVisitorName(event.target.value)}
+              />
+              <DateTimePicker
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="방문 시작일"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+              <DateTimePicker
+                label="방문 종료일"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+            </Grid>
+          </Grid>
         </Box>
         <Box
           sx={{
             gridRow: "3",
-            bgcolor: "orange",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -318,11 +285,9 @@ export default function Visitor03() {
           </Grid>
           <Grid item sm={6}>
             <Box p={2} textAlign="center">
-              <Link to="/Visitor04" style={{ textDecoration: "none" }}>
-                <Button variant="contained" fullWidth>
-                  다음 페이지
-                </Button>
-              </Link>
+              <Button variant="contained" onClick={reservation}>
+                예약 하기
+              </Button>
             </Box>
           </Grid>
         </Box>
