@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -31,25 +31,30 @@ const commonStyles = {
 };
 
 export default function ReservationConfirm() {
+  const navigate = useNavigate();
   const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {
+    console.log(globalVariable["visitorID"]);
+    if (
+      globalVariable["visitorID"] === undefined ||
+      globalVariable["visitorID"] === null
+    ) {
+      navigate("/");
+    }
     GetVisitor();
   }, []);
 
   var config = {
     method: "get",
-    url: `/visitor?site_id=1&manager_id=WT0000000000&visitor_id=${globalVariable["visitorID"]}`,
+    url: `/visitor?site_id=${globalVariable["siteID"]}&manager_id=WT0000000000&visitor_id=${globalVariable["visitorID"]}`,
     headers: {},
   };
 
   const GetVisitor = async () =>
     await axios(config)
       .then(function (response) {
-        console.log("예약확인: ", globalVariable["visitorID"]);
-        console.log(config.url);
-        console.log(response.data["visitors"][0]);
         setVisitors(response.data["visitors"][0]);
       })
       .catch(function (error) {
@@ -224,7 +229,7 @@ export default function ReservationConfirm() {
               gridRow: "2",
             }}
             variant="filled"
-            value={visitors.visitor_name}
+            value={visitors.visitor_id}
           />
           <TextField
             sx={{

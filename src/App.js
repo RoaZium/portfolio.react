@@ -3,14 +3,14 @@ import React, { useState } from "react";
 
 export const AppOpenContext = React.createContext(false);
 export const SelectedVisitorInfoContext = React.createContext([]);
-export const GlobalContext = React.createContext();
+export const GlobalContext = React.createContext([]);
 
 const App = () => {
   const [globalVariable, setGlobalVariable] = useState({
     appOpen: true,
     agreePrivacy: false,
-    visitorID: "1111",
-    // visitor: [{ visitorID: "TT" }],
+    siteID: "00000000-0000-0000-0000-000000000000",
+    visitorID: null,
   });
   const [appOpen, setAppOpen] = useState(false);
   const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);

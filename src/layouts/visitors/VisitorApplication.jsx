@@ -13,13 +13,13 @@ import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { GlobalContext } from "../../App";
+import { AppOpenContext, GlobalContext } from "../../App";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
 export default function VisitorApplication() {
   const navigate = useNavigate();
-  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
+  var { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [visitorName, setVisitorName] = React.useState();
   const [comapnyName, setComapnyName] = React.useState();
   const [email, setEmail] = React.useState();
@@ -31,9 +31,11 @@ export default function VisitorApplication() {
     new Date().toLocaleDateString()
   );
   const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
+  var { appOpen, setAppOpen } = React.useContext(AppOpenContext);
 
   useEffect(() => {
     if (globalVariable["agreePrivacy"] === false) {
+      console.log(globalVariable["agreePrivacy"]);
       navigate("/AgreePrivacy");
     }
   }, []);
@@ -100,10 +102,8 @@ export default function VisitorApplication() {
   const PostVisitor = async () => {
     axios(config)
       .then(function (response) {
-        setGlobalVariable(JSON.stringify(response.data["visitor_id"]));
-        console.log("ID: ", JSON.stringify(response.data["visitor_id"]));
-        console.log(JSON.stringify(response.data));
-        // navigate("/ReservationConfirm");
+        globalVariable["visitorID"] = response.data["visitor_id"];
+        navigate("/ReservationConfirm");
       })
       .catch(function (error) {
         console.log(error);
