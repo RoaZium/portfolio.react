@@ -29,7 +29,7 @@ const commonStyles = {
   borderColor: "text.primary",
 };
 
-export default function Visitor04() {
+export default function ReservationConfirm() {
   const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {

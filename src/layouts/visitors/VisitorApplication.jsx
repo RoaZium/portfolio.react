@@ -31,7 +31,9 @@ export default function VisitorApplication() {
   );
   const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("tt");
+  }, []);
 
   const reservVisitor = () => {
     if (visitorName === undefined || visitorName === null) {
@@ -57,7 +59,7 @@ export default function VisitorApplication() {
     console.log("종료", visitTo);
     console.log("시작", visitFrom);
     PostVisitor();
-    // navigate("/Visitor04");
+    navigate("/ReservationConfirm");
   };
 
   var data = JSON.stringify({
