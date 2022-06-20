@@ -16,8 +16,7 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
-export default function Visitor03() {
-  const [value, setValue] = React.useState(new Date());
+export default function VisitorApplication() {
   const navigate = useNavigate();
 
   const [visitorName, setVisitorName] = React.useState();
@@ -26,44 +25,60 @@ export default function Visitor03() {
   const [carNo, setCarNo] = React.useState();
   const [telephone, setTelephone] = React.useState();
   const [purpose, setPurpose] = React.useState();
-  const [managerID, setManagerID] = React.useState();
-  const [visitFrom, setVisitFrom] = React.useState();
-  const [visitTo, setVisitTo] = React.useState();
-  const [agreePrivacy, setAgreePrivacy] = React.useState();
-  const [visitApproval, setVisitApproval] = React.useState();
+  const [managerID, setManagerID] = React.useState("WT0000000000");
+  const [visitFrom, setVisitFrom] = React.useState(
+    new Date().toLocaleDateString()
+  );
+  const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
 
-  useEffect(() => {
+  useEffect(() => {}, []);
+
+  const reservVisitor = () => {
+    if (visitorName === undefined || visitorName === null) {
+      alert("방문자 성명을 입력하세요.");
+      return;
+    }
+
+    if (telephone === undefined || telephone === null) {
+      alert("연락처를 입력하세요.");
+      return;
+    }
+
+    if (visitFrom === undefined || visitFrom === null) {
+      alert("방문 시작일을 입력하세요.");
+      return;
+    }
+
+    if (visitTo === undefined || visitTo === null) {
+      alert("방문 종료일을 입력하세요.");
+      return;
+    }
+
+    console.log("종료", visitTo);
+    console.log("시작", visitFrom);
     PostVisitor();
-  }, []);
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  const reservation = () => {
-    PostVisitor();
-    navigate("/Visitor04");
+    // navigate("/Visitor04");
   };
 
   var data = JSON.stringify({
     site_id: "1",
-    visitor_name: { visitorName },
+    visitor_name: visitorName,
     gender: "",
     address: "",
-    company_name: { comapnyName },
+    company_name: comapnyName,
     job_position: "",
     job_title: "",
-    email: { email },
-    car_no: { carNo },
-    telephone: { telephone },
+    email: email,
+    car_no: carNo,
+    telephone: telephone,
     picture: "",
     birthday: "",
     vip: "",
-    purpose: { purpose },
-    manager_id: "WT0000000000",
-    visit_from: "2022-01-01 00:00:00",
-    visit_to: "2022-01-01 23:59:59",
-    agree_privacy: "",
+    purpose: purpose,
+    manager_id: managerID,
+    visit_from: visitFrom,
+    visit_to: visitTo,
+    agree_privacy: true,
     sign_image: "",
     access_permission: "",
     visit_approval: "",
@@ -238,25 +253,24 @@ export default function Visitor03() {
                   marginBottom: 2,
                 }}
                 label="피방문자 성명"
-                value={visitorName}
+                value={managerID}
                 variant="filled"
-                onChange={(event) => setVisitorName(event.target.value)}
+                onChange={(newValue) => setManagerID(newValue)}
               />
               <DateTimePicker
-                sx={{
-                  marginBottom: 2,
-                }}
                 label="방문 시작일"
-                value={value}
-                onChange={handleChange}
+                value={visitFrom}
+                inputFormat="yyyy-MM-dd HH:mm"
+                onChange={(newValue) => setVisitFrom(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}
               />
               <DateTimePicker
                 label="방문 종료일"
-                value={value}
-                onChange={handleChange}
+                value={visitTo}
+                inputFormat="yyyy-MM-dd HH:mm"
+                onChange={(newValue) => setVisitTo(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}
@@ -285,7 +299,7 @@ export default function Visitor03() {
           </Grid>
           <Grid item sm={6}>
             <Box p={2} textAlign="center">
-              <Button variant="contained" onClick={reservation}>
+              <Button variant="contained" onClick={reservVisitor}>
                 예약 하기
               </Button>
             </Box>

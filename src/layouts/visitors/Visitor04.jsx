@@ -283,7 +283,7 @@ export default function Visitor04() {
       >
         <Grid item sm={6}>
           <Box p={2} textAlign="center">
-            <Link to="/Visitor03" style={{ textDecoration: "none" }}>
+            <Link to="/VisitorApplication" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
                 이전 페이지
               </Button>

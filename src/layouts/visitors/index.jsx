@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Route, Routes } from "react-router-dom";
 import Visitor01 from "./Visitor01";
 import Visitor02 from "./Visitor02";
-import Visitor03 from "./Visitor03";
+import Visitor03 from "./VisitorApplication";
 import Visitor04 from "./Visitor04";
 import { Container } from "@mui/material";
 import CI from "../../assets/images/CI.png";

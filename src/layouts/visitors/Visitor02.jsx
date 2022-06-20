@@ -39,7 +39,7 @@ export default function Visitor02() {
       return;
     }
 
-    navigate("/Visitor03");
+    navigate("/VisitorApplication");
   };
 
   // const Valid
