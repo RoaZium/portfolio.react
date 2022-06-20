@@ -4,20 +4,27 @@ import React, { useState } from "react";
 
 export const AppOpenContext = React.createContext(false);
 export const SelectedVisitorInfoContext = React.createContext([]);
+export const GlobalContext = React.createContext([]);
 
 const App = () => {
+  const [globalVariable, setGlobalVariable] = useState({
+    appOpen: true,
+    visitor: [{ visitorID: "TT", agreePrivacy: false }],
+  });
   const [appOpen, setAppOpen] = useState(false);
   const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);
 
   return (
-    <AppOpenContext.Provider value={{ appOpen, setAppOpen }}>
-      <SelectedVisitorInfoContext.Provider
-        value={{ selectedVisitorInfo, setSelectedVisitorInfo }}
-      >
-        <Visitor />
-        {/* <Admin /> */}
-      </SelectedVisitorInfoContext.Provider>
-    </AppOpenContext.Provider>
+    <GlobalContext.Provider value={{ globalVariable, setGlobalVariable }}>
+      <AppOpenContext.Provider value={{ appOpen, setAppOpen }}>
+        <SelectedVisitorInfoContext.Provider
+          value={{ selectedVisitorInfo, setSelectedVisitorInfo }}
+        >
+          <Visitor />
+          {/* <Admin /> */}
+        </SelectedVisitorInfoContext.Provider>
+      </AppOpenContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 

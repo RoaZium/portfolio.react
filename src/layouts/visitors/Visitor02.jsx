@@ -12,6 +12,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Divider } from "@mui/material";
 import React from "react";
+import { GlobalContext } from "../../App";
 
 const MyButton = styled(Button)({
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -25,6 +26,7 @@ const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입�
 
 export default function Visitor02() {
   const navigate = useNavigate();
+  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [privateAssignFlag, setPrivateAssignFlag] = React.useState(false);
   const [policyAssignFlag, setPolicyAssignFlag] = React.useState(false);
 
@@ -39,10 +41,12 @@ export default function Visitor02() {
       return;
     }
 
-    navigate("/VisitorApplication");
+    // console.log(globalVariable["visitor"][0].agreePrivacy);
+    console.log(globalVariable["appOpen"]);
+    globalVariable["appOpen"] = !globalVariable["appOpen"];
+    console.log("App: ", globalVariable["appOpen"]);
+    // navigate("/VisitorApplication");
   };
-
-  // const Valid
 
   return (
     <Box

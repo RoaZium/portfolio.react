@@ -102,6 +102,7 @@ export default function VisitorDetailManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
+  
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
