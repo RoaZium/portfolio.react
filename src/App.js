@@ -9,7 +9,8 @@ const App = () => {
   const [globalVariable, setGlobalVariable] = useState({
     appOpen: true,
     agreePrivacy: false,
-    visitor: [{ visitorID: "TT" }],
+    visitorID: "1111",
+    // visitor: [{ visitorID: "TT" }],
   });
   const [appOpen, setAppOpen] = useState(false);
   const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);

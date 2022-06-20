@@ -9,9 +9,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Divider from "@mui/material/Divider";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
+import { GlobalContext } from "../../App";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
@@ -30,6 +31,7 @@ const commonStyles = {
 };
 
 export default function ReservationConfirm() {
+  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {
@@ -38,13 +40,16 @@ export default function ReservationConfirm() {
 
   var config = {
     method: "get",
-    url: "/visitor?site_id=1&manager_id=WT0000000000&visitor_id=WT0000000061",
+    url: `/visitor?site_id=1&manager_id=WT0000000000&visitor_id=${globalVariable["visitorID"]}`,
     headers: {},
   };
 
   const GetVisitor = async () =>
     await axios(config)
       .then(function (response) {
+        console.log("예약확인: ", globalVariable["visitorID"]);
+        console.log(config.url);
+        console.log(response.data["visitors"][0]);
         setVisitors(response.data["visitors"][0]);
       })
       .catch(function (error) {

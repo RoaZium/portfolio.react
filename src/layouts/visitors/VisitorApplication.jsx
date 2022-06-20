@@ -62,7 +62,6 @@ export default function VisitorApplication() {
     console.log("종료", visitTo);
     console.log("시작", visitFrom);
     PostVisitor();
-    navigate("/ReservationConfirm");
   };
 
   var data = JSON.stringify({
@@ -101,7 +100,10 @@ export default function VisitorApplication() {
   const PostVisitor = async () => {
     axios(config)
       .then(function (response) {
+        setGlobalVariable(JSON.stringify(response.data["visitor_id"]));
+        console.log("ID: ", JSON.stringify(response.data["visitor_id"]));
         console.log(JSON.stringify(response.data));
+        // navigate("/ReservationConfirm");
       })
       .catch(function (error) {
         console.log(error);
