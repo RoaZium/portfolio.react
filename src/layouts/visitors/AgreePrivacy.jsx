@@ -24,7 +24,7 @@ const MyButton = styled(Button)({
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
-export default function Visitor02() {
+export default function AgreePrivacy() {
   const navigate = useNavigate();
   const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [privateAssignFlag, setPrivateAssignFlag] = React.useState(false);
@@ -225,7 +225,7 @@ export default function Visitor02() {
       >
         <Grid item xs={6}>
           <Box p={2}>
-            <Link to="/Visitor01" style={{ textDecoration: "none" }}>
+            <Link to="/Home" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
                 이전 페이지
               </Button>

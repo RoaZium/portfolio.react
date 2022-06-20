@@ -15,7 +15,7 @@ const buttonStyle = {
   textAlign: "top",
 };
 
-export default function Visitor01() {
+export default function Home() {
   return (
     <Box
       display="flex"
@@ -34,7 +34,7 @@ export default function Visitor01() {
           container
           justifyContent="right"
         >
-          <Link to="/Visitor02" style={{ textDecoration: "none" }}>
+          <Link to="/AgreePrivacy" style={{ textDecoration: "none" }}>
             <Button sx={buttonStyle} variant="contained">
               방문자 예약 신청
               <AssignmentIndIcon
