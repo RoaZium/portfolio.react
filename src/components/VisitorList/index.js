@@ -107,7 +107,7 @@ export default function VisitorList() {
   );
 
   const RowDoubleClick = () => {
-    navigate("/VisitorDetail");
+    navigate("/VisitorDetailManagement");
   };
 
   const DeleteSelectedVisitor = () => {

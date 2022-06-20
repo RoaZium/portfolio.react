@@ -296,7 +296,7 @@ export default function VisitorInfo() {
             <Grid container>
               <Grid item sm={6}>
                 <Box pr={1.5} textAlign="center">
-                  <Link to="/Visitor" style={{ textDecoration: "none" }}>
+                  <Link to="/VisitorManagement" style={{ textDecoration: "none" }}>
                     <Button variant="contained" fullWidth>
                       취소
                     </Button>
@@ -305,7 +305,7 @@ export default function VisitorInfo() {
               </Grid>
               <Grid item sm={6}>
                 <Box pl={1.5} textAlign="center">
-                  <Link to="/Visitor" style={{ textDecoration: "none" }}>
+                  <Link to="/VisitorManagement" style={{ textDecoration: "none" }}>
                     <Button variant="contained" fullWidth>
                       완료
                     </Button>
