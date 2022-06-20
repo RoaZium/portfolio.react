@@ -41,11 +41,8 @@ export default function Visitor02() {
       return;
     }
 
-    // console.log(globalVariable["visitor"][0].agreePrivacy);
-    console.log(globalVariable["appOpen"]);
-    globalVariable["appOpen"] = !globalVariable["appOpen"];
-    console.log("App: ", globalVariable["appOpen"]);
-    // navigate("/VisitorApplication");
+    setGlobalVariable((globalVariable["appOpen"] = true));
+    navigate("/VisitorApplication");
   };
 
   return (

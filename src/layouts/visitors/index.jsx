@@ -5,13 +5,17 @@ import Typography from "@mui/material/Typography";
 import { Route, Routes } from "react-router-dom";
 import Visitor01 from "./Visitor01";
 import Visitor02 from "./Visitor02";
-import Visitor03 from "./VisitorApplication";
-import Visitor04 from "./ReservationConfirm";
+import VisitorApplication from "./VisitorApplication";
+import ReservationConfirm from "./ReservationConfirm";
 import { Container } from "@mui/material";
 import CI from "../../assets/images/CI.png";
 import Grid from "@mui/material/Grid";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../assets/theme";
+import Login from "../admins/Login";
+import VisitorManagement from "../admins/VisitorManagement";
+import VisitorDetailManagement from "../admins/VisitorDetailManagement";
+import AdminManagement from "../admins/AdminManagement";
 
 export default function Main() {
   return (
@@ -54,8 +58,24 @@ export default function Main() {
               <Route path="/" element={<Visitor01 />} />
               <Route path="/Visitor01" element={<Visitor01 />} />
               <Route path="/Visitor02" element={<Visitor02 />} />
-              <Route path="/Visitor03" element={<Visitor03 />} />
-              <Route path="/Visitor04" element={<Visitor04 />} />
+              <Route
+                path="/VisitorApplication"
+                element={<VisitorApplication />}
+              />
+              <Route
+                path="/ReservationConfirm"
+                element={<ReservationConfirm />}
+              />
+              <Route path="/Login" element={<Login />} />
+              <Route
+                path="/VisitorManagement"
+                element={<VisitorManagement />}
+              />
+              <Route
+                path="/VisitorDetailManagement"
+                element={<VisitorDetailManagement />}
+              />
+              <Route path="/AdminManagement" element={<AdminManagement />} />
             </Routes>
           </Box>
         </Container>

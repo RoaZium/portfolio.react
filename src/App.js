@@ -1,5 +1,4 @@
 import Visitor from "./layouts/visitors";
-import Admin from "./layouts/admins/index";
 import React, { useState } from "react";
 
 export const AppOpenContext = React.createContext(false);
@@ -21,7 +20,6 @@ const App = () => {
           value={{ selectedVisitorInfo, setSelectedVisitorInfo }}
         >
           <Visitor />
-          {/* <Admin /> */}
         </SelectedVisitorInfoContext.Provider>
       </AppOpenContext.Provider>
     </GlobalContext.Provider>
