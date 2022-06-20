@@ -113,7 +113,7 @@ export default function VisitorDetailManagement() {
   };
 
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="inherit" to="/Visitor">
+    <Link underline="hover" key="1" color="inherit" to="/VisitorManagement">
       방문자 관리
     </Link>,
     <Typography variant="h6" fontWeight="bold" key="3" color="text.primary">
@@ -192,7 +192,7 @@ export default function VisitorDetailManagement() {
           </IconButton>
         </DrawerHeader>
         <List>
-          <ListItemButton component={Link} to="/Visitor">
+          <ListItemButton component={Link} to="/VisitorManagement">
             <ListItemIcon>
               <PersonAddAlt1 />
             </ListItemIcon>

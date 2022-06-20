@@ -179,7 +179,7 @@ export default function AdminManagement() {
           </IconButton>
         </DrawerHeader>
         <List>
-          <ListItemButton component={Link} to="/Visitor">
+          <ListItemButton component={Link} to="/VisitorManagement">
             <ListItemIcon>
               <PersonAddAlt1 />
             </ListItemIcon>
@@ -191,7 +191,7 @@ export default function AdminManagement() {
               방문자 관리
             </ListItemText>
           </ListItemButton>
-          <ListItemButton component={Link} to="/Admin">
+          <ListItemButton component={Link} to="/AdminManagement">
             <ListItemIcon>
               <AccountBox />
             </ListItemIcon>

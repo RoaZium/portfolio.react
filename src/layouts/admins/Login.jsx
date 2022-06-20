@@ -123,7 +123,7 @@ export default function Login() {
             justifyContent="center"
           >
             <Box>
-              <Link to="/Visitor" style={{ textDecoration: "none" }}>
+              <Link to="/VisitorManagement" style={{ textDecoration: "none" }}>
                 <Button
                   variant="contained"
                   sx={{
