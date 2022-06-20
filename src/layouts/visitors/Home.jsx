@@ -57,7 +57,7 @@ export default function Home() {
           container
           justifyContent="left"
         >
-          <Link to="/Visitor04" style={{ textDecoration: "none" }}>
+          <Link to="/ReservationConfirm" style={{ textDecoration: "none" }}>
             <Button sx={buttonStyle} variant="contained">
               방문자 예약 조회
               <AssignmentIndIcon

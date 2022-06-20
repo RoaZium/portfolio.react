@@ -32,6 +32,7 @@ export default function AgreePrivacy() {
 
   useEffect(() => {
     globalVariable["agreePrivacy"] = false;
+    localStorage.setItem("visitorID", "");
   }, []);
 
   const ValidAssign = () => {
