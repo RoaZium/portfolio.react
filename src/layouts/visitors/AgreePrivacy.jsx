@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Divider } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { GlobalContext } from "../../App";
 
 const MyButton = styled(Button)({
@@ -30,6 +30,11 @@ export default function AgreePrivacy() {
   const [privateAssignFlag, setPrivateAssignFlag] = React.useState(false);
   const [policyAssignFlag, setPolicyAssignFlag] = React.useState(false);
 
+  useEffect(() => {
+    globalVariable["appOpen"] = false;
+    console.log("App: ", globalVariable["appOpen"]);
+  }, []);
+
   const ValidAssign = () => {
     if (privateAssignFlag === false) {
       alert("개인정보 수집, 이용, 제공 동의가 필요합니다.");
@@ -41,7 +46,8 @@ export default function AgreePrivacy() {
       return;
     }
 
-    setGlobalVariable((globalVariable["appOpen"] = true));
+    console.log("App: ", globalVariable["appOpen"]);
+    globalVariable["appOpen"] = true;
     navigate("/VisitorApplication");
   };
 

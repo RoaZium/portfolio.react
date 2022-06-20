@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export const AppOpenContext = React.createContext(false);
 export const SelectedVisitorInfoContext = React.createContext([]);
-export const GlobalContext = React.createContext([]);
+export const GlobalContext = React.createContext();
 
 const App = () => {
   const [globalVariable, setGlobalVariable] = useState({

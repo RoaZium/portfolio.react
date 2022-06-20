@@ -13,12 +13,13 @@ import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { GlobalContext } from "../../App";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
 export default function VisitorApplication() {
   const navigate = useNavigate();
-
+  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
   const [visitorName, setVisitorName] = React.useState();
   const [comapnyName, setComapnyName] = React.useState();
   const [email, setEmail] = React.useState();
@@ -32,7 +33,9 @@ export default function VisitorApplication() {
   const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
 
   useEffect(() => {
-    console.log("tt");
+    if (globalVariable["appOpen"] === false) {
+      navigate("/AgreePrivacy");
+    }
   }, []);
 
   const reservVisitor = () => {
