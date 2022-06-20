@@ -31,8 +31,7 @@ export default function AgreePrivacy() {
   const [policyAssignFlag, setPolicyAssignFlag] = React.useState(false);
 
   useEffect(() => {
-    globalVariable["appOpen"] = false;
-    console.log("App: ", globalVariable["appOpen"]);
+    globalVariable["agreePrivacy"] = false;
   }, []);
 
   const ValidAssign = () => {
@@ -46,8 +45,7 @@ export default function AgreePrivacy() {
       return;
     }
 
-    console.log("App: ", globalVariable["appOpen"]);
-    globalVariable["appOpen"] = true;
+    globalVariable["agreePrivacy"] = true;
     navigate("/VisitorApplication");
   };
 
@@ -231,7 +229,7 @@ export default function AgreePrivacy() {
       >
         <Grid item xs={6}>
           <Box p={2}>
-            <Link to="/Home" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Button variant="contained" fullWidth>
                 이전 페이지
               </Button>

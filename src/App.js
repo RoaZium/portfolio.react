@@ -8,7 +8,8 @@ export const GlobalContext = React.createContext();
 const App = () => {
   const [globalVariable, setGlobalVariable] = useState({
     appOpen: true,
-    visitor: [{ visitorID: "TT", agreePrivacy: false }],
+    agreePrivacy: false,
+    visitor: [{ visitorID: "TT" }],
   });
   const [appOpen, setAppOpen] = useState(false);
   const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);

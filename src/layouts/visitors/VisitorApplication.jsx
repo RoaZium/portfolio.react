@@ -33,7 +33,7 @@ export default function VisitorApplication() {
   const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
 
   useEffect(() => {
-    if (globalVariable["appOpen"] === false) {
+    if (globalVariable["agreePrivacy"] === false) {
       navigate("/AgreePrivacy");
     }
   }, []);
