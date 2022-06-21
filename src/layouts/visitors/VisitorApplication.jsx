@@ -330,7 +330,6 @@ export default function VisitorApplication() {
                 label="피방문자 성명"
                 value={managerID}
                 variant="filled"
-                InputLabelProps={{ shrink: true }}
                 onChange={(newValue) => setManagerID(newValue)}
               />
               <TextField
@@ -340,7 +339,6 @@ export default function VisitorApplication() {
                 label="피방문자 부서"
                 value={managerID}
                 variant="filled"
-                InputLabelProps={{ shrink: true }}
                 onChange={(newValue) => setManagerID(newValue)}
               />
             </Grid>

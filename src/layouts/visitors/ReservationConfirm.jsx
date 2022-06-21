@@ -60,9 +60,9 @@ export default function ReservationConfirm() {
           height: "760px",
           bgcolor: "transparent",
           display: "grid",
-          gridAutoRows: "80px auto 70px",
+          gridAutoRows: "80px auto auto 70px",
           gridTemplateColumns: "1",
-          gridTemplateRows: "3",
+          gridTemplateRows: "4",
           gap: 1,
         }}
       >
@@ -91,19 +91,156 @@ export default function ReservationConfirm() {
         <Box
           sx={{
             gridRow: "2",
-            bgcolor: "transparent",
             borderRadius: 3,
             boxShadow: 3,
             p: 2,
+            display: "grid",
+            gridAutoRows: "30px 5px auto",
+            gridTemplateRows: "3",
           }}
         >
-          <Typography bgcolor="transparent" fontWeight="bold" fontSize={20}>
-            방문자 예약 정보
+          <Typography
+            bgcolor="transparent"
+            fontWeight="bold"
+            fontSize={20}
+            sx={{
+              gridRow: "1",
+            }}
+          >
+            방문자 정보
           </Typography>
           <Divider
             sx={{
-              marginTop: 1,
-              marginBottom: 3,
+              gridRow: "2",
+              marginBottom: 2,
+              marginLeft: -2,
+              marginRight: -2,
+            }}
+          />
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              gridRow: "3",
+              display: "flex",
+            }}
+          >
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                label="성명"
+                value={visitors.visitor_name}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+                sx={{
+                  marginBottom: 2,
+                }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="회사명"
+                value={visitors.comapny_name}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="이메일"
+                value={visitors.email}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+              />
+              <DateTimePicker
+                label="방문 시작일"
+                value={visitors.visit_from}
+                inputFormat="yyyy-MM-dd HH:mm"
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="연락처"
+                value={visitors.telephone}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="방문목적"
+                value={visitors.purpose}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="차량번호"
+                value={visitors.car_no}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+              />
+              <DateTimePicker
+                label="방문 종료일"
+                value={visitors.visit_to}
+                inputFormat="yyyy-MM-dd HH:mm"
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+        <Box
+          sx={{
+            gridRow: "3",
+            borderRadius: 3,
+            boxShadow: 3,
+            p: 2,
+            display: "grid",
+            gridAutoRows: "30px 5px auto",
+            gridTemplateRows: "3",
+          }}
+        >
+          <Typography
+            bgcolor="transparent"
+            fontWeight="bold"
+            fontSize={20}
+            sx={{
+              gridRow: "1",
+            }}
+          >
+            피방문자 정보
+          </Typography>
+          <Divider
+            sx={{
+              gridRow: "2",
+              marginBottom: 2,
               marginLeft: -2,
               marginRight: -2,
             }}
@@ -129,8 +266,8 @@ export default function ReservationConfirm() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="성명"
-                value={visitors.visitor_name}
+                label="피방문자 성명"
+                value={visitors.manager_id}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
@@ -138,35 +275,8 @@ export default function ReservationConfirm() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="연락처"
-                value={visitors.telephone}
-                variant="filled"
-                InputLabelProps={{ shrink: true }}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="회사명"
-                value={visitors.comapny_name}
-                variant="filled"
-                InputLabelProps={{ shrink: true }}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="차량번호"
-                value={visitors.car_no}
-                variant="filled"
-                InputLabelProps={{ shrink: true }}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="이메일"
-                value={visitors.email}
+                label="피방문자 부서"
+                value={visitors.manager_id}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
@@ -183,42 +293,17 @@ export default function ReservationConfirm() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="방문목적"
-                value={visitors.purpose}
-                variant="filled"
-                InputLabelProps={{ shrink: true }}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="피방문자 성명"
+                label="피방문자 연락처"
                 value={visitors.manager_id}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
-              />
-              <DateTimePicker
-                label="방문 시작일"
-                value={visitors.visit_from}
-                inputFormat="yyyy-MM-dd HH:mm"
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ marginBottom: 2 }} />
-                )}
-              />
-              <DateTimePicker
-                label="방문 종료일"
-                value={visitors.visit_to}
-                inputFormat="yyyy-MM-dd HH:mm"
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ marginBottom: 2 }} />
-                )}
               />
             </Grid>
           </Grid>
         </Box>
         <Box
           sx={{
-            gridRow: "3",
+            gridRow: "4",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
