@@ -172,7 +172,7 @@ export default function VisitorManagement() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem component={Link} to="/" onClick={handleClose}>
+              <MenuItem component={Link} to="/Login" onClick={handleClose}>
                 로그아웃
               </MenuItem>
             </Menu>

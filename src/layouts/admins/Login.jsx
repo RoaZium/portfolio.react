@@ -2,6 +2,7 @@ import { AccountCircle, Lock } from "@mui/icons-material";
 import {
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputAdornment,
   OutlinedInput,
@@ -20,6 +21,7 @@ export default function Login() {
   const [id, setID] = useState();
   const [password, setPassword] = useState();
   const [encryptionPassword, setEncryptionPassword] = useState();
+  const [errorPassword, setErrorPassword] = useState("");
 
   const LoginUser = () => {
     if (id === undefined || id === null) {
@@ -58,10 +60,11 @@ export default function Login() {
         var code = JSON.stringify(response.data["code"]);
 
         if (code !== "1") {
-          alert("비밀번호가 틀립니다.");
+          setErrorPassword("비밀번호가 틀립니다.");
           return;
         }
 
+        setErrorPassword("");
         navigate("/VisitorManagement");
       })
       .catch(function (error) {
@@ -70,6 +73,7 @@ export default function Login() {
   };
 
   const handleChange = (prop) => (event) => {
+    setErrorPassword("");
     setPassword(event.target.value);
     setEncryptionPassword(sha512(event.target.value));
   };
@@ -163,6 +167,13 @@ export default function Login() {
             <FormControl variant="standard">
               <OutlinedInput
                 id="input-with-icon-adornment"
+                sx={{
+                  borderRadius: 10,
+                  height: "50px",
+                  width: "350px",
+                  marginLeft: 3,
+                  marginRight: 3,
+                }}
                 startAdornment={
                   <InputAdornment position="start">
                     <Lock />
@@ -171,14 +182,17 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={handleChange("password")}
-                sx={{
-                  borderRadius: 10,
-                  height: "50px",
-                  width: "350px",
-                  marginLeft: 3,
-                  marginRight: 3,
-                }}
+                aria-describedby="component-error-text"
               />
+              <FormHelperText
+                id="component-error-text"
+                sx={{
+                  color: "red",
+                  marginLeft: 5,
+                }}
+              >
+                {errorPassword}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid
