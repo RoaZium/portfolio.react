@@ -18,20 +18,6 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
-const MyThemeComponent = styled("div")(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
-  padding: theme.spacing(1),
-  border: 1,
-  borderRadius: 0,
-  borderColor: "black",
-}));
-
-const commonStyles = {
-  border: 1,
-  borderColor: "text.primary",
-};
-
 export default function ReservationConfirm() {
   const navigate = useNavigate();
   const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
@@ -51,7 +37,9 @@ export default function ReservationConfirm() {
 
   var config = {
     method: "get",
-    url: `/visitor?site_id=${globalVariable["siteID"]}&manager_id=WT0000000000&visitor_id=${globalVariable["visitorID"]}`,
+    url: `/visitor?site_id=${localStorage.getItem(
+      "SiteID"
+    )}&manager_id=WT0000000000&visitor_id=${localStorage.getItem("visitorID")}`,
     headers: {},
   };
 
@@ -138,12 +126,13 @@ export default function ReservationConfirm() {
               }}
             >
               <TextField
-                label="성명"
-                value={visitors.visitor_name}
-                variant="outlined"
                 sx={{
                   marginBottom: 2,
                 }}
+                label="성명"
+                value={visitors.visitor_name}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 sx={{
@@ -151,7 +140,8 @@ export default function ReservationConfirm() {
                 }}
                 label="연락처"
                 value={visitors.telephone}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 sx={{
@@ -159,7 +149,8 @@ export default function ReservationConfirm() {
                 }}
                 label="회사명"
                 value={visitors.comapny_name}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 sx={{
@@ -167,7 +158,8 @@ export default function ReservationConfirm() {
                 }}
                 label="차량번호"
                 value={visitors.car_no}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 sx={{
@@ -175,7 +167,8 @@ export default function ReservationConfirm() {
                 }}
                 label="이메일"
                 value={visitors.email}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
             </Grid>
             <Grid
@@ -192,7 +185,8 @@ export default function ReservationConfirm() {
                 }}
                 label="방문목적"
                 value={visitors.purpose}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 sx={{
@@ -200,7 +194,8 @@ export default function ReservationConfirm() {
                 }}
                 label="피방문자 성명"
                 value={visitors.manager_id}
-                variant="outlined"
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
               />
               <DateTimePicker
                 label="방문 시작일"

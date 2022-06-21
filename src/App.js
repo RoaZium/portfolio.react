@@ -15,6 +15,8 @@ const App = () => {
   const [appOpen, setAppOpen] = useState(false);
   const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);
 
+  localStorage.setItem("SiteID", "00000000-0000-0000-0000-000000000000");
+
   return (
     <GlobalContext.Provider value={{ globalVariable, setGlobalVariable }}>
       <AppOpenContext.Provider value={{ appOpen, setAppOpen }}>

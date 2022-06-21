@@ -103,6 +103,7 @@ export default function VisitorApplication() {
     axios(config)
       .then(function (response) {
         globalVariable["visitorID"] = response.data["visitor_id"];
+        localStorage.setItem("visitorID", response.data["visitor_id"]);
         navigate("/ReservationConfirm");
       })
       .catch(function (error) {
@@ -118,9 +119,9 @@ export default function VisitorApplication() {
           height: "760px",
           bgcolor: "transparent",
           display: "grid",
-          gridAutoRows: "80px auto 70px",
+          gridAutoRows: "80px auto auto 70px",
           gridTemplateColumns: "1",
-          gridTemplateRows: "3",
+          gridTemplateRows: "4",
           gap: 1,
         }}
       >
@@ -205,15 +206,6 @@ export default function VisitorApplication() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="연락처"
-                value={telephone}
-                variant="filled"
-                onChange={(event) => setTelephone(event.target.value)}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
                 label="회사명"
                 value={comapnyName}
                 variant="filled"
@@ -223,19 +215,19 @@ export default function VisitorApplication() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="차량번호"
-                value={carNo}
-                variant="filled"
-                onChange={(event) => setCarNo(event.target.value)}
-              />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
                 label="이메일"
                 value={email}
                 variant="filled"
                 onChange={(event) => setEmail(event.target.value)}
+              />
+              <DateTimePicker
+                label="방문 시작일"
+                value={visitFrom}
+                inputFormat="yyyy-MM-dd HH:mm"
+                onChange={(newValue) => setVisitFrom(newValue)}
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
               />
             </Grid>
             <Grid
@@ -250,6 +242,15 @@ export default function VisitorApplication() {
                 sx={{
                   marginBottom: 2,
                 }}
+                label="연락처"
+                value={telephone}
+                variant="filled"
+                onChange={(event) => setTelephone(event.target.value)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
                 label="방문목적"
                 value={purpose}
                 variant="filled"
@@ -259,19 +260,10 @@ export default function VisitorApplication() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="피방문자 성명"
-                value={managerID}
+                label="차량번호"
+                value={carNo}
                 variant="filled"
-                onChange={(newValue) => setManagerID(newValue)}
-              />
-              <DateTimePicker
-                label="방문 시작일"
-                value={visitFrom}
-                inputFormat="yyyy-MM-dd HH:mm"
-                onChange={(newValue) => setVisitFrom(newValue)}
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ marginBottom: 2 }} />
-                )}
+                onChange={(event) => setCarNo(event.target.value)}
               />
               <DateTimePicker
                 label="방문 종료일"
@@ -288,6 +280,93 @@ export default function VisitorApplication() {
         <Box
           sx={{
             gridRow: "3",
+            borderRadius: 3,
+            boxShadow: 3,
+            p: 2,
+            display: "grid",
+            gridAutoRows: "30px 5px auto",
+            gridTemplateRows: "3",
+          }}
+        >
+          <Typography
+            bgcolor="transparent"
+            fontWeight="bold"
+            fontSize={20}
+            sx={{
+              gridRow: "1",
+            }}
+          >
+            피방문자 정보
+          </Typography>
+          <Divider
+            sx={{
+              gridRow: "2",
+              marginBottom: 2,
+              marginLeft: -2,
+              marginRight: -2,
+            }}
+          />
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              gridRow: "3",
+              display: "flex",
+            }}
+          >
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 성명"
+                value={managerID}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+                onChange={(newValue) => setManagerID(newValue)}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 부서"
+                value={managerID}
+                variant="filled"
+                InputLabelProps={{ shrink: true }}
+                onChange={(newValue) => setManagerID(newValue)}
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 연락처"
+                value={managerID}
+                variant="filled"
+                onChange={(newValue) => setManagerID(newValue)}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+        <Box
+          sx={{
+            gridRow: "4",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
