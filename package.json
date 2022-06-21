@@ -25,6 +25,7 @@
     "date-fns": "^2.28.0",
     "form-data": "^4.0.0",
     "http-proxy-middleware": "^2.0.4",
+    "js-sha512": "^0.8.0",
     "mkcert": "^1.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
