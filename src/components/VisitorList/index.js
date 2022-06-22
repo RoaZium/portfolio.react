@@ -112,7 +112,6 @@ const columns = [
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
-  const [VisitorRow, setVisitorRows] = React.useState(VisitorRows);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
@@ -147,8 +146,7 @@ export default function VisitorList() {
   const DeleteSelectedVisitor = () => {
     const select = new Set(selectedVisitorInfo);
     console.log(select);
-    setVisitorRows((row) => row.filter((x) => !select.has(x.id)));
-    console.log(VisitorRow);
+    setVisitorList((row) => row.filter((x) => !select.has(x.visitor_id)));
   };
 
   return (
@@ -188,8 +186,8 @@ export default function VisitorList() {
           getRowId={(row) => row.visitor_id}
           onSelectionModelChange={(ids) => {
             const selectedIDs = new Set(ids);
-            const selectedVisitorInfo = VisitorRow.filter((row) =>
-              selectedIDs.has(row.id)
+            const selectedVisitorInfo = visitorList.filter((row) =>
+              selectedIDs.has(row.visitor_id)
             );
             setSelectedVisitorInfo(selectedVisitorInfo);
           }}

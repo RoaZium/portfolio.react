@@ -16,18 +16,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { SelectedVisitorInfoContext } from "../../App";
 
 export default function VisitorInfo() {
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
 
   useEffect(() => {
-    console.log("상세: ", selectedVisitorInfo);
+    console.log("상세: ", selectedVisitorInfo[0]);
   });
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -85,7 +80,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="방문자 성명"
-              value={selectedVisitorInfo[0].VisitorName}
+              value={selectedVisitorInfo[0].visitor_name}
               variant="filled"
             />
             <TextField
@@ -94,7 +89,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="연락처"
-              value={selectedVisitorInfo[0].TelePhone}
+              value={selectedVisitorInfo[0].telephone}
               variant="filled"
             />
             <Grid
@@ -119,8 +114,7 @@ export default function VisitorInfo() {
               <Grid item>
                 <DateTimePicker
                   label="시작일"
-                  value={value}
-                  onChange={handleChange}
+                  value={selectedVisitorInfo[0].visit_from}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
@@ -138,8 +132,7 @@ export default function VisitorInfo() {
               <Grid item>
                 <DateTimePicker
                   label="종료일"
-                  value={value}
-                  onChange={handleChange}
+                  value={selectedVisitorInfo[0].visit_to}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
@@ -150,7 +143,7 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="차량번호"
-              value={selectedVisitorInfo[0].CarNo}
+              value={selectedVisitorInfo[0].car_no}
               variant="filled"
             />
             <Box
@@ -203,7 +196,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="이메일"
-              value={selectedVisitorInfo[0].Email}
+              value={selectedVisitorInfo[0].email}
               variant="filled"
             />
             <TextField
@@ -212,7 +205,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="회사명"
-              value={selectedVisitorInfo[0].CompanyName}
+              value={selectedVisitorInfo[0].comapny_name}
               variant="filled"
             />
             <TextField
@@ -221,7 +214,7 @@ export default function VisitorInfo() {
                 gridRow: "3",
               }}
               label="방문목적"
-              value={selectedVisitorInfo[0].Purpose}
+              value={selectedVisitorInfo[0].purpose}
               variant="filled"
             />
             <TextField
@@ -230,7 +223,7 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="피방문자 성명"
-              value={selectedVisitorInfo[0].VisitorName}
+              value={selectedVisitorInfo[0].purpose}
               variant="filled"
             />
             <Autocomplete
@@ -296,7 +289,10 @@ export default function VisitorInfo() {
             <Grid container>
               <Grid item sm={6}>
                 <Box pr={1.5} textAlign="center">
-                  <Link to="/VisitorManagement" style={{ textDecoration: "none" }}>
+                  <Link
+                    to="/VisitorManagement"
+                    style={{ textDecoration: "none" }}
+                  >
                     <Button variant="contained" fullWidth>
                       취소
                     </Button>
@@ -305,7 +301,10 @@ export default function VisitorInfo() {
               </Grid>
               <Grid item sm={6}>
                 <Box pl={1.5} textAlign="center">
-                  <Link to="/VisitorManagement" style={{ textDecoration: "none" }}>
+                  <Link
+                    to="/VisitorManagement"
+                    style={{ textDecoration: "none" }}
+                  >
                     <Button variant="contained" fullWidth>
                       완료
                     </Button>

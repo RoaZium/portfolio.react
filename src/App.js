@@ -2,7 +2,7 @@ import Visitor from "./layouts/visitors";
 import React, { useState } from "react";
 
 export const AppOpenContext = React.createContext(false);
-export const SelectedVisitorInfoContext = React.createContext([]);
+export const SelectedVisitorInfoContext = React.createContext({});
 export const GlobalContext = React.createContext([]);
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
     visitorID: null,
   });
   const [appOpen, setAppOpen] = useState(false);
-  const [selectedVisitorInfo, setSelectedVisitorInfo] = useState([]);
+  const [selectedVisitorInfo, setSelectedVisitorInfo] = useState({});
 
   localStorage.setItem("SiteID", "00000000-0000-0000-0000-000000000000");
 
