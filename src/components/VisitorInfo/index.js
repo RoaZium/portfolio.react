@@ -8,21 +8,82 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-import { AccessAuthority, ApprovalState } from "../../Datas/ComboBox";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { ApprovalState } from "../../Datas/ComboBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { SelectedVisitorInfoContext } from "../../App";
+import axios from "axios";
 
 export default function VisitorInfo() {
+  const navigate = useNavigate();
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
+  const [visitorInfo, setVisitorInfo] = React.useState({});
+  const [authorizationList, setAuthorizationList] = React.useState([]);
+  const [selectedVisitor, setSelectedVisitor] = React.useState(null);
 
   useEffect(() => {
-    console.log("상세: ", selectedVisitorInfo[0]);
-  });
+    if (selectedVisitorInfo[0] !== undefined) {
+      setVisitorInfo(selectedVisitorInfo[0]);
+      console.log(selectedVisitorInfo[0]);
+    } else {
+      navigate("/VisitorManagement");
+    }
+
+    GetAuthorization();
+  }, []);
+
+  var config = {
+    method: "get",
+    url: `/authorization?site_id=${localStorage.getItem("SiteID")}`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+  };
+
+  const GetAuthorization = async () => {
+    axios(config)
+      .then(function (response) {
+        if (response.data["authorities"].length > 0) {
+          setAuthorizationList(response.data["authorities"]);
+          console.log(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  var putConfig = {
+    method: "put",
+    url: "/visitorauthoritygroup",
+    headers: {
+      login_token: localStorage.getItem("Token"),
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      visitor_id: visitorInfo.visitor_id,
+      authoritygroup_id: selectedVisitor,
+    }),
+  };
+
+  const PutVisitorInfo = async () => {
+    await axios(putConfig)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const UpdateVisitor = async () => {
+    console.log(putConfig);
+    PutVisitorInfo();
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -80,7 +141,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="방문자 성명"
-              value={selectedVisitorInfo[0].visitor_name}
+              value={visitorInfo.visitor_name}
               variant="filled"
             />
             <TextField
@@ -89,7 +150,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="연락처"
-              value={selectedVisitorInfo[0].telephone}
+              value={visitorInfo.telephone}
               variant="filled"
             />
             <Grid
@@ -114,7 +175,7 @@ export default function VisitorInfo() {
               <Grid item>
                 <DateTimePicker
                   label="시작일"
-                  value={selectedVisitorInfo[0].visit_from}
+                  value={visitorInfo.visit_from}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
@@ -132,7 +193,7 @@ export default function VisitorInfo() {
               <Grid item>
                 <DateTimePicker
                   label="종료일"
-                  value={selectedVisitorInfo[0].visit_to}
+                  value={visitorInfo.visit_to}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
@@ -143,7 +204,7 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="차량번호"
-              value={selectedVisitorInfo[0].car_no}
+              value={visitorInfo.car_no}
               variant="filled"
             />
             <Box
@@ -196,7 +257,7 @@ export default function VisitorInfo() {
                 gridRow: "1",
               }}
               label="이메일"
-              value={selectedVisitorInfo[0].email}
+              value={visitorInfo.email}
               variant="filled"
             />
             <TextField
@@ -205,7 +266,7 @@ export default function VisitorInfo() {
                 gridRow: "2",
               }}
               label="회사명"
-              value={selectedVisitorInfo[0].comapny_name}
+              value={visitorInfo.comapny_name}
               variant="filled"
             />
             <TextField
@@ -214,7 +275,7 @@ export default function VisitorInfo() {
                 gridRow: "3",
               }}
               label="방문목적"
-              value={selectedVisitorInfo[0].purpose}
+              value={visitorInfo.purpose}
               variant="filled"
             />
             <TextField
@@ -223,13 +284,21 @@ export default function VisitorInfo() {
                 gridRow: "4",
               }}
               label="피방문자 성명"
-              value={selectedVisitorInfo[0].purpose}
+              value={visitorInfo.purpose}
               variant="filled"
             />
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={AccessAuthority}
+              options={authorizationList}
+              getOptionLabel={(option) => option.authoritygroup_name}
+              onChange={(event, newValue) => {
+                if (newValue === null) {
+                  return;
+                }
+
+                setSelectedVisitor(newValue.authoritygroup_id);
+              }}
               sx={{ gridColumn: "2", gridRow: "5" }}
               renderInput={(params) => (
                 <TextField {...params} label="출입권한" />
@@ -244,35 +313,27 @@ export default function VisitorInfo() {
                 <TextField {...params} label="승인상태" />
               )}
             />
-            <Link
-              to="/Visitor"
-              style={{ textDecoration: "none", justifySelf: "flex-end" }}
+            <Button
+              sx={{
+                gridColumn: "2",
+                gridRow: "7",
+                visibility: "hidden",
+              }}
+              variant="contained"
+              onClick={UpdateVisitor}
             >
-              <Button
-                sx={{
-                  gridColumn: "2",
-                  gridRow: "7",
-                  visibility: "hidden",
-                }}
-                variant="contained"
-              >
-                예약하기
-              </Button>
-            </Link>
-            <Link
-              to="/Visitor"
-              style={{ textDecoration: "none", justifySelf: "flex-end" }}
+              예약하기
+            </Button>
+            <Button
+              sx={{
+                gridColumn: "2",
+                gridRow: "7",
+              }}
+              variant="contained"
+              onClick={UpdateVisitor}
             >
-              <Button
-                sx={{
-                  gridColumn: "2",
-                  gridRow: "7",
-                }}
-                variant="contained"
-              >
-                예약하기
-              </Button>
-            </Link>
+              예약하기
+            </Button>
           </Box>
           <Box
             mt={3}
