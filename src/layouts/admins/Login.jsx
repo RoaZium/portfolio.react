@@ -55,7 +55,7 @@ export default function Login() {
   const PostLogin = async () => {
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data["code"]));
+        localStorage.setItem("Token", response.data["token"]);
         console.log(data);
         var code = JSON.stringify(response.data["code"]);
 

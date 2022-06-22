@@ -1,15 +1,24 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { VisitorRows } from "../../Datas/VisitorList";
 import { Button } from "@mui/material";
 import { SelectedVisitorInfoContext } from "../../App";
+import axios from "axios";
 
 const columns = [
-  // { field: "VisitorID", headerName: "ID", width: 90, editable: false },
   {
-    field: "VisitorName",
+    visitor_id: "VisitorID",
+    headerName: "ID",
+    flex: 0.01,
+    editable: false,
+    align: "center",
+    headerAlign: "center",
+    hide: true,
+  },
+  {
+    field: "visitor_name",
     headerName: "이름",
     editable: false,
     align: "center",
@@ -17,7 +26,7 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "CompanyName",
+    field: "comapny_name",
     headerName: "회사명",
     editable: false,
     align: "center",
@@ -25,15 +34,15 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "TelePhone",
+    field: "telephone",
     headerName: "연락처",
     editable: false,
     align: "center",
-    flex: 1,
+    flex: 1.5,
     headerAlign: "center",
   },
   {
-    field: "CarNo",
+    field: "car_no",
     headerName: "차량번호",
     editable: false,
     align: "center",
@@ -41,7 +50,7 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "Email",
+    field: "email",
     headerName: "이메일",
     editable: false,
     align: "center",
@@ -49,23 +58,7 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "BirthDay",
-    headerName: "생년월일",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "Vip",
-    headerName: "VIP",
-    editable: false,
-    align: "center",
-    flex: 0.5,
-    headerAlign: "center",
-  },
-  {
-    field: "Purpose",
+    field: "purpose",
     headerName: "방문 목적",
     editable: false,
     align: "center",
@@ -73,23 +66,41 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "VisitFrom",
+    field: "visit_from",
     headerName: "방문 시작일",
     editable: false,
     align: "center",
-    flex: 1,
+    flex: 2,
     headerAlign: "center",
+    type: "date",
   },
   {
-    field: "VisitTo",
+    field: "visit_to",
     headerName: "방문 종료일",
     editable: false,
     align: "center",
-    flex: 1,
+    flex: 2,
+    headerAlign: "center",
+    type: "date",
+  },
+  {
+    field: "1",
+    headerName: "피방문자 성명",
+    editable: false,
+    align: "center",
+    flex: 0.8,
     headerAlign: "center",
   },
   {
-    field: "AgreePrivacy",
+    field: "2",
+    headerName: "피방문자 부서",
+    editable: false,
+    align: "center",
+    flex: 0.8,
+    headerAlign: "center",
+  },
+  {
+    field: "agree_privacy",
     headerName: "개인정보동의",
     editable: false,
     align: "center",
@@ -105,6 +116,29 @@ export default function VisitorList() {
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
+  const [visitorList, setVisitorList] = React.useState([]);
+
+  useEffect(() => {
+    GetVisitorAdmin();
+  }, []);
+
+  var config = {
+    method: "get",
+    url: `/visitoradmin?site_id=${localStorage.getItem("SiteID")}`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+  };
+
+  const GetVisitorAdmin = async () => {
+    await axios(config)
+      .then(function (response) {
+        setVisitorList(response.data["visitors"]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const RowDoubleClick = () => {
     navigate("/VisitorDetailManagement");
@@ -143,7 +177,7 @@ export default function VisitorList() {
         </Box>
         <DataGrid
           GridLinesVisibility="None"
-          rows={VisitorRow}
+          rows={visitorList}
           columns={columns}
           pageSize={pageSize}
           isCellEditable={(params) => 0}
@@ -151,6 +185,7 @@ export default function VisitorList() {
           onRowDoubleClick={RowDoubleClick}
           rowsPerPageOptions={[5, 10, 20]}
           checkboxSelection={false}
+          getRowId={(row) => row.visitor_id}
           onSelectionModelChange={(ids) => {
             const selectedIDs = new Set(ids);
             const selectedVisitorInfo = VisitorRow.filter((row) =>
