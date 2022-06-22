@@ -15,6 +15,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { SelectedVisitorInfoContext } from "../../App";
 import axios from "axios";
+import { ContactsTwoTone } from "@mui/icons-material";
 
 export default function VisitorInfo() {
   const navigate = useNavigate();
@@ -83,6 +84,38 @@ export default function VisitorInfo() {
   const UpdateVisitor = async () => {
     console.log(putConfig);
     PutVisitorInfo();
+  };
+
+  var approvalData = {
+    site_id: localStorage.getItem("SiteID"),
+    visitor_id: visitorInfo.visitor_id,
+    approval: 0,
+  };
+
+  var putApprovalConfig = {
+    method: "put",
+    url: "/visitorapproval",
+    headers: {
+      login_token: localStorage.getItem("Token"),
+      "Content-Type": "application/json",
+    },
+    data: approvalData,
+  };
+
+  const PutVisitorApproval = async () => {
+    await axios(putApprovalConfig)
+      .then(function (response) {
+        console.log(putApprovalConfig);
+        console.log("Approval: ", JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleChange = (prop) => {
+    approvalData.approval = prop;
+    PutVisitorApproval();
   };
 
   return (
@@ -308,6 +341,18 @@ export default function VisitorInfo() {
               disablePortal
               id="combo-box-demo"
               options={ApprovalState}
+              getOptionDisabled={(option) => false}
+              onChange={(event, newValue) => {
+                if (newValue === null) {
+                  return;
+                }
+
+                if (parseInt(newValue.code.toString(), 2) === 0x01) {
+                  handleChange(1);
+                } else {
+                  handleChange(0);
+                }
+              }}
               sx={{ gridColumn: "2", gridRow: "6" }}
               renderInput={(params) => (
                 <TextField {...params} label="승인상태" />
