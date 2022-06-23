@@ -16,6 +16,7 @@ import VisitorDetailManagement from "../admins/VisitorDetailManagement";
 import AdminManagement from "../admins/AdminManagement";
 import AgreePrivacy from "./AgreePrivacy";
 import Home from "./Home";
+import ReservationSearch from "./ReservationSearch";
 
 export default function Main() {
   return (
@@ -75,6 +76,10 @@ export default function Main() {
                 element={<VisitorDetailManagement />}
               />
               <Route path="/AdminManagement" element={<AdminManagement />} />
+              <Route
+                path="/ReservationSearch"
+                element={<ReservationSearch />}
+              />
             </Routes>
           </Box>
         </Container>
