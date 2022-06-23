@@ -27,6 +27,9 @@ export default function VisitorInfo() {
   const [selectedVisitor, setSelectedVisitor] = React.useState(null);
 
   useEffect(() => {
+    setSelectedVisitor(selectedVisitor);
+    console.log("useEffect: ", selectedVisitor);
+
     if (selectedVisitorInfo[0] !== undefined) {
       setVisitorInfo(selectedVisitorInfo[0]);
       console.log(selectedVisitorInfo[0]);
@@ -34,8 +37,11 @@ export default function VisitorInfo() {
       navigate("/VisitorManagement");
     }
 
+    console.log("222");
     GetAuthorization();
-  }, []);
+  }, [selectedVisitor]);
+
+  console.log("selectedVisitor:", selectedVisitor);
 
   var config = {
     method: "get",
@@ -330,7 +336,9 @@ export default function VisitorInfo() {
                   return;
                 }
 
+                localStorage.setItem("AuthorityGroupID", newValue.authoritygroup_id)
                 setSelectedVisitor(newValue.authoritygroup_id);
+                console.log("ID2:", selectedVisitor);
               }}
               sx={{ gridColumn: "2", gridRow: "5" }}
               renderInput={(params) => (
