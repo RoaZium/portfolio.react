@@ -27,6 +27,9 @@ export default function VisitorApplication() {
   const [telephone, setTelephone] = React.useState();
   const [purpose, setPurpose] = React.useState();
   const [managerID, setManagerID] = React.useState("WT0000000000");
+  const [managerName, setManagerName] = React.useState("이름");
+  const [managerDeptName, setManagerDeptName] = React.useState("부서");
+  const [managerTelePhone, setManagerTelePhone] = React.useState("01011112222");
   const [visitFrom, setVisitFrom] = React.useState(
     new Date().toLocaleDateString()
   );
@@ -63,7 +66,8 @@ export default function VisitorApplication() {
 
     console.log("종료", visitTo);
     console.log("시작", visitFrom);
-    PostVisitor();
+
+    GetManagerID();
   };
 
   var data = JSON.stringify({
@@ -81,7 +85,9 @@ export default function VisitorApplication() {
     birthday: "",
     vip: "",
     purpose: purpose,
-    manager_id: managerID,
+    manager_id: localStorage.getItem("ManagerID"),
+    manager_name: managerName,
+    manager_dept_name: managerDeptName,
     visit_from: visitFrom,
     visit_to: visitTo,
     agree_privacy: true,
@@ -102,9 +108,39 @@ export default function VisitorApplication() {
   const PostVisitor = async () => {
     axios(config)
       .then(function (response) {
+        console.log("PostVisitor: ", response.data);
         globalVariable["visitorID"] = response.data["visitor_id"];
         localStorage.setItem("visitorID", response.data["visitor_id"]);
         navigate("/ReservationConfirm");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  var getManagerData = "";
+
+  var getconfig = {
+    method: "get",
+    url: `/visitormanagerid?telephone=${managerTelePhone}&user_name=${managerName}&organization_name=${managerDeptName}`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+    data: getManagerData,
+  };
+
+  const GetManagerID = () => {
+    axios(getconfig)
+      .then(function (response) {
+        console.log(response.data);
+
+        localStorage.setItem("ManagerID", response.data["manager_id"]);
+
+        if (response.data["code"] === 1) {
+          PostVisitor();
+        } else {
+          alert("존재하지 않는 피방문자 입니다.");
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -328,18 +364,18 @@ export default function VisitorApplication() {
                   marginBottom: 2,
                 }}
                 label="피방문자 성명"
-                value={managerID}
+                value={managerName}
                 variant="filled"
-                onChange={(newValue) => setManagerID(newValue)}
+                onChange={(event) => setManagerName(event.target.value)}
               />
               <TextField
                 sx={{
                   marginBottom: 2,
                 }}
                 label="피방문자 부서"
-                value={managerID}
+                value={managerDeptName}
                 variant="filled"
-                onChange={(newValue) => setManagerID(newValue)}
+                onChange={(event) => setManagerDeptName(event.target.value)}
               />
             </Grid>
             <Grid
@@ -355,9 +391,9 @@ export default function VisitorApplication() {
                   marginBottom: 2,
                 }}
                 label="피방문자 연락처"
-                value={managerID}
+                value={managerTelePhone}
                 variant="filled"
-                onChange={(newValue) => setManagerID(newValue)}
+                onChange={(event) => setManagerTelePhone(event.target.value)}
               />
             </Grid>
           </Grid>

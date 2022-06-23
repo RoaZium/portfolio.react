@@ -39,13 +39,16 @@ export default function ReservationConfirm() {
     method: "get",
     url: `/visitor?site_id=${localStorage.getItem(
       "SiteID"
-    )}&manager_id=WT0000000000&visitor_id=${localStorage.getItem("visitorID")}`,
+    )}&manager_id=${localStorage.getItem(
+      "ManagerID"
+    )}&visitor_id=${localStorage.getItem("visitorID")}`,
     headers: {},
   };
 
   const GetVisitor = async () =>
     await axios(config)
       .then(function (response) {
+        console.log("RE:", response.data);
         setVisitors(response.data["visitors"][0]);
       })
       .catch(function (error) {
@@ -267,7 +270,7 @@ export default function ReservationConfirm() {
                   marginBottom: 2,
                 }}
                 label="피방문자 성명"
-                value={visitors.manager_id}
+                value={localStorage.getItem("ManagerID")}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
@@ -276,7 +279,7 @@ export default function ReservationConfirm() {
                   marginBottom: 2,
                 }}
                 label="피방문자 부서"
-                value={visitors.manager_id}
+                value={visitors.manager_dept_name}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
@@ -294,7 +297,7 @@ export default function ReservationConfirm() {
                   marginBottom: 2,
                 }}
                 label="피방문자 연락처"
-                value={visitors.manager_id}
+                value={visitors.manager_name}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
