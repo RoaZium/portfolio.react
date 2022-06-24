@@ -143,7 +143,7 @@ export default function ReservationSearch() {
 
   var getConfig = {
     method: "get",
-    url: `/visitor?visitor_name=${visitorName}&telephone=01000000000&site_id=${localStorage.getItem(
+    url: `/visitor?visitor_name=${visitorName}&telephone=${visitorTelephone}&site_id=${localStorage.getItem(
       "SiteID"
     )}&car_no=${visitorCarNo}`,
     headers: {},
@@ -171,12 +171,20 @@ export default function ReservationSearch() {
   };
 
   const SearchVisitor = () => {
-    if (visitorName === null || visitorName === undefined) {
+    if (
+      visitorName === null ||
+      visitorName === undefined ||
+      visitorName === ""
+    ) {
       alert("성명을 입력해 주세요");
       return;
     }
 
-    if (visitorTelephone === null || visitorTelephone === undefined) {
+    if (
+      visitorTelephone === null ||
+      visitorTelephone === undefined ||
+      visitorTelephone === ""
+    ) {
       alert("연락처를 입력해 주세요");
       return;
     }
@@ -292,6 +300,9 @@ export default function ReservationSearch() {
             />
             <Button
               sx={{
+                height: "30px",
+                alignSelf: "center",
+                justifyItems: "right",
                 marginRight: 2,
               }}
               variant="contained"
@@ -327,11 +338,6 @@ export default function ReservationSearch() {
                 boxShadow="3"
                 height="60vh"
               >
-                <Box display="flex" justifyContent="flex-end">
-                  <Button variant="contained" sx={{ marginRight: 2 }}>
-                    조회
-                  </Button>
-                </Box>
                 <DataGrid
                   GridLinesVisibility="None"
                   rows={visitorList}
