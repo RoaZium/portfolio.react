@@ -10,28 +10,25 @@ import StepLabel from "@mui/material/StepLabel";
 import Divider from "@mui/material/Divider";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import { GlobalContext } from "../../App";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
-const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
+const steps = ["예약 조회", "예약 확인"];
 
 export default function ReservationConfirm() {
   const navigate = useNavigate();
-  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
-  const [visitors, setVisitors] = useState([]);
+  const [visitors, setVisitors] = useState({});
 
   useEffect(() => {
     if (
-      globalVariable["visitorID"] === undefined ||
-      globalVariable["visitorID"] === null
+      localStorage.getItem("visitorID") === undefined ||
+      localStorage.getItem("visitorID") === null
     ) {
       navigate("/");
     }
 
-    localStorage.setItem("visitorID", globalVariable["visitorID"]);
+    setVisitors({});
     GetVisitor();
   }, []);
 
@@ -39,8 +36,6 @@ export default function ReservationConfirm() {
     method: "get",
     url: `/visitor?site_id=${localStorage.getItem(
       "SiteID"
-    )}&manager_id=${localStorage.getItem(
-      "ManagerID"
     )}&visitor_id=${localStorage.getItem("visitorID")}`,
     headers: {},
   };
@@ -48,7 +43,6 @@ export default function ReservationConfirm() {
   const GetVisitor = async () =>
     await axios(config)
       .then(function (response) {
-        console.log("RE:", response.data);
         setVisitors(response.data["visitors"][0]);
       })
       .catch(function (error) {
@@ -81,7 +75,7 @@ export default function ReservationConfirm() {
             sx={{
               bgcolor: "transparent",
             }}
-            activeStep={2}
+            activeStep={1}
             alternativeLabel
           >
             {steps.map((label) => (
@@ -210,6 +204,7 @@ export default function ReservationConfirm() {
               />
               <DateTimePicker
                 label="방문 종료일"
+                defaultValue={"Some Value"}
                 value={visitors.visit_to}
                 inputFormat="yyyy-MM-dd HH:mm"
                 renderInput={(params) => (
@@ -316,7 +311,7 @@ export default function ReservationConfirm() {
         >
           <Grid item sm={6}>
             <Box p={2} textAlign="center">
-              <Link to="/VisitorApplication" style={{ textDecoration: "none" }}>
+              <Link to="/ReservationSearch" style={{ textDecoration: "none" }}>
                 <Button variant="contained" fullWidth>
                   이전 페이지
                 </Button>
@@ -332,13 +327,6 @@ export default function ReservationConfirm() {
               </Link>
             </Box>
           </Grid>
-          {/*         <Button
-          onClick={sendRequest}
-          sx={{ display: "flex" }}
-          variant="contained"
-        >
-          테스트
-        </Button> */}
         </Box>
       </Box>
     </LocalizationProvider>

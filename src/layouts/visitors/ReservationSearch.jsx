@@ -152,7 +152,17 @@ export default function ReservationSearch() {
   const GETVisitorInfo = async () => {
     await axios(getConfig)
       .then(function (response) {
-        console.log(getConfig);
+        if (
+          response.data["visitors"] === null ||
+          response.data["visitors"][0] === null
+        ) {
+          return;
+        }
+
+        localStorage.setItem(
+          "visitorID",
+          response.data["visitors"][0].visitor_id
+        );
         setVisitorList(response.data["visitors"]);
       })
       .catch(function (error) {
@@ -161,9 +171,6 @@ export default function ReservationSearch() {
   };
 
   const SearchVisitor = () => {
-    console.log("1", visitorName);
-    console.log("2", visitorTelephone);
-
     if (visitorName === null || visitorName === undefined) {
       alert("성명을 입력해 주세요");
       return;
