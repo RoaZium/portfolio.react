@@ -126,307 +126,298 @@ export default function VisitorInfo() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box
-        alignItems="flex-start"
-        display="flex"
-        justifyContent="space-between"
-        p={2}
-      >
+      <Box display="flex" flexDirection="column">
         <Box
-          width="100%"
-          display="flex"
-          flexDirection="column"
-          borderRadius={2}
-          p={2}
-          boxShadow="3"
+          sx={{
+            gridRow: "2",
+            borderRadius: 3,
+            boxShadow: 3,
+            p: 2,
+            marginBottom: 2,
+            display: "grid",
+            gridAutoRows: "30px 5px auto",
+            gridTemplateRows: "3",
+          }}
         >
-          <Box
-            display="flex"
-            flexDirection={{ xs: "column", sm: "column" }}
-            mb={2}
-          >
-            <Typography
-              variant="h6"
-              fontWeight="bold"
-              textTransform="capitalize"
-            >
-              방문자 관리 상세
-            </Typography>
-
-            <Divider
-              Color="skyblue"
-              sx={{
-                marginLeft: -2,
-                marginRight: -2,
-                marginTop: 1,
-              }}
-            />
-          </Box>
-          <Box
-            mb={1}
+          <Typography
+            bgcolor="transparent"
+            fontWeight="bold"
+            fontSize={20}
             sx={{
-              gridRow: "3",
-              alignContent: "stretch",
-              bgcolor: "transparent",
-              display: "grid",
-              gridTemplateColumns: "2",
-              gridTemplateRows: "7",
-              gap: 3,
+              gridRow: "1",
             }}
           >
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "1",
-              }}
-              label="방문자 성명"
-              value={visitorInfo.visitor_name}
-              variant="filled"
-            />
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "2",
-              }}
-              label="연락처"
-              value={visitorInfo.telephone}
-              variant="filled"
-            />
-            <Grid
-              container
-              spacing={1}
-              sx={{
-                gridColumn: "1",
-                gridrow: "4",
-              }}
-            >
-              <Grid item display="flex">
-                <Typography
-                  sx={{
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  방문기간
-                </Typography>
-              </Grid>
-              <Grid item>
-                <DateTimePicker
-                  label="시작일"
-                  value={visitorInfo.visit_from}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </Grid>
-              <Grid item display="flex">
-                <Typography
-                  sx={{
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  ~
-                </Typography>
-              </Grid>
-              <Grid item>
-                <DateTimePicker
-                  label="종료일"
-                  value={visitorInfo.visit_to}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </Grid>
-            </Grid>
-            <TextField
-              sx={{
-                gridColumn: "1",
-                gridRow: "4",
-              }}
-              label="차량번호"
-              value={visitorInfo.car_no}
-              variant="filled"
-            />
-            <Box
-              sx={{
-                gridColumn: "1",
-                gridRow: "6",
-                bgcolor: "#e8e8e8",
-                display: "grid",
-                gridAutoColumns: "auto auto 70px 10px 70px",
-                gridTemplateColumns: "6",
-                gridTemplateRows: "1",
-              }}
-            >
-              <Typography
-                sx={{
-                  alignSelf: "center",
-                  gridColumn: "1",
-                  gridRow: "1",
-                  marginLeft: "10px",
-                }}
-              >
-                모바일
-              </Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  display: "flex",
-                  alignSelf: "center",
-                  gridColumn: "3",
-                  gridRow: "1",
-                }}
-              >
-                신청
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  display: "flex",
-                  alignSelf: "center",
-                  gridColumn: "5",
-                  gridRow: "1",
-                }}
-              >
-                삭제
-              </Button>
-            </Box>
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "1",
-              }}
-              label="이메일"
-              value={visitorInfo.email}
-              variant="filled"
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "2",
-              }}
-              label="회사명"
-              value={visitorInfo.comapny_name}
-              variant="filled"
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "3",
-              }}
-              label="방문목적"
-              value={visitorInfo.purpose}
-              variant="filled"
-            />
-            <TextField
-              sx={{
-                gridColumn: "2",
-                gridRow: "4",
-              }}
-              label="피방문자 성명"
-              value={visitorInfo.purpose}
-              variant="filled"
-            />
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={authorizationList}
-              getOptionLabel={(option) => option.authoritygroup_name}
-              onChange={(event, newValue) => {
-                if (newValue === null) {
-                  return;
-                }
-
-                localStorage.setItem("AuthorityGroupID", newValue.authoritygroup_id)
-                setSelectedVisitor(newValue.authoritygroup_id);
-                console.log("ID2:", selectedVisitor);
-              }}
-              sx={{ gridColumn: "2", gridRow: "5" }}
-              renderInput={(params) => (
-                <TextField {...params} label="출입권한" />
-              )}
-            />
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={ApprovalState}
-              getOptionDisabled={(option) => false}
-              onChange={(event, newValue) => {
-                if (newValue === null) {
-                  return;
-                }
-
-                if (parseInt(newValue.code.toString(), 2) === 0x01) {
-                  handleChange(1);
-                } else {
-                  handleChange(0);
-                }
-              }}
-              sx={{ gridColumn: "2", gridRow: "6" }}
-              renderInput={(params) => (
-                <TextField {...params} label="승인상태" />
-              )}
-            />
-            <Button
-              sx={{
-                gridColumn: "2",
-                gridRow: "7",
-                visibility: "hidden",
-              }}
-              variant="contained"
-              onClick={UpdateVisitor}
-            >
-              예약하기
-            </Button>
-            <Button
-              sx={{
-                gridColumn: "2",
-                gridRow: "7",
-              }}
-              variant="contained"
-              onClick={UpdateVisitor}
-            >
-              예약하기
-            </Button>
-          </Box>
-          <Box
-            mt={3}
-            display="flex"
-            flexDirection="row"
+            방문자 정보
+          </Typography>
+          <Divider
             sx={{
               gridRow: "2",
+              marginBottom: 2,
+              marginLeft: -2,
+              marginRight: -2,
+            }}
+          />
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              gridRow: "3",
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              borderRadius: 3,
             }}
           >
-            <Grid container>
-              <Grid item sm={6}>
-                <Box pr={1.5} textAlign="center">
-                  <Link
-                    to="/VisitorManagement"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Button variant="contained" fullWidth>
-                      취소
-                    </Button>
-                  </Link>
-                </Box>
-              </Grid>
-              <Grid item sm={6}>
-                <Box pl={1.5} textAlign="center">
-                  <Link
-                    to="/VisitorManagement"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Button variant="contained" fullWidth>
-                      완료
-                    </Button>
-                  </Link>
-                </Box>
-              </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                label="성명"
+                value={visitorInfo.visitor_name}
+                variant="filled"
+                sx={{
+                  marginBottom: 2,
+                }}
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="회사명"
+                value={visitorInfo.comapny_name}
+                variant="filled"
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="이메일"
+                value={visitorInfo.email}
+                variant="filled"
+              />
+              <DateTimePicker
+                label="방문 시작일"
+                value={visitorInfo.visit_from}
+                inputFormat="yyyy-MM-dd HH:mm"
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={authorizationList}
+                getOptionLabel={(option) => option.authoritygroup_name}
+                onChange={(event, newValue) => {
+                  if (newValue === null) {
+                    return;
+                  }
+
+                  localStorage.setItem(
+                    "AuthorityGroupID",
+                    newValue.authoritygroup_id
+                  );
+                  setSelectedVisitor(newValue.authoritygroup_id);
+                  console.log("ID2:", selectedVisitor);
+                }}
+                sx={{ gridColumn: "2", gridRow: "5" }}
+                renderInput={(params) => (
+                  <TextField {...params} label="출입권한" />
+                )}
+              />
             </Grid>
-          </Box>
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="연락처"
+                value={visitorInfo.telephone}
+                variant="filled"
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="방문목적"
+                value={visitorInfo.purpose}
+                variant="filled"
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="차량번호"
+                value={visitorInfo.car_no}
+                variant="filled"
+              />
+              <DateTimePicker
+                label="방문 종료일"
+                value={visitorInfo.visit_to}
+                inputFormat="yyyy-MM-dd HH:mm"
+                renderInput={(params) => (
+                  <TextField {...params} sx={{ marginBottom: 2 }} />
+                )}
+              />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={ApprovalState}
+                getOptionDisabled={(option) => false}
+                onChange={(event, newValue) => {
+                  if (newValue === null) {
+                    return;
+                  }
+
+                  if (parseInt(newValue.code.toString(), 2) === 0x01) {
+                    handleChange(1);
+                  } else {
+                    handleChange(0);
+                  }
+                }}
+                sx={{ gridColumn: "2", gridRow: "6", marginBottom: 2 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="승인상태" />
+                )}
+              />
+              <Box
+                sx={{
+                  gridColumn: "1",
+                  gridRow: "6",
+                  bgcolor: "#e8e8e8",
+                  display: "grid",
+                  gridAutoColumns: "auto auto 70px 10px 70px",
+                  gridTemplateColumns: "6",
+                  gridTemplateRows: "1",
+                }}
+              >
+                <Typography
+                  sx={{
+                    alignSelf: "center",
+                    gridColumn: "1",
+                    gridRow: "1",
+                    marginLeft: "10px",
+                  }}
+                >
+                  모바일
+                </Typography>
+                <Button
+                  variant="contained"
+                  sx={{
+                    display: "flex",
+                    alignSelf: "center",
+                    gridColumn: "3",
+                    gridRow: "1",
+                  }}
+                >
+                  신청
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    display: "flex",
+                    alignSelf: "center",
+                    gridColumn: "5",
+                    gridRow: "1",
+                  }}
+                >
+                  삭제
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box
+          sx={{
+            gridRow: "3",
+            borderRadius: 3,
+            boxShadow: 3,
+            p: 2,
+            display: "grid",
+            gridAutoRows: "30px 5px auto",
+            gridTemplateRows: "3",
+          }}
+        >
+          <Typography
+            bgcolor="transparent"
+            fontWeight="bold"
+            fontSize={20}
+            sx={{
+              gridRow: "1",
+            }}
+          >
+            피방문자 정보
+          </Typography>
+          <Divider
+            sx={{
+              gridRow: "2",
+              marginBottom: 2,
+              marginLeft: -2,
+              marginRight: -2,
+            }}
+          />
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              gridRow: "3",
+              display: "flex",
+            }}
+          >
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 성명"
+                value={visitorInfo.managerName}
+                variant="filled"
+              />
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 부서"
+                value={visitorInfo.managerDeptName}
+                variant="filled"
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  marginBottom: 2,
+                }}
+                label="피방문자 연락처"
+                value={visitorInfo.managerTelePhone}
+                variant="filled"
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </LocalizationProvider>

@@ -101,7 +101,6 @@ export default function VisitorDetailManagement() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { appOpen, setAppOpen } = React.useContext(AppOpenContext);
-  
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -219,17 +218,15 @@ export default function VisitorDetailManagement() {
       </Drawer>
       <DashboardLayout>
         <Box>
-          <Grid container spacing={0}>
+          <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Box p={2}>
-                <Box p={1} borderRadius={2} boxShadow="3">
-                  <Breadcrumbs
-                    separator={<NavigateNext fontSize="small" />}
-                    aria-label="breadcrumb"
-                  >
-                    {breadcrumbs}
-                  </Breadcrumbs>
-                </Box>
+              <Box p={1} borderRadius={2} boxShadow="3">
+                <Breadcrumbs
+                  separator={<NavigateNext fontSize="small" />}
+                  aria-label="breadcrumb"
+                >
+                  {breadcrumbs}
+                </Breadcrumbs>
               </Box>
             </Grid>
             <Grid item xs={12}>
