@@ -56,11 +56,10 @@ export default function Login() {
     axios(config)
       .then(function (response) {
         localStorage.setItem("Token", response.data["token"]);
-        console.log(data);
         var code = JSON.stringify(response.data["code"]);
 
         if (code !== "1") {
-          setErrorPassword("비밀번호가 틀립니다.");
+          setErrorPassword("아이디 또는 비밀번호를 잘못 입력했습니다.");
           return;
         }
 
