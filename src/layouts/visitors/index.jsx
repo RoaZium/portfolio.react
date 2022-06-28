@@ -2,10 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import VisitorApplication from "./VisitorApplication";
 import ReservationConfirm from "./ReservationConfirm";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import CI from "../../assets/images/CI.png";
 import Grid from "@mui/material/Grid";
 import { ThemeProvider } from "@mui/material/styles";
@@ -20,6 +20,8 @@ import ReservationSearch from "./ReservationSearch";
 import Reservation from "./Reservation";
 
 export default function Main() {
+  const navigate = useNavigate();
+
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
@@ -51,6 +53,16 @@ export default function Main() {
               >
                 방문 예약 시스템
               </Typography>
+            </Grid>
+            <Grid>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                로그인
+              </Button>
             </Grid>
           </Grid>
         </Box>

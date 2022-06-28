@@ -22,7 +22,7 @@ const columns = [
     headerName: "이름",
     editable: false,
     align: "center",
-    flex: 0.7,
+    flex: 1,
     headerAlign: "center",
   },
   {
@@ -38,7 +38,7 @@ const columns = [
     headerName: "연락처",
     editable: false,
     align: "center",
-    flex: 1.5,
+    flex: 1,
     headerAlign: "center",
   },
   {
@@ -54,7 +54,7 @@ const columns = [
     headerName: "이메일",
     editable: false,
     align: "center",
-    flex: 1,
+    flex: 1.4,
     headerAlign: "center",
   },
   {
@@ -70,7 +70,7 @@ const columns = [
     headerName: "방문 시작일",
     editable: false,
     align: "center",
-    flex: 2,
+    flex: 1.6,
     headerAlign: "center",
     type: "date",
   },
@@ -79,24 +79,32 @@ const columns = [
     headerName: "방문 종료일",
     editable: false,
     align: "center",
-    flex: 2,
+    flex: 1.6,
     headerAlign: "center",
     type: "date",
   },
   {
-    field: "1",
+    field: "manager_name",
     headerName: "피방문자 성명",
     editable: false,
     align: "center",
-    flex: 0.8,
+    flex: 1,
     headerAlign: "center",
   },
   {
-    field: "2",
+    field: "manager_dept_name",
     headerName: "피방문자 부서",
     editable: false,
     align: "center",
-    flex: 0.8,
+    flex: 1,
+    headerAlign: "center",
+  },
+  {
+    field: "manager_telephone",
+    headerName: "피방문자 연락처",
+    editable: false,
+    align: "center",
+    flex: 1,
     headerAlign: "center",
   },
   {
@@ -166,8 +174,12 @@ export default function VisitorList() {
         height="70vh"
       >
         <Box display="flex" justifyContent="flex-end">
-          <Button variant="contained" sx={{ marginRight: 2 }}>
-            수정
+          <Button
+            variant="contained"
+            sx={{ marginRight: 2 }}
+            onClick={GetVisitorAdmin}
+          >
+            조회
           </Button>
           <Button variant="contained" onClick={DeleteSelectedVisitor}>
             삭제

@@ -124,6 +124,62 @@ export default function VisitorInfo() {
     PutVisitorApproval();
   };
 
+  var mobileData = JSON.stringify({
+    user_id: visitorInfo.visitor_id,
+    card_no: "",
+    mobile: 2,
+    start_date: "2022-01-24 01:00:00",
+    end_date: "2022-12-31 23:59:59",
+  });
+
+  var mobileConfig = {
+    method: "post",
+    url: "/visitorcard",
+    headers: {
+      login_token: localStorage.getItem("Token"),
+      "Content-Type": "application/json",
+    },
+    data: mobileData,
+  };
+
+  const PostMobile = async () => {
+    await axios(mobileConfig)
+      .then(function (response) {
+        alert("모바일 신청되었습니다.");
+        localStorage.setItem("MobileCode", response.data["card_number"]);
+      })
+      .catch(function (error) {
+        console.log("MobileError:", mobileConfig);
+        console.log(error);
+      });
+  };
+
+  var deleteConfig = {
+    method: "delete",
+    url: `/visitorcard?card_no=${localStorage.getItem("MobileCode")}`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+    data: deleteConfig,
+  };
+
+  const DeleteMobile = async () => {
+    deleteConfig.url = `/visitorcard?card_no=${localStorage.getItem(
+      "MobileCode"
+    )}`;
+
+    await axios(deleteConfig)
+      .then(function (response) {
+        alert("모바일 삭제되었습니다.");
+        console.log("Delete", localStorage.getItem("MobileCode"));
+        console.log("Delete:", deleteConfig);
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box display="flex" flexDirection="column">
@@ -319,6 +375,7 @@ export default function VisitorInfo() {
                     gridColumn: "3",
                     gridRow: "1",
                   }}
+                  onClick={PostMobile}
                 >
                   신청
                 </Button>
@@ -330,6 +387,7 @@ export default function VisitorInfo() {
                     gridColumn: "5",
                     gridRow: "1",
                   }}
+                  onClick={DeleteMobile}
                 >
                   삭제
                 </Button>
@@ -388,7 +446,7 @@ export default function VisitorInfo() {
                   marginBottom: 2,
                 }}
                 label="피방문자 성명"
-                value={visitorInfo.managerName}
+                value={visitorInfo.manager_name}
                 variant="filled"
               />
               <TextField
@@ -396,7 +454,7 @@ export default function VisitorInfo() {
                   marginBottom: 2,
                 }}
                 label="피방문자 부서"
-                value={visitorInfo.managerDeptName}
+                value={visitorInfo.manager_dept_name}
                 variant="filled"
               />
             </Grid>
@@ -413,7 +471,7 @@ export default function VisitorInfo() {
                   marginBottom: 2,
                 }}
                 label="피방문자 연락처"
-                value={visitorInfo.managerTelePhone}
+                value={visitorInfo.manager_telephone}
                 variant="filled"
               />
             </Grid>
