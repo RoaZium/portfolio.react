@@ -201,6 +201,8 @@ export default function VisitorList() {
             const selectedVisitorInfo = visitorList.filter((row) =>
               selectedIDs.has(row.visitor_id)
             );
+            localStorage.setItem("visitorID", selectedVisitorInfo[0].visitor_id);
+            console.log("id", selectedVisitorInfo[0]);
             setSelectedVisitorInfo(selectedVisitorInfo);
           }}
           sx={{

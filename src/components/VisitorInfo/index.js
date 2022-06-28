@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   Autocomplete,
   Button,
+  Chip,
   Divider,
   Grid,
   TextField,
@@ -25,38 +26,36 @@ export default function VisitorInfo() {
   const [visitorInfo, setVisitorInfo] = React.useState({});
   const [authorizationList, setAuthorizationList] = React.useState([]);
   const [selectedVisitor, setSelectedVisitor] = React.useState(null);
+  const [autocompleteValues, setAutocompleteValues] = React.useState([]);
 
   useEffect(() => {
     setSelectedVisitor(selectedVisitor);
-    console.log("useEffect: ", selectedVisitor);
 
     if (selectedVisitorInfo[0] !== undefined) {
       setVisitorInfo(selectedVisitorInfo[0]);
-      console.log(selectedVisitorInfo[0]);
     } else {
       navigate("/VisitorManagement");
     }
 
-    console.log("222");
     GetAuthorization();
   }, [selectedVisitor]);
 
-  console.log("selectedVisitor:", selectedVisitor);
-
   var config = {
     method: "get",
-    url: `/authorization?site_id=${localStorage.getItem("SiteID")}`,
+    url: `/userauthoritygroup?site_id=${localStorage.getItem(
+      "SiteID"
+    )}&user_id=${localStorage.getItem("visitorID")}`,
     headers: {
       login_token: localStorage.getItem("Token"),
     },
   };
 
   const GetAuthorization = async () => {
-    axios(config)
+    await axios(config)
       .then(function (response) {
-        if (response.data["authorities"].length > 0) {
-          setAuthorizationList(response.data["authorities"]);
-          console.log(response.data);
+        if (response.data["userauthorities"].length > 0) {
+          setAutocompleteValues(response.data["userauthorities"]);
+          setAuthorizationList(response.data["userauthorities"]);
         }
       })
       .catch(function (error) {
@@ -263,25 +262,34 @@ export default function VisitorInfo() {
                 )}
               />
               <Autocomplete
+                multiple
                 disablePortal
                 id="combo-box-demo"
+                value={autocompleteValues}
                 options={authorizationList}
                 getOptionLabel={(option) => option.authoritygroup_name}
-                onChange={(event, newValue) => {
+                onInputChange={(event, newInputValue) => {
+                  console.log(newInputValue);
+                }}
+                onChange={(event, newValue, reason, detail) => {
                   if (newValue === null) {
                     return;
                   }
 
-                  localStorage.setItem(
-                    "AuthorityGroupID",
-                    newValue.authoritygroup_id
-                  );
+                  console.log("S", detail.option["authoritygroup_id"]);
+
                   setSelectedVisitor(newValue.authoritygroup_id);
-                  console.log("ID2:", selectedVisitor);
+                  setAutocompleteValues(newValue);
+                  console.log("ID2:", newValue);
+                  console.log("ID3:", autocompleteValues);
                 }}
                 sx={{ gridColumn: "2", gridRow: "5" }}
                 renderInput={(params) => (
-                  <TextField {...params} label="출입권한" />
+                  <TextField
+                    {...params}
+                    label="출입권한"
+                    onDelete={(value) => console.log("t", value)}
+                  />
                 )}
               />
             </Grid>
@@ -327,9 +335,14 @@ export default function VisitorInfo() {
               />
               <Autocomplete
                 disablePortal
-                id="combo-box-demo"
+                id="ApprovalComboBox"
                 options={ApprovalState}
                 getOptionDisabled={(option) => false}
+                defaultValue={
+                  selectedVisitorInfo[0].visit_approval === false
+                    ? "불가"
+                    : "승인"
+                }
                 onChange={(event, newValue) => {
                   if (newValue === null) {
                     return;

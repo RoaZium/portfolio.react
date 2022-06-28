@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/logo.png";
-import Company from "../../assets/images/Login_company.jpg";
+import CI from "../../assets/images/CI.png";
+import Company from "../../assets/images/Login_company.png";
 import { useState } from "react";
 import { sha512 } from "js-sha512";
 import axios from "axios";
@@ -128,7 +128,7 @@ export default function Login() {
             alignItems="center"
             justifyContent="center"
           >
-            <Box component="img" src={Logo} />
+            <Box component="img" src={CI} />
           </Grid>
           <Grid
             item
