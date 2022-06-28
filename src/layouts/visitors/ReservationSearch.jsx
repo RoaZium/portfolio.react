@@ -92,7 +92,7 @@ const columns = [
     type: "date",
   },
   {
-    field: "1",
+    field: "manager_name",
     headerName: "피방문자 성명",
     editable: false,
     align: "center",
@@ -100,7 +100,7 @@ const columns = [
     headerAlign: "center",
   },
   {
-    field: "2",
+    field: "manager_dept_name",
     headerName: "피방문자 부서",
     editable: false,
     align: "center",
@@ -152,6 +152,7 @@ export default function ReservationSearch() {
   const GETVisitorInfo = async () => {
     await axios(getConfig)
       .then(function (response) {
+        console.log("visit", response);
         if (
           response.data["visitors"] === null ||
           response.data["visitors"][0] === null
@@ -166,6 +167,17 @@ export default function ReservationSearch() {
         setVisitorList(response.data["visitors"]);
       })
       .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const GetVisitor = async () => {
+    await axios
+      .get("/")
+      .then((response) => {
+        console.log("visitor:", response);
+      })
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -311,6 +323,20 @@ export default function ReservationSearch() {
               }}
             >
               조회
+            </Button>
+            <Button
+              sx={{
+                height: "30px",
+                alignSelf: "center",
+                justifyItems: "right",
+                marginRight: 2,
+              }}
+              variant="contained"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              홈
             </Button>
           </Grid>
         </Grid>

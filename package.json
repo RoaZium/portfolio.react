@@ -37,7 +37,7 @@
   "scripts": {
     "server": "cd server && nodemon server",
     "client": "cd client && npm start",
-    "start": "set HTTPS=true SSL_CRT_FILE=./.cert/Sightcubecert.pem SSL_KEY_FILE=./.cert/Sightcubekey.pem&&react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -60,7 +60,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://172.17.17.101:48090/v1",
+  "proxy": "http://172.17.17.6:48090/v2",
   "devDependencies": {
     "babel-plugin-root-import": "^6.6.0",
     "eslint": "^8.14.0",

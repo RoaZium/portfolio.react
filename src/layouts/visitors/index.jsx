@@ -17,6 +17,7 @@ import AdminManagement from "../admins/AdminManagement";
 import AgreePrivacy from "./AgreePrivacy";
 import Home from "./Home";
 import ReservationSearch from "./ReservationSearch";
+import Reservation from "./Reservation";
 
 export default function Main() {
   return (

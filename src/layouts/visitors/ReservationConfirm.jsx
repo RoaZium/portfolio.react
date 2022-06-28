@@ -265,7 +265,7 @@ export default function ReservationConfirm() {
                   marginBottom: 2,
                 }}
                 label="피방문자 성명"
-                value={localStorage.getItem("ManagerID")}
+                value={visitors.manager_name}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
@@ -292,7 +292,7 @@ export default function ReservationConfirm() {
                   marginBottom: 2,
                 }}
                 label="피방문자 연락처"
-                value={visitors.manager_name}
+                value={visitors.telephone}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
