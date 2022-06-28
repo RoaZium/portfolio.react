@@ -27,8 +27,14 @@ export default function Main() {
       <React.Fragment>
         <CssBaseline />
         <Box sx={{ bgcolor: "transparent", height: "100px" }}>
-          <Grid container>
-            <Grid>
+          <Grid
+            container
+            display="flex"
+            sx={{
+              direction: "row",
+            }}
+          >
+            <Grid item xs={1}>
               <Box
                 component="img"
                 src={CI}
@@ -40,28 +46,28 @@ export default function Main() {
                 }}
               />
             </Grid>
-            <Grid>
+            <Grid item xs={10.4}>
               <Typography
                 variant="h6"
                 fontWeight="bold"
                 sx={{
                   bgcolor: "transparent",
-                  height: 40,
-                  marginLeft: 2,
+                  alignSelf: "center",
                   my: 3,
                 }}
               >
                 방문 예약 시스템
               </Typography>
             </Grid>
-            <Grid>
+            <Grid item xs={0.6} display="flex">
               <Button
+                sx={{ alignSelf: "center", justifyItems: "right" }}
                 variant="contained"
                 onClick={() => {
                   navigate("/login");
                 }}
               >
-                로그인
+                관리자
               </Button>
             </Grid>
           </Grid>
