@@ -60,7 +60,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://172.17.17.6:48090/v2",
+  "proxy": "http://172.17.17.101:48090/v2",
   "devDependencies": {
     "babel-plugin-root-import": "^6.6.0",
     "eslint": "^8.14.0",

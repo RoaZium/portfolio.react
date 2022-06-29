@@ -28,6 +28,7 @@ export default function VisitorInfo() {
   const [authorizationList, setAuthorizationList] = React.useState([]);
   const [selectedVisitor, setSelectedVisitor] = React.useState(null);
   const [autocompleteValues, setAutocompleteValues] = React.useState([]);
+  const [userAuthorList, setUserAuthorList] = React.useState([]);
 
   useEffect(() => {
     setSelectedVisitor(selectedVisitor);
@@ -39,11 +40,12 @@ export default function VisitorInfo() {
     }
 
     GetAuthorization();
+    user();
   }, [selectedVisitor]);
 
   var config = {
     method: "get",
-    url: `/userauthoritygroup?site_id=${localStorage.getItem(
+    url: `/authorization?site_id=${localStorage.getItem(
       "SiteID"
     )}&user_id=${localStorage.getItem("visitorID")}`,
     headers: {
@@ -54,9 +56,10 @@ export default function VisitorInfo() {
   const GetAuthorization = async () => {
     await axios(config)
       .then(function (response) {
-        if (response.data["userauthorities"].length > 0) {
-          setAutocompleteValues(response.data["userauthorities"]);
-          setAuthorizationList(response.data["userauthorities"]);
+        console.log("권한", response);
+        if (response.data["authorities"].length > 0) {
+          setAutocompleteValues(response.data["authorities"]);
+          setAuthorizationList(response.data["authorities"]);
         }
       })
       .catch(function (error) {
@@ -213,6 +216,28 @@ export default function VisitorInfo() {
       });
   };
 
+  var userAuthorityConfig = {
+    method: "get",
+    url: `/userauthoritygroup?site_id=${localStorage.getItem(
+      "SiteID"
+    )}&user_id=${localStorage.getItem("visitorID")}`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+  };
+
+  const user = async () => {
+    console.log("config", userAuthorityConfig);
+    await axios(userAuthorityConfig)
+      .then(function (response) {
+        console.log("SS", response.data["userauthorities"]);
+        setUserAuthorList(response.data["userauthorities"]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box display="flex" flexDirection="column">
@@ -299,7 +324,7 @@ export default function VisitorInfo() {
                 multiple
                 disablePortal
                 id="combo-box-demo"
-                value={autocompleteValues}
+                value={userAuthorList}
                 options={authorizationList}
                 getOptionLabel={(option) => option.authoritygroup_name}
                 onInputChange={(event, newInputValue) => {

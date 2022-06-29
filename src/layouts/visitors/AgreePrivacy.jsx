@@ -128,7 +128,7 @@ export default function AgreePrivacy() {
             bgcolor: "transparent",
           }}
         >
-          (주) 종근당(이하. 회사라고 합니다.) 이용자들의 개인정보를 소중히
+          종근당 바이오(이하. 회사라고 합니다.) 이용자들의 개인정보를 소중히
           다루고 개인정보와 관련된 정보 통신망 이용 촉진 및 정보 보호등에 관한
           법률(이하' 개인정보보호법) 등을 준수합니다. 귀하의 개인정보를 수집함에
           있어 아래 내용을 안내하고 있으니 자세히 읽어보시고 모든 내용을
@@ -175,7 +175,7 @@ export default function AgreePrivacy() {
             bgcolor: "transparent",
           }}
         >
-          (주) 종근당 보안 정책 준수 동의
+          종근당 바이오 보안 정책 준수 동의
         </Typography>
         <Divider
           sx={{
