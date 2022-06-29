@@ -117,15 +117,41 @@ const columns = [
   },
 ];
 
+const DEFAULT_DATA = [
+  {
+    agree_privacy: true,
+    birthday: "",
+    car_no: "",
+    card_number: null,
+    comapny_name: "",
+    email: "",
+    manager_dept_name: "",
+    manager_id: "",
+    manager_name: "",
+    manager_telephone: "",
+    mobile_status: 0,
+    picture: null,
+    purpose: "",
+    sign_image: "",
+    telephone: "",
+    vip: false,
+    visit_approval: false,
+    visit_from: "",
+    visit_to: "",
+    visitor_id: "",
+    visitor_name: "",
+  },
+];
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
-  const [visitorList, setVisitorList] = React.useState([]);
+  const [visitorList, setVisitorList] = React.useState(DEFAULT_DATA);
 
   useEffect(() => {
+    console.log("data", "data");
     GetVisitorAdmin();
   }, []);
 
@@ -152,9 +178,34 @@ export default function VisitorList() {
   };
 
   const DeleteSelectedVisitor = () => {
-    const select = new Set(selectedVisitorInfo);
-    console.log(select);
-    setVisitorList((row) => row.filter((x) => !select.has(x.visitor_id)));
+    const visiotrFilter = visitorList.filter(
+      (x) => x.visitor_id === selectedVisitorInfo[0].visitor_id
+    );
+
+    console.log("ss", visiotrFilter);
+    console.log("TT", selectedVisitorInfo[0]);
+    // setVisitorList(visiotrFilter);
+    DeleteVisitor();
+  };
+
+  var DeleteConfig = {
+    method: "delete",
+    url: `/visitor?visitor_id=`,
+    headers: {
+      login_token: localStorage.getItem("Token"),
+    },
+  };
+
+  const DeleteVisitor = async () => {
+    DeleteConfig.url = `/visitor?visitor_id=${selectedVisitorInfo[0].visitor_id}`;
+    await axios(DeleteConfig)
+      .then(function (response) {
+        alert("삭제되었습니다.");
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -201,8 +252,10 @@ export default function VisitorList() {
             const selectedVisitorInfo = visitorList.filter((row) =>
               selectedIDs.has(row.visitor_id)
             );
-            localStorage.setItem("visitorID", selectedVisitorInfo[0].visitor_id);
-            console.log("id", selectedVisitorInfo[0]);
+            localStorage.setItem(
+              "visitorID",
+              selectedVisitorInfo[0].visitor_id
+            );
             setSelectedVisitorInfo(selectedVisitorInfo);
           }}
           sx={{

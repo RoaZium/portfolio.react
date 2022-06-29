@@ -17,6 +17,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { SelectedVisitorInfoContext } from "../../App";
 import axios from "axios";
 import { ContactsTwoTone } from "@mui/icons-material";
+import { jssPreset } from "@material-ui/core";
 
 export default function VisitorInfo() {
   const navigate = useNavigate();
@@ -159,7 +160,7 @@ export default function VisitorInfo() {
     headers: {
       login_token: localStorage.getItem("Token"),
     },
-    data: deleteConfig,
+    data: "",
   };
 
   const DeleteMobile = async () => {
@@ -172,6 +173,39 @@ export default function VisitorInfo() {
         alert("모바일 삭제되었습니다.");
         console.log("Delete", localStorage.getItem("MobileCode"));
         console.log("Delete:", deleteConfig);
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  var authorDeleteData = {
+    visitor_id: visitorInfo.visitor_id,
+    authorities: [
+      {
+        authoritygroup_id: localStorage.getItem("AuthoritygroupID"),
+        authoritygroup_name: "",
+      },
+    ],
+  };
+
+  var authorityConfig = {
+    method: "delete",
+    url: "/visitorauthoritygroup",
+    headers: {
+      login_token: localStorage.getItem("Token"),
+      "Content-Type": "application/json",
+    },
+    data: authorDeleteData,
+  };
+
+  const DeleteAuthority = async () => {
+    authorDeleteData["authorities"][0].authoritygroup_id =
+      localStorage.getItem("AuthoritygroupID");
+    console.log("delete", authorityConfig);
+    await axios(authorityConfig)
+      .then(function (response) {
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -276,12 +310,17 @@ export default function VisitorInfo() {
                     return;
                   }
 
-                  console.log("S", detail.option["authoritygroup_id"]);
+                  console.log("id", detail.option["authoritygroup_id"]);
+
+                  localStorage.setItem(
+                    "AuthoritygroupID",
+                    detail.option["authoritygroup_id"]
+                  );
+
+                  DeleteAuthority();
 
                   setSelectedVisitor(newValue.authoritygroup_id);
                   setAutocompleteValues(newValue);
-                  console.log("ID2:", newValue);
-                  console.log("ID3:", autocompleteValues);
                 }}
                 sx={{ gridColumn: "2", gridRow: "5" }}
                 renderInput={(params) => (
