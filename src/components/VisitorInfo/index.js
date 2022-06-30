@@ -1,36 +1,42 @@
-import React, { useEffect } from "react";
+import { useContext, useDebugValue, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import {
   Autocomplete,
   Button,
-  Chip,
   Divider,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ApprovalState } from "../../Datas/ComboBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
+
 import { SelectedVisitorInfoContext } from "../../App";
-import axios from "axios";
-import { ContactsTwoTone } from "@mui/icons-material";
-import { jssPreset } from "@material-ui/core";
+import {
+  DeleteAuthorization,
+  PutAuthorization,
+} from "../../APIs/Authorization";
 
 export default function VisitorInfo() {
   const navigate = useNavigate();
-  const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
+  const { selectedVisitorInfo, setSelectedVisitorInfo } = useContext(
     SelectedVisitorInfoContext
   );
-  const [visitorInfo, setVisitorInfo] = React.useState({});
-  const [authorizationList, setAuthorizationList] = React.useState([]);
-  const [selectedVisitor, setSelectedVisitor] = React.useState(null);
-  const [autocompleteValues, setAutocompleteValues] = React.useState([]);
-  const [userAuthorList, setUserAuthorList] = React.useState([]);
+  const [visitorInfo, setVisitorInfo] = useState({});
+  const [authorizationList, setAuthorizationList] = useState([]);
+  const [selectedVisitor, setSelectedVisitor] = useState(null);
+  const [userAuthorList, setUserAuthorList] = useState([]);
+
+  useDebugValue(userAuthorList);
+  useDebugValue(authorizationList);
 
   useEffect(() => {
+    console.log("useEffet", "");
     setSelectedVisitor(selectedVisitor);
 
     if (selectedVisitorInfo[0] !== undefined) {
@@ -41,7 +47,7 @@ export default function VisitorInfo() {
 
     GetAuthorization();
     user();
-  }, [selectedVisitor]);
+  }, []);
 
   var config = {
     method: "get",
@@ -56,43 +62,13 @@ export default function VisitorInfo() {
   const GetAuthorization = async () => {
     await axios(config)
       .then(function (response) {
-        console.log("권한", response);
         if (response.data["authorities"].length > 0) {
-          setAutocompleteValues(response.data["authorities"]);
           setAuthorizationList(response.data["authorities"]);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-  };
-
-  var putConfig = {
-    method: "put",
-    url: "/visitorauthoritygroup",
-    headers: {
-      login_token: localStorage.getItem("Token"),
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      visitor_id: visitorInfo.visitor_id,
-      authoritygroup_id: selectedVisitor,
-    }),
-  };
-
-  const PutVisitorInfo = async () => {
-    await axios(putConfig)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const UpdateVisitor = async () => {
-    console.log(putConfig);
-    PutVisitorInfo();
   };
 
   var approvalData = {
@@ -183,39 +159,6 @@ export default function VisitorInfo() {
       });
   };
 
-  var authorDeleteData = {
-    visitor_id: visitorInfo.visitor_id,
-    authorities: [
-      {
-        authoritygroup_id: localStorage.getItem("AuthoritygroupID"),
-        authoritygroup_name: "",
-      },
-    ],
-  };
-
-  var authorityConfig = {
-    method: "delete",
-    url: "/visitorauthoritygroup",
-    headers: {
-      login_token: localStorage.getItem("Token"),
-      "Content-Type": "application/json",
-    },
-    data: authorDeleteData,
-  };
-
-  const DeleteAuthority = async () => {
-    authorDeleteData["authorities"][0].authoritygroup_id =
-      localStorage.getItem("AuthoritygroupID");
-    console.log("delete", authorityConfig);
-    await axios(authorityConfig)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
   var userAuthorityConfig = {
     method: "get",
     url: `/userauthoritygroup?site_id=${localStorage.getItem(
@@ -230,6 +173,7 @@ export default function VisitorInfo() {
     console.log("config", userAuthorityConfig);
     await axios(userAuthorityConfig)
       .then(function (response) {
+        console.log("config", response.data);
         console.log("SS", response.data["userauthorities"]);
         setUserAuthorList(response.data["userauthorities"]);
       })
@@ -335,17 +279,40 @@ export default function VisitorInfo() {
                     return;
                   }
 
-                  console.log("id", detail.option["authoritygroup_id"]);
-
                   localStorage.setItem(
                     "AuthoritygroupID",
                     detail.option["authoritygroup_id"]
                   );
 
-                  DeleteAuthority();
+                  switch (reason) {
+                    case "selectOption": // 출입권한 추가
+                      userAuthorList.push({
+                        user_id: localStorage.getItem("visitorID"),
+                        authoritygroup_id: detail.option.authoritygroup_id,
+                        authoritygroup_name: detail.option.authoritygroup_name,
+                        site_id: localStorage.getItem("SiteID"),
+                        site_name: "SITE",
+                      });
+
+                      setUserAuthorList(userAuthorList);
+                      PutAuthorization(detail.option.authoritygroup_id);
+                      break;
+                    case "removeOption": // 출입권한 삭제
+                      DeleteAuthorization(detail.option.authoritygroup_id);
+
+                      var result = userAuthorList.filter(
+                        (id) =>
+                          id.authoritygroup_id !==
+                          detail.option.authoritygroup_id
+                      );
+
+                      setUserAuthorList(result);
+                      break;
+                    default:
+                      break;
+                  }
 
                   setSelectedVisitor(newValue.authoritygroup_id);
-                  setAutocompleteValues(newValue);
                 }}
                 sx={{ gridColumn: "2", gridRow: "5" }}
                 renderInput={(params) => (
