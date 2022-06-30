@@ -33,9 +33,6 @@ export default function VisitorInfo() {
   const [selectedVisitor, setSelectedVisitor] = useState(null);
   const [userAuthorList, setUserAuthorList] = useState([]);
 
-  useDebugValue(userAuthorList);
-  useDebugValue(authorizationList);
-
   useEffect(() => {
     console.log("useEffet", "");
     setSelectedVisitor(selectedVisitor);
@@ -204,6 +201,7 @@ export default function VisitorInfo() {
                 label="방문 시작일"
                 value={visitorInfo.visit_from}
                 inputFormat="yyyy-MM-dd HH:mm"
+                onChange={() => console.log(visitorInfo.visit_to)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}
@@ -310,6 +308,7 @@ export default function VisitorInfo() {
                 label="방문 종료일"
                 value={visitorInfo.visit_to}
                 inputFormat="yyyy-MM-dd HH:mm"
+                onChange={() => console.log(visitorInfo.visit_to)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}

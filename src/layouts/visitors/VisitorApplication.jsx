@@ -30,10 +30,8 @@ export default function VisitorApplication() {
   const [managerName, setManagerName] = React.useState("이름");
   const [managerDeptName, setManagerDeptName] = React.useState("부서");
   const [managerTelePhone, setManagerTelePhone] = React.useState("01011112222");
-  const [visitFrom, setVisitFrom] = React.useState(
-    new Date().toLocaleDateString()
-  );
-  const [visitTo, setVisitTo] = React.useState(new Date().toLocaleDateString());
+  const [visitFrom, setVisitFrom] = React.useState(new Date());
+  const [visitTo, setVisitTo] = React.useState(new Date());
   var { appOpen, setAppOpen } = React.useContext(AppOpenContext);
 
   useEffect(() => {
@@ -261,6 +259,7 @@ export default function VisitorApplication() {
                 label="방문 시작일"
                 value={visitFrom}
                 inputFormat="yyyy-MM-dd HH:mm"
+                minDateTime={new Date()}
                 onChange={(newValue) => setVisitFrom(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
