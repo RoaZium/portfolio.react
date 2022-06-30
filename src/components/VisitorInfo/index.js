@@ -21,6 +21,7 @@ import {
   DeleteAuthorization,
   PutAuthorization,
 } from "../../APIs/Authorization";
+import { PostMobile, DeleteMobile } from "../../APIs/Mobile";
 
 export default function VisitorInfo() {
   const navigate = useNavigate();
@@ -103,62 +104,6 @@ export default function VisitorInfo() {
     PutVisitorApproval();
   };
 
-  var mobileData = JSON.stringify({
-    user_id: visitorInfo.visitor_id,
-    card_no: "",
-    mobile: 2,
-    start_date: "2022-01-24 01:00:00",
-    end_date: "2022-12-31 23:59:59",
-  });
-
-  var mobileConfig = {
-    method: "post",
-    url: "/visitorcard",
-    headers: {
-      login_token: localStorage.getItem("Token"),
-      "Content-Type": "application/json",
-    },
-    data: mobileData,
-  };
-
-  const PostMobile = async () => {
-    await axios(mobileConfig)
-      .then(function (response) {
-        alert("모바일 신청되었습니다.");
-        localStorage.setItem("MobileCode", response.data["card_number"]);
-      })
-      .catch(function (error) {
-        console.log("MobileError:", mobileConfig);
-        console.log(error);
-      });
-  };
-
-  var deleteConfig = {
-    method: "delete",
-    url: `/visitorcard?card_no=${localStorage.getItem("MobileCode")}`,
-    headers: {
-      login_token: localStorage.getItem("Token"),
-    },
-    data: "",
-  };
-
-  const DeleteMobile = async () => {
-    deleteConfig.url = `/visitorcard?card_no=${localStorage.getItem(
-      "MobileCode"
-    )}`;
-
-    await axios(deleteConfig)
-      .then(function (response) {
-        alert("모바일 삭제되었습니다.");
-        console.log("Delete", localStorage.getItem("MobileCode"));
-        console.log("Delete:", deleteConfig);
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
   var userAuthorityConfig = {
     method: "get",
     url: `/userauthoritygroup?site_id=${localStorage.getItem(
@@ -174,7 +119,6 @@ export default function VisitorInfo() {
     await axios(userAuthorityConfig)
       .then(function (response) {
         console.log("config", response.data);
-        console.log("SS", response.data["userauthorities"]);
         setUserAuthorList(response.data["userauthorities"]);
       })
       .catch(function (error) {
@@ -425,7 +369,9 @@ export default function VisitorInfo() {
                     gridColumn: "3",
                     gridRow: "1",
                   }}
-                  onClick={PostMobile}
+                  onClick={() => {
+                    PostMobile(visitorInfo.visitor_id);
+                  }}
                 >
                   신청
                 </Button>
@@ -437,7 +383,9 @@ export default function VisitorInfo() {
                     gridColumn: "5",
                     gridRow: "1",
                   }}
-                  onClick={DeleteMobile}
+                  onClick={() => {
+                    DeleteMobile(localStorage.getItem("MobileCode"));
+                  }}
                 >
                   삭제
                 </Button>
