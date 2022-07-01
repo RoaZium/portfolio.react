@@ -161,7 +161,7 @@ export default function ReservationConfirm() {
               <DateTimePicker
                 label="방문 시작일"
                 value={visitors.visit_from}
-                inputFormat="yyyy-MM-dd HH:mm"
+                inputFormat="yyyy-MM-dd HH:mm:ss"
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}
@@ -206,7 +206,7 @@ export default function ReservationConfirm() {
                 label="방문 종료일"
                 defaultValue={"Some Value"}
                 value={visitors.visit_to}
-                inputFormat="yyyy-MM-dd HH:mm"
+                inputFormat="yyyy-MM-dd HH:mm:ss"
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
                 )}

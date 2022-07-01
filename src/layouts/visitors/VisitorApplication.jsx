@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AppOpenContext, GlobalContext } from "../../App";
+import moment from "moment-timezone";
 
 const steps = ["개인정보 및 보안정책 동의", "방문신청 정보 입력", "예약 확인"];
 
@@ -26,17 +27,18 @@ export default function VisitorApplication() {
   const [carNo, setCarNo] = React.useState();
   const [telephone, setTelephone] = React.useState();
   const [purpose, setPurpose] = React.useState();
-  const [managerID, setManagerID] = React.useState("WT0000000000");
-  const [managerName, setManagerName] = React.useState("이름");
-  const [managerDeptName, setManagerDeptName] = React.useState("부서");
-  const [managerTelePhone, setManagerTelePhone] = React.useState("01011112222");
-  const [visitFrom, setVisitFrom] = React.useState(new Date());
-  const [visitTo, setVisitTo] = React.useState(new Date());
-  var { appOpen, setAppOpen } = React.useContext(AppOpenContext);
+  const [managerName, setManagerName] = React.useState();
+  const [managerDeptName, setManagerDeptName] = React.useState();
+  const [managerTelePhone, setManagerTelePhone] = React.useState();
+  const [visitFrom, setVisitFrom] = React.useState(
+    moment().format("YYYY-MM-DD 00:00:00")
+  );
+  const [visitTo, setVisitTo] = React.useState(
+    moment().format("YYYY-MM-DD 23:59:59")
+  );
 
   useEffect(() => {
     if (globalVariable["agreePrivacy"] === false) {
-      console.log(globalVariable["agreePrivacy"]);
       navigate("/AgreePrivacy");
     }
   }, []);
@@ -62,13 +64,10 @@ export default function VisitorApplication() {
       return;
     }
 
-    console.log("종료", visitTo);
-    console.log("시작", visitFrom);
-
     GetManagerID();
   };
 
-  var data = JSON.stringify({
+  var data = {
     site_id: "1",
     visitor_name: visitorName,
     gender: "",
@@ -92,7 +91,7 @@ export default function VisitorApplication() {
     sign_image: "",
     access_permission: "",
     visit_approval: "",
-  });
+  };
 
   var config = {
     method: "post",
@@ -106,8 +105,6 @@ export default function VisitorApplication() {
   const PostVisitor = async () => {
     axios(config)
       .then(function (response) {
-        console.log("data:", config.data);
-        console.log("PostVisitor: ", response.data);
         globalVariable["visitorID"] = response.data["visitor_id"];
         localStorage.setItem("visitorID", response.data["visitor_id"]);
         navigate("/ReservationConfirm");
@@ -131,8 +128,6 @@ export default function VisitorApplication() {
   const GetManagerID = () => {
     axios(getconfig)
       .then(function (response) {
-        console.log(response.data);
-
         localStorage.setItem("ManagerID", response.data["manager_id"]);
 
         if (response.data["code"] === 1) {
@@ -258,7 +253,7 @@ export default function VisitorApplication() {
               <DateTimePicker
                 label="방문 시작일"
                 value={visitFrom}
-                inputFormat="yyyy-MM-dd HH:mm"
+                inputFormat="yyyy-MM-dd HH:mm:ss"
                 minDateTime={new Date()}
                 onChange={(newValue) => setVisitFrom(newValue)}
                 renderInput={(params) => (
@@ -304,7 +299,8 @@ export default function VisitorApplication() {
               <DateTimePicker
                 label="방문 종료일"
                 value={visitTo}
-                inputFormat="yyyy-MM-dd HH:mm"
+                inputFormat="yyyy-MM-dd HH:mm:ss"
+                minDateTime={new Date()}
                 onChange={(newValue) => setVisitTo(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} sx={{ marginBottom: 2 }} />
