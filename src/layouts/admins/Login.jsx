@@ -182,6 +182,11 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={handleChange("password")}
+                onKeyDown={(key) => {
+                  if (key.key === "Enter") {
+                    LoginUser();
+                  }
+                }}
                 aria-describedby="component-error-text"
               />
               <FormHelperText
