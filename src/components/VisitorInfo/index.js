@@ -222,18 +222,19 @@ export default function VisitorInfo() {
                     detail.option["authoritygroup_id"]
                   );
 
-                  var resultFilter = userAuthorList.filter(
-                    (p) =>
-                      p.authoritygroup_id === "detail.option.authoritygroup_id"
-                  );
-
-                  if (resultFilter.length < 1) {
-                    alert("이미 출입권한 항목이 존재합니다.");
-                    return;
-                  }
-
                   switch (reason) {
                     case "selectOption": // 출입권한 추가
+                      var resultFilter = userAuthorList.filter(
+                        (p) =>
+                          p.authoritygroup_id ===
+                          detail.option.authoritygroup_id
+                      );
+
+                      if (resultFilter.length >= 1) {
+                        alert("이미 출입권한 항목이 존재합니다.");
+                        return;
+                      }
+
                       userAuthorList.push({
                         user_id: localStorage.getItem("visitorID"),
                         authoritygroup_id: detail.option.authoritygroup_id,
