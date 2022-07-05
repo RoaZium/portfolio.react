@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -9,178 +9,24 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Divider from "@mui/material/Divider";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
-import { GlobalContext } from "../../App";
 import { DataGrid } from "@mui/x-data-grid";
 import { SelectedVisitorInfoContext } from "../../App";
-
-const columns = [
-  {
-    visitor_id: "VisitorID",
-    headerName: "ID",
-    flex: 0.01,
-    editable: false,
-    align: "center",
-    headerAlign: "center",
-    hide: true,
-  },
-  {
-    field: "visitor_name",
-    headerName: "이름",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "comapny_name",
-    headerName: "회사명",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "telephone",
-    headerName: "연락처",
-    editable: false,
-    align: "center",
-    flex: 1.5,
-    headerAlign: "center",
-  },
-  {
-    field: "car_no",
-    headerName: "차량번호",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "email",
-    headerName: "이메일",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "purpose",
-    headerName: "방문 목적",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "visit_from",
-    headerName: "방문 시작일",
-    editable: false,
-    align: "center",
-    flex: 2,
-    headerAlign: "center",
-    type: "date",
-  },
-  {
-    field: "visit_to",
-    headerName: "방문 종료일",
-    editable: false,
-    align: "center",
-    flex: 2,
-    headerAlign: "center",
-    type: "date",
-  },
-  {
-    field: "manager_name",
-    headerName: "피방문자 성명",
-    editable: false,
-    align: "center",
-    flex: 0.8,
-    headerAlign: "center",
-  },
-  {
-    field: "manager_dept_name",
-    headerName: "피방문자 부서",
-    editable: false,
-    align: "center",
-    flex: 0.8,
-    headerAlign: "center",
-  },
-  {
-    field: "3",
-    headerName: "피방문자 연락처",
-    editable: false,
-    align: "center",
-    flex: 0.8,
-    headerAlign: "center",
-  },
-  {
-    field: "agree_privacy",
-    headerName: "개인정보동의",
-    editable: false,
-    align: "center",
-    flex: 0.8,
-    headerAlign: "center",
-  },
-];
+import { visitorColumns } from "../../assets/Columns/VisitorColumns";
 
 const steps = ["예약 조회", "예약 확인"];
 
 export default function ReservationSearch() {
   const navigate = useNavigate();
-  const { globalVariable, setGlobalVariable } = React.useContext(GlobalContext);
-  const [visitors, setVisitors] = useState([]);
   const [pageSize, setPageSize] = React.useState(5);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
   const [visitorList, setVisitorList] = React.useState([]);
-  const [visitorID, setVisitorID] = React.useState();
   const [visitorName, setVisitorName] = React.useState();
   const [visitorTelephone, setVisitorTelephone] = React.useState();
   const [visitorCarNo, setVisitorCarNo] = React.useState();
-
-  var getConfig = {
-    method: "get",
-    url: `/visitor?visitor_name=${visitorName}&telephone=${visitorTelephone}&site_id=${localStorage.getItem(
-      "SiteID"
-    )}&car_no=${visitorCarNo}`,
-    headers: {},
-  };
-
-  const GETVisitorInfo = async () => {
-    await axios(getConfig)
-      .then(function (response) {
-        console.log("visit", response);
-        if (
-          response.data["visitors"] === null ||
-          response.data["visitors"][0] === null
-        ) {
-          return;
-        }
-
-        localStorage.setItem(
-          "visitorID",
-          response.data["visitors"][0].visitor_id
-        );
-        setVisitorList(response.data["visitors"]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const GetVisitor = async () => {
-    await axios
-      .get("/")
-      .then((response) => {
-        console.log("visitor:", response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const SearchVisitor = () => {
     if (
@@ -202,11 +48,29 @@ export default function ReservationSearch() {
     }
 
     setVisitorList([]);
-    GETVisitorInfo();
+    GetVisitorInfo();
   };
 
-  const RowDoubleClick = () => {
-    navigate("/ReservationConfirm");
+  const data = {
+    site_id: localStorage.getItem("SiteID"),
+    visitor_name: `${visitorName}`,
+    telephone: `${visitorTelephone}`,
+    car_no: `${visitorCarNo}`,
+  };
+
+  const GetVisitorInfo = async () => {
+    await axios
+      .get("/visitor", {
+        params: data,
+      })
+      .then((response) => {
+        localStorage.setItem(
+          "visitorID",
+          response.data["visitors"][0].visitor_id
+        );
+        setVisitorList(response.data["visitors"]);
+        console.log("Express2", response);
+      });
   };
 
   return (
@@ -367,11 +231,13 @@ export default function ReservationSearch() {
                 <DataGrid
                   GridLinesVisibility="None"
                   rows={visitorList}
-                  columns={columns}
+                  columns={visitorColumns}
                   pageSize={pageSize}
                   isCellEditable={(params) => 0}
                   onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-                  onRowDoubleClick={RowDoubleClick}
+                  onRowDoubleClick={() => {
+                    navigate("/ReservationConfirm");
+                  }}
                   rowsPerPageOptions={[5, 10, 20]}
                   checkboxSelection={false}
                   getRowId={(row) => row.visitor_id}
