@@ -79,13 +79,14 @@ export default function VisitorApplication() {
         params: managerData,
       })
       .then((response) => {
-        if (response === null && response["manager_id"] === null) {
+        if (response.data === null && response.data["manager_id"] === null) {
           return;
         }
 
-        localStorage.setItem("ManagerID", response["manager_id"]);
+        localStorage.setItem("ManagerID", response.data["manager_id"]);
 
-        if (response["code"] === 1) {
+        console.log("Manager", response);
+        if (response.data["code"] === 1) {
           PostVisitor();
         } else {
           alert("존재하지 않는 피방문자 입니다.");
@@ -135,8 +136,9 @@ export default function VisitorApplication() {
   const PostVisitor = async () => {
     axios(postConfig)
       .then(function (response) {
-        globalVariable["visitorID"] = response["visitor_id"];
-        localStorage.setItem("visitorID", response["visitor_id"]);
+        console.log("post", response);
+        globalVariable["visitorID"] = response.data["visitor_id"];
+        localStorage.setItem("visitorID", response.data["visitor_id"]);
         navigate("/ReservationConfirm");
       })
       .catch(function (error) {
@@ -152,7 +154,7 @@ export default function VisitorApplication() {
           height: "760px",
           bgcolor: "transparent",
           display: "grid",
-          gridAutoRows: "80px auto auto 70px",
+          gridAutoRows: "80px auto 140px 70px",
           gridTemplateColumns: "1",
           gridTemplateRows: "4",
           gap: 1,
@@ -367,15 +369,6 @@ export default function VisitorApplication() {
                 variant="filled"
                 onChange={(event) => setManagerName(event.target.value)}
               />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="피방문자 부서"
-                value={managerDeptName}
-                variant="filled"
-                onChange={(event) => setManagerDeptName(event.target.value)}
-              />
             </Grid>
             <Grid
               item
@@ -389,10 +382,10 @@ export default function VisitorApplication() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="피방문자 연락처"
-                value={managerTelePhone}
+                label="피방문자 부서"
+                value={managerDeptName}
                 variant="filled"
-                onChange={(event) => setManagerTelePhone(event.target.value)}
+                onChange={(event) => setManagerDeptName(event.target.value)}
               />
             </Grid>
           </Grid>

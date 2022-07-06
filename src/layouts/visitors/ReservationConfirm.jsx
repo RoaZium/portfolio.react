@@ -29,7 +29,7 @@ export default function ReservationConfirm() {
     }
 
     setVisitors({});
-    GetVisitor();
+    GetVisitorInfo();
   }, []);
 
   var config = {
@@ -40,15 +40,23 @@ export default function ReservationConfirm() {
     headers: {},
   };
 
-  const GetVisitor = async () =>
-    await axios(config)
-      .then(function (response) {
+  const data = {
+    site_id: localStorage.getItem("SiteID"),
+    visitor_id: `${localStorage.getItem("visitorID")}`,
+  };
+
+  const GetVisitorInfo = async () => {
+    await axios
+      .get("/visitor", {
+        params: data,
+      })
+      .then((response) => {
         setVisitors(response.data["visitors"][0]);
       })
       .catch(function (error) {
         console.log(error);
       });
-
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
@@ -57,7 +65,7 @@ export default function ReservationConfirm() {
           height: "760px",
           bgcolor: "transparent",
           display: "grid",
-          gridAutoRows: "80px auto auto 70px",
+          gridAutoRows: "80px auto 140px 70px",
           gridTemplateColumns: "1",
           gridTemplateRows: "4",
           gap: 1,
@@ -269,15 +277,6 @@ export default function ReservationConfirm() {
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
-              <TextField
-                sx={{
-                  marginBottom: 2,
-                }}
-                label="피방문자 부서"
-                value={visitors.manager_dept_name}
-                variant="filled"
-                InputLabelProps={{ shrink: true }}
-              />
             </Grid>
             <Grid
               item
@@ -291,8 +290,8 @@ export default function ReservationConfirm() {
                 sx={{
                   marginBottom: 2,
                 }}
-                label="피방문자 연락처"
-                value={visitors.telephone}
+                label="피방문자 부서"
+                value={visitors.manager_dept_name}
                 variant="filled"
                 InputLabelProps={{ shrink: true }}
               />
