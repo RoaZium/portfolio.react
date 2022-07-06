@@ -3,8 +3,8 @@ var axios = require("axios");
 var mobilePostData = {
   user_id: null,
   mobile: 2,
-  start_date: "2022-01-24 01:00:00",
-  end_date: "2022-12-31 23:59:59",
+  start_date: null,
+  end_date: null,
 };
 
 var mobilePostConfig = {
@@ -36,8 +36,10 @@ var mobileDeleteConfig = {
 };
 
 // POST: 모바일 추가
-export const PostMobile = async (props) => {
+export const PostMobile = async (props, startDate, endDate) => {
   mobilePostData.user_id = props;
+  mobilePostData.start_date = startDate;
+  mobilePostData.end_date = endDate;
 
   await axios(mobilePostConfig)
     .then((response) => {

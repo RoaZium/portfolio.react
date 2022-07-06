@@ -152,6 +152,7 @@ export default function VisitorList() {
   const [visitorList, setVisitorList] = React.useState(DEFAULT_DATA);
 
   useEffect(() => {
+    console.log("useEffect");
     GetVisitorAdmin();
   }, []);
 
@@ -173,17 +174,6 @@ export default function VisitorList() {
       });
   };
 
-  const DeleteSelectedVisitor = () => {
-    const visiotrFilter = visitorList.filter(
-      (x) => x.visitor_id === selectedVisitorInfo[0].visitor_id
-    );
-
-    console.log("ss", visiotrFilter);
-    console.log("TT", selectedVisitorInfo[0]);
-    // setVisitorList(visiotrFilter);
-    DeleteVisitor();
-  };
-
   var DeleteConfig = {
     method: "delete",
     url: `/visitor?visitor_id=`,
@@ -192,12 +182,11 @@ export default function VisitorList() {
     },
   };
 
-  const DeleteVisitor = async () => {
+  const DeleteSelectedVisitor = async () => {
     DeleteConfig.url = `/visitor?visitor_id=${selectedVisitorInfo[0].visitor_id}`;
     await axios(DeleteConfig)
       .then(function (response) {
         alert("삭제되었습니다.");
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -245,15 +234,18 @@ export default function VisitorList() {
           rowsPerPageOptions={[5, 10, 20]}
           checkboxSelection={false}
           getRowId={(row) => row.visitor_id}
-          onSelectionModelChange={(ids) => {
+          onSelectionModelChange={(ids, newValue, reason) => {
             const selectedIDs = new Set(ids);
+
             const selectedVisitorInfo = visitorList.filter((row) =>
               selectedIDs.has(row.visitor_id)
             );
+
             localStorage.setItem(
               "visitorID",
               selectedVisitorInfo[0].visitor_id
             );
+
             setSelectedVisitorInfo(selectedVisitorInfo);
           }}
           sx={{

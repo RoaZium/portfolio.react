@@ -370,7 +370,11 @@ export default function VisitorInfo() {
                     gridRow: "1",
                   }}
                   onClick={() => {
-                    PostMobile(visitorInfo.visitor_id);
+                    PostMobile(
+                      visitorInfo.visitor_id,
+                      visitorInfo.visit_from,
+                      visitorInfo.visit_to
+                    );
                   }}
                 >
                   신청
