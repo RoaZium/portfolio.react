@@ -142,6 +142,7 @@ const DEFAULT_DATA = [
     visitor_name: "",
   },
 ];
+
 export default function VisitorList() {
   const navigate = useNavigate();
   const [pageSize, setPageSize] = React.useState(5);
@@ -151,7 +152,6 @@ export default function VisitorList() {
   const [visitorList, setVisitorList] = React.useState(DEFAULT_DATA);
 
   useEffect(() => {
-    console.log("data", "data");
     GetVisitorAdmin();
   }, []);
 
@@ -171,10 +171,6 @@ export default function VisitorList() {
       .catch(function (error) {
         console.log(error);
       });
-  };
-
-  const RowDoubleClick = () => {
-    navigate("/VisitorDetailManagement");
   };
 
   const DeleteSelectedVisitor = () => {
@@ -243,7 +239,9 @@ export default function VisitorList() {
           pageSize={pageSize}
           isCellEditable={(params) => 0}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          onRowDoubleClick={RowDoubleClick}
+          onRowDoubleClick={() => {
+            navigate("/VisitorDetailManagement");
+          }}
           rowsPerPageOptions={[5, 10, 20]}
           checkboxSelection={false}
           getRowId={(row) => row.visitor_id}
