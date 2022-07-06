@@ -67,6 +67,36 @@ export default function VisitorApplication() {
     GetManagerID();
   };
 
+  const managerData = {
+    organization_name: `${managerDeptName}`,
+    telephone: `${managerTelePhone}`,
+    user_name: `${managerName}`,
+  };
+
+  const GetManagerID = async () => {
+    await axios
+      .get("/visitormanagerid", {
+        params: managerData,
+      })
+      .then((response) => {
+        if (response === null && response["manager_id"] === null) {
+          return;
+        }
+
+        localStorage.setItem("ManagerID", response["manager_id"]);
+
+        if (response["code"] === 1) {
+          PostVisitor();
+        } else {
+          alert("존재하지 않는 피방문자 입니다.");
+        }
+      })
+      .catch((error) => {
+        alert("존재하지 않는 피방문자 입니다.");
+        console.log(error);
+      });
+  };
+
   var data = {
     site_id: "1",
     visitor_name: visitorName,
@@ -93,7 +123,7 @@ export default function VisitorApplication() {
     visit_approval: "",
   };
 
-  var config = {
+  var postConfig = {
     method: "post",
     url: "/visitor",
     headers: {
@@ -103,38 +133,11 @@ export default function VisitorApplication() {
   };
 
   const PostVisitor = async () => {
-    axios(config)
+    axios(postConfig)
       .then(function (response) {
-        globalVariable["visitorID"] = response.data["visitor_id"];
-        localStorage.setItem("visitorID", response.data["visitor_id"]);
+        globalVariable["visitorID"] = response["visitor_id"];
+        localStorage.setItem("visitorID", response["visitor_id"]);
         navigate("/ReservationConfirm");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  var getManagerData = "";
-
-  var getconfig = {
-    method: "get",
-    url: `/visitormanagerid?telephone=${managerTelePhone}&user_name=${managerName}&organization_name=${managerDeptName}`,
-    headers: {
-      login_token: localStorage.getItem("Token"),
-    },
-    data: getManagerData,
-  };
-
-  const GetManagerID = () => {
-    axios(getconfig)
-      .then(function (response) {
-        localStorage.setItem("ManagerID", response.data["manager_id"]);
-
-        if (response.data["code"] === 1) {
-          PostVisitor();
-        } else {
-          alert("존재하지 않는 피방문자 입니다.");
-        }
       })
       .catch(function (error) {
         console.log(error);
