@@ -34,6 +34,8 @@ export const PutAuthorization = async (props) => {
   authorizationData.authorities[0].authoritygroup_id = props;
   authorizationData.visitor_id = localStorage.getItem("visitorID");
 
+  console.log("Token", putConfig.headers.login_token);
+
   await axios(putConfig)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
