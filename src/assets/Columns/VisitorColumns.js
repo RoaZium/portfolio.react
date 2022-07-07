@@ -1,6 +1,6 @@
 export const visitorColumns = [
   {
-    visitor_id: "VisitorID",
+    visitor_id: "visitor_id",
     headerName: "ID",
     flex: 0.01,
     editable: false,

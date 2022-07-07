@@ -1,155 +1,24 @@
 import React, { useEffect } from "react";
-import { Box } from "@mui/system";
-import { useNavigate } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
-import { VisitorRows } from "../../Datas/VisitorList";
-import { Button } from "@mui/material";
-import { SelectedVisitorInfoContext } from "../../App";
+
 import axios from "axios";
 
-const columns = [
-  {
-    visitor_id: "VisitorID",
-    headerName: "ID",
-    flex: 0.01,
-    editable: false,
-    align: "center",
-    headerAlign: "center",
-    hide: true,
-  },
-  {
-    field: "visitor_name",
-    headerName: "이름",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "comapny_name",
-    headerName: "회사명",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "telephone",
-    headerName: "연락처",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "car_no",
-    headerName: "차량번호",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "email",
-    headerName: "이메일",
-    editable: false,
-    align: "center",
-    flex: 1.4,
-    headerAlign: "center",
-  },
-  {
-    field: "purpose",
-    headerName: "방문 목적",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "visit_from",
-    headerName: "방문 시작일",
-    editable: false,
-    align: "center",
-    flex: 1.6,
-    headerAlign: "center",
-    type: "date",
-  },
-  {
-    field: "visit_to",
-    headerName: "방문 종료일",
-    editable: false,
-    align: "center",
-    flex: 1.6,
-    headerAlign: "center",
-    type: "date",
-  },
-  {
-    field: "manager_name",
-    headerName: "피방문자 성명",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "manager_dept_name",
-    headerName: "피방문자 부서",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "manager_telephone",
-    headerName: "피방문자 연락처",
-    editable: false,
-    align: "center",
-    flex: 1,
-    headerAlign: "center",
-  },
-  {
-    field: "agree_privacy",
-    headerName: "개인정보동의",
-    editable: false,
-    align: "center",
-    flex: 0.8,
-    headerAlign: "center",
-  },
-];
+import { useNavigate } from "react-router-dom";
 
-const DEFAULT_DATA = [
-  {
-    agree_privacy: true,
-    birthday: "",
-    car_no: "",
-    card_number: null,
-    comapny_name: "",
-    email: "",
-    manager_dept_name: "",
-    manager_id: "",
-    manager_name: "",
-    manager_telephone: "",
-    mobile_status: 0,
-    picture: null,
-    purpose: "",
-    sign_image: "",
-    telephone: "",
-    vip: false,
-    visit_approval: false,
-    visit_from: "",
-    visit_to: "",
-    visitor_id: "",
-    visitor_name: "",
-  },
-];
+import { DataGrid } from "@mui/x-data-grid";
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
+
+import { SelectedVisitorInfoContext } from "../../App";
+import { visitorColumns } from "../../assets/Columns/VisitorColumns";
 
 export default function VisitorList() {
   const navigate = useNavigate();
-  const [pageSize, setPageSize] = React.useState(10);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
-  const [visitorList, setVisitorList] = React.useState(DEFAULT_DATA);
+
+  const [pageSize, setPageSize] = React.useState(10);
+  const [visitorList, setVisitorList] = React.useState([]);
 
   useEffect(() => {
     console.log("useEffect");
@@ -238,7 +107,7 @@ export default function VisitorList() {
         <DataGrid
           GridLinesVisibility="None"
           rows={visitorList}
-          columns={columns}
+          columns={visitorColumns}
           pageSize={pageSize}
           isCellEditable={(params) => 0}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}

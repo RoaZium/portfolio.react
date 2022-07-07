@@ -43,8 +43,14 @@ export const PostMobile = async (props, startDate, endDate) => {
 
   await axios(mobilePostConfig)
     .then((response) => {
-      alert("모바일 신청되었습니다.");
-      localStorage.setItem("MobileCode", response.data["card_number"]);
+      if (response.data.code === -1) {
+        alert("모바일카드 신청이 실패했습니다.");
+      } else {
+        alert("모바일카드가 신청 되었습니다.");
+
+        localStorage.setItem("MobileCode", response.data["card_number"]);
+      }
+
       console.log(JSON.stringify(response.data));
     })
     .catch((error) => {
@@ -69,7 +75,12 @@ export const DeleteMobile = async (props) => {
 
   await axios(mobileDeleteConfig)
     .then((response) => {
-      alert("모바일 삭제되었습니다.");
+      if (response.data.code === -1) {
+        alert("모바일카드 삭제가 실패했습니다.");
+      } else {
+        alert("모바일카드가 삭제되었습니다.");
+      }
+
       console.log(JSON.stringify(response.data));
     })
     .catch((error) => {
