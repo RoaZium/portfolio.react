@@ -145,7 +145,7 @@ const DEFAULT_DATA = [
 
 export default function VisitorList() {
   const navigate = useNavigate();
-  const [pageSize, setPageSize] = React.useState(5);
+  const [pageSize, setPageSize] = React.useState(10);
   const { selectedVisitorInfo, setSelectedVisitorInfo } = React.useContext(
     SelectedVisitorInfoContext
   );
@@ -193,6 +193,15 @@ export default function VisitorList() {
       });
   };
 
+  const handleRemoveItem = (e) => {
+    var result = visitorList.filter(
+      (item) => item.visitor_id !== selectedVisitorInfo[0].visitor_id
+    );
+
+    setVisitorList([...result]);
+    console.log(result);
+  };
+
   return (
     <Box
       alignItems="flex-start"
@@ -217,7 +226,12 @@ export default function VisitorList() {
           >
             조회
           </Button>
-          <Button variant="contained" onClick={DeleteSelectedVisitor}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              DeleteSelectedVisitor();
+            }}
+          >
             삭제
           </Button>
         </Box>
@@ -231,7 +245,7 @@ export default function VisitorList() {
           onRowDoubleClick={() => {
             navigate("/VisitorDetailManagement");
           }}
-          rowsPerPageOptions={[5, 10, 20]}
+          rowsPerPageOptions={[10, 20, 40]}
           checkboxSelection={false}
           getRowId={(row) => row.visitor_id}
           onSelectionModelChange={(ids, newValue, reason) => {

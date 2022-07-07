@@ -32,6 +32,7 @@ var deleteConfig = {
 // PUT: 출입그룹권한
 export const PutAuthorization = async (props) => {
   authorizationData.authorities[0].authoritygroup_id = props;
+  authorizationData.visitor_id = localStorage.getItem("visitorID");
 
   await axios(putConfig)
     .then(function (response) {
@@ -45,6 +46,7 @@ export const PutAuthorization = async (props) => {
 // DELETE: 출입그룹권한
 export const DeleteAuthorization = async (props) => {
   authorizationData.authorities[0].authoritygroup_id = props;
+  authorizationData.visitor_id = localStorage.getItem("visitorID");
 
   await axios(deleteConfig)
     .then(function (response) {
